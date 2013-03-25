@@ -1,8 +1,11 @@
 ndf
 ===
 
-Network Defender Toolkit - a set of network tools, scripts for Enterprise Defense.
+Network Defender Toolkit - a set of network tools for Enterprise Defense.
 
+Documentation
+-------------
+Please see our presentation at HITBAMS2013. (link is coming)
 
 Requirements
 ------------
