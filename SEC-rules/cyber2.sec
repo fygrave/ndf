@@ -1,0 +1,103 @@
+##############
+# CyberGuard #
+##############
+# 
+# This script does not follow sessions... because, nassages can be lost...
+#
+# svsoldatov, 2007-07-16
+#
+# SMTP-Proxy sessions analysis
+#
+#
+# Jul 16 02:23:08 cyberguard auditLogger: time="2007-07-16 02:23:06.256" event="sessionCreated" sensor="PF" sessionId="46978733:69019800" sessionGroupId="46978733:69019800" filterAction="pasvProxy" proxy="smtpProxy" ruleType="staticRule" ruleId="9" clientInAddr="80.192.51.98" serverInAddr="193.30.236.28" protocol="TCP" clientInPort="3291" serverInPort="25"
+# Jul 16 02:23:08 cyberguard auditLogger: time="2007-07-16 02:23:06.256" event="dynamicRuleCreated" sensor="PF" ruleId="9800136" begClientInAddr="0.0.0.0" endClientInAddr="0.0.0.0" begServerInAddr="10.4.193.5" endServerInAddr="10.4.193.5" protocol="TCP" begClientInPort="10268" endClientInPort="10268" begServerInPort="25" endServerInPort="25" filterAction="actvProxy" proxy="smtpProxy" sessionGroupId="46978733:69019800"
+# Jul 16 02:23:08 cyberguard auditLogger: time="2007-07-16 02:23:06.257" event="sessionCreated" sensor="PF" sessionId="46978733:69019b00" sessionGroupId="46978733:69019800" filterAction="actvProxy" proxy="smtpProxy" ruleType="dynamicRule" ruleId="9800136" clientInAddr="10.4.68.11" serverInAddr="10.4.193.5" protocol="TCP" clientInPort="10268" serverInPort="25"
+#### Jul 16 02:23:12 cyberguard auditLogger: time="2007-07-16 02:23:10.447" event="mailPassed" sensor="smtpProxy" sessionGroupId="46978733:69019800" messageId="<f99c01c7c72d$fcfd0a5a$244cec48@lottos.com.au>" sender="su6@lottos.com.au" recipient="samitrofanov@yourdomaoin.ru" subject="=?windows-1251?B?wuXr6Oru6+Xv7eD/IOLu5+zu5u3u8fL8?=" contentType="multipart/related" contentSize="23035" clientInAddr="80.192.51.98" serverInAddr="10.4.193.5" direction="upload"
+# Jul 16 02:23:12 cyberguard auditLogger: time="2007-07-16 02:23:11.086" event="sessionDestroyed" sensor="PF" sessionId="46978733:69019b00" sessionGroupId="46978733:69019800" filterAction="actvProxy" proxy="smtpProxy" ruleType="dynamicRule" ruleId="9800136" clientInAddr="10.4.68.11" serverInAddr="10.4.193.5" protocol="TCP" clientInPort="10268" serverInPort="25" clientIfName="lo" serverIfName="es1p0" clientTcpState="FIN" serverTcpState="FIN" forwPackets="51" forwBytes="25785" backPackets="41" backBytes="2459" startTime="2007-07-16 02:23:06.000"
+# Jul 16 02:23:16 cyberguard auditLogger: time="2007-07-16 02:23:13.428" event="sessionDestroyed" sensor="PF" sessionId="46978733:69019800" sessionGroupId="46978733:69019800" filterAction="pasvProxy" proxy="smtpProxy" ruleType="staticRule" ruleId="9" clientInAddr="80.192.51.98" serverInAddr="193.30.236.28" protocol="TCP" clientInPort="3291" serverInPort="25" clientIfName="es1p1" serverIfName="lo" clientTcpState="FIN" serverTcpState="FIN" forwPackets="26" forwBytes="24170" backPackets="28" backBytes="1437" startTime="2007-07-16 02:23:05.000"
+#
+#
+#
+
+
+# Subject: forth message in log
+# rule work if exist new rows in smtp_proxy log (CYBERSMTP) 
+#    and if Subject is in /perllib/BadSubjects.conf
+# start to write $alerts{"$4"}->{"Email_Bad_Subject"}->{SESSIONS}
+# create Bad_Subject_$4 context for ONE HOUR, after one hour delete $alerts{"$4"}->{"Email_Bad_Subject"}
+# 1 - sender
+# 2 - recipient
+# 3 - subject
+# 4 - clientInAddr
+type=Single
+ptype=RegExp
+pattern=(?i)\s+event=\"mailPassed\"\s+sensor=\"smtpProxy\"\s+sessionGroupId=\"\w+\:\w+\"\s+messageId=\"\<\S+\>\"\s+sender=\"(\S+\@\S+)\"\s+recipient=\"(\S+\@\S+)\"\s+subject=\"(.*)\"\s+contentType=.*\s+clientInAddr=\"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\"\s+serverInAddr=\"10\.4\.193\.5\"\s+
+desc=Firs time bad subj from $4
+continue=TakeNext
+context=CYBERSMTP \
+	&& !Bad_Subject_$4 \
+	&& =( \
+		require '/perllib/BadSubjects.conf';\
+		my $subj = '$3'; \
+		`/bin/echo "$subj" >/tmp/sec-emsubj`; \
+		my $flag = 0; \
+		foreach my $s (@BAD_SUBJECTS){  \
+			if ($subj =~ /^$s$/) { \
+				$flag = 1; \
+				last; \
+			} \
+		} \
+		return $flag; \
+	)
+action=create Bad_Subject_$4 3600 eval %o ( delete($alerts{"$4"}) )
+
+# count and record subject, if previous event occured
+type=Single
+ptype=RegExp
+pattern=(?i)\s+event=\"mailPassed\"\s+sensor=\"smtpProxy\"\s+sessionGroupId=\"\w+\:\w+\"\s+messageId=\"\<\S+\>\"\s+sender=\"(\S+\@\S+)\"\s+recipient=\"(\S+\@\S+)\"\s+subject=\"(.*)\"\s+contentType=.*\s+clientInAddr=\"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\"\s+serverInAddr=\"10\.4\.193\.5\"\s+
+continue=TakeNext
+context=CYBERSMTP \
+	&& Bad_Subject_$4
+desc=$4: FROM: $1 TO: $2 SUBJECT: $3
+action=eval %o ( \
+		$alerts{"$4"}->{"Email_Bad_Subject"}->{COUNT}++; \
+	); \
+	add Bad_Subject_$4 %t: %s 
+
+
+# Check number of bad subjects and respond if count > N
+type=Single
+ptype=RegExp
+pattern=(?i)\s+event=\"mailPassed\"\s+sensor=\"smtpProxy\"\s+sessionGroupId=\"\w+\:\w+\"\s+messageId=\"\<\S+\>\"\s+sender=\"(\S+\@\S+)\"\s+recipient=\"(\S+\@\S+)\"\s+subject=\"(.*)\"\s+contentType=.*\s+clientInAddr=\"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\"\s+serverInAddr=\"10\.4\.193\.5\"\s+
+continue=TakeNext
+context=CYBERSMTP \
+	&& Bad_Subject_$4 \
+	&& !MailSent_Bad_Subject_$4 \
+	&& =( \
+		if ($alerts{"$4"}->{"Email_Bad_Subject"}->{COUNT} > 35 ) { \
+			return 1; \
+		} \
+		return 0; \
+	 )
+desc=$4 Respond Email_Bad_Subject
+action=eval %o ( my $ret = `/bin/grep $4 /var/log/unixes/cyber/smtp_proxy/messages | /bin/grep -i subject | /bin/sed 's/^.*\ messageId=/messageId=/g'`; $ret = "\n\r\n\r\n".$ret; ); \
+	add Bad_Subject_$4 %o; \
+	report Bad_Subject_$4 /usr/bin/mail -s 'SEC: Email_Bad_Subject from $4' svsoldatov@yourdomaoin.com avsoloviev@yourdomaoin.com ; \
+	create MailSent_Bad_Subject_$4 10800
+
+
+
+#####
+### Syber FTP_Put block: FTP upload failed
+###
+#May 24 16:30:59 cyberguard auditlogd: Activity: ftp_proxy 2006/05/24 16:30:58: ftp: 10.4.79.225     <-- 193.30.236.12   STOR command not allowed.
+#May 24 16:30:59 cyberguard auditlogd: Activity: ftp_proxy 2006/05/24 16:30:58: ftp: 10.4.79.225     <-- 193.30.236.12   STOR command not allowed.
+type=Single
+ptype=RegExp
+pattern=(?i)\s+ftp:\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+<\-\-\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(STOR|DELE|MAIL|MLFL|MKD|XMKD|RMD|XRMD|STOU|SYST)\s+command\s+not\s+allowed\.
+context=CYBERFTP
+desc=$3 has been blocked from $1 to $2
+action=add FTP_$1_$2_$3 %t: %s ; \
+	set FTP_$1_$2_$3 600 (report FTP_$1_$2_$3 /usr/bin/mail -s 'SEC: FTP $3: $1 -> $2 is blocked' svsoldatov@yourdomaoin.ru)
+
+

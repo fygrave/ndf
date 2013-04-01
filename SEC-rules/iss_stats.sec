@@ -1,0 +1,39 @@
+#################################
+# SEC ruleset for RealSecure SP #
+#################################
+#
+# snmptrapd with ISS-MIB output is used as
+# input for SEC.pl
+
+#
+#             !!!Important!!!
+# This ruleset is tuned for yourdomaoin HQ office and may not
+# give desired results in other LANs. So, I don't recommend
+# to use it as it is without modifications.
+#
+#                      Sergey V Soldatov, 2005-06-17
+
+
+###        ISS-MIB::eventEntryName25."" = STRING: SensorStatistics ISS-MIB::eventEntryTime25."" = STRING: 2005-10-21 13:36:05      ISS-MIB::eventEntryProtocol25."" = STRING: IP (256)     ISS-MIB::eventEntrySourceIpAddress25."" = STRING: 0.0.0.0      ISS-MIB::eventEntryDestinationIpAddress25."" = STRING: 0.0.0.0  ISS-MIB::eventEntryIcmpType25."" = STRING: None ISS-MIB::eventEntryIcmpCode25."" = STRING: None ISS-MIB::eventEntrySourcePort25."" = STRING: 0 ISS-MIB::eventEntryDestinationPort25."" = STRING: 0     ISS-MIB::eventEntryUserActionList25."" = STRING: DISPLAY=Default:0,LOGDB=LogWithoutRaw:0,SNMP=Default:0 ISS-MIB::eventEntryEventSpecificInfo25."" = STRING:  :stats.interval:300;  :frames:14267717;  :octets:2599745229;  :arp.packets:18700;  :ipv4.packets:14228246;  :ipv4.xsum_errs:0;  :ipv6.packets:12;  :icmp.packets:36636;  :icmp.xsum_errs:0;  :udp.packets:430616;  :udp.xsum_errs:0;  :tcp.packets:13562613;  :tcp.xsum_errs:8;  :tcp.syns:55970;  :tcp.synacks:50262;  :tcp.rsts:19796;  :tcp.hyns:19614;  :tcp.hyndups:263216;  :tcp.hynacks:6225;  :tcp.connections:33115;  :tcp.partial:0;  :tcp.onesided:6274;  :tcp.misseddata_gaps:30;  :tcp.timeouts:7901;  :tcp.active:10490;  :tcp.events.attack:12543;  :tcp.events.audit:197;  :max bits/sec:663215680;  :max attacks/sec:244;  :max audits/sec:6;  :victim-ip-addr:0.0.0.0;  :intruder-ip-addr:0.0.0.0;
+
+#
+# Sensor Statistics
+#
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+SensorStatistics\s+.+\s+ISS\-MIB\:\:eventEntryEventSpecificInfo25\.\"\"\s+=\s+STRING\:\s+(.*)$
+continue=TakeNext
+desc=SensorStatistics
+context=ISSLOG
+action=eval %o (\
+	if ("$1" =~ /\:stats\.interval\:(\d+)\;\s+\:frames\:(\d+)\;\s+\:octets\:(\d+)\;\s+\:arp\.packets\:(\d+)\;\s+\:ipv4\.packets\:(\d+)\;\s+\:ipv4\.xsum_errs\:(\d+)\;\s+\:ipv6\.packets\:(\d+)\;\s+\:icmp\.packets\:(\d+);\s+\:icmp\.xsum_errs\:(\d+)\;\s+\:udp\.packets\:(\d+)\;\s+\:udp\.xsum_errs\:(\d+)\;\s+\:tcp\.packets\:(\d+)\;\s+\:tcp\.xsum_errs\:(\d+)\;\s+\:tcp\.syns\:(\d+);\s+\:tcp\.synacks\:(\d+)\;\s+\:tcp\.rsts\:(\d+)\;\s+\:tcp\.hyns\:(\d+)\;\s+\:tcp\.hyndups\:(\d+)\;\s+\:tcp\.hynacks\:(\d+)\;\s+\:tcp\.connections\:(\d+)\;\s+\:tcp\.partial\:(\d+)\;\s+\:tcp\.onesided\:(\d+)\;\s+\:tcp\.misseddata_gaps\:(\d+)\;\s+\:tcp\.timeouts\:(\d+)\;\s+\:tcp\.active\:(\d+)\;\s+\:tcp\.events\.attack\:(\d+)\;\s+\:tcp\.events\.audit\:(\d+);\s+\:max\s+bits\/sec\:(\d+)\;\s+\:max\s+attacks\/sec\:(\d+)\;\s+\:max\s+audits\/sec\:(\d+)\;/) {\
+		open TTT, ">>/tmp/SensorStatistics.txt"; \
+		print TTT "$1\t$2\t$3\t$4\n"; \
+		close TTT; \
+	}\
+	); \
+	
+	#write /tmp/sec.log
+
+
+

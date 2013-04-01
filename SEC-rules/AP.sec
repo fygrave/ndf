@@ -1,0 +1,97 @@
+################################
+# Analyze logs wi-fi APs       #
+################################
+#
+# Sergey V Soldatov, 2005-08-18
+#
+
+#
+# DOT11-CCKM_AUTH_FAILED
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\-CCKM_AUTH_FAILED:\s+Station\s+(\S+)\s+CCKM\s+authentication\s+failed
+context=APLOG && !CCKM_AUTH_FAILED_$1_MailSent
+desc=Station $1 auth failed
+action=eval %o ( my $ret = ""; \
+		$ret .= "$0\n\n"; \
+		$ret .= "Explanation: The station failed CCKM authentication.\n\n". \
+			"Recommended Action: Verify that the topology of the access points configured to use the WDS access point is functional.\n"; \
+		return $ret; \
+	); \
+	fill E %o; \
+	report E /usr/bin/mail -s 'SEC: AP $1 CCKM auth failed' svsoldatov@yourdomaoin.ru; \
+	delete E; \
+	create CCKM_AUTH_FAILED_$1_MailSent 600
+
+#
+# DOT11-AUTH_FAILED
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\-AUTH_FAILED:\s+Station\s+(\S+)\s+authentication\s+failed
+context=APLOG && !AUTH_FAILED_$1_MailSent
+desc=Station $1 auth failed
+action=eval %o ( my $ret = ""; \
+		$ret .= "$0\n\n"; \
+		$ret .= "Explanation: The station failed authentication.\n\n". \
+			"Recommended Action: Verify that the user entered the correct username and password, and check that the authentication server is online.\n\n\n"; \
+		return $ret; \
+	); \
+	fill E %o; \
+	report E /usr/bin/mail -s 'SEC: AP $1 auth failed' svsoldatov@yourdomaoin.ru; \
+	delete E; \
+	create AUTH_FAILED_$1_MailSent 600
+
+
+
+#
+# DOT11-TKIP_MIC_FAILURE_REPEATED
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\-TKIP_MIC_FAILURE_REPEATED:\s+Two\s+TKIP\s+Michael\s+MIC\s+failures\s+were\s+detected\s+within\s+(\d+)\s+seconds\s+on\s+(\S+)\s+interface
+context=APLOG && !TKIP_MIC_FAILURE_REPEATED_Mail_sent
+desc=2 TKIP MIC failures within $1 seconds on $2 interface
+action=eval %o ( my $ret = ""; \
+		$ret .= "$0\n\n"; \
+		$ret .= "Explanation: Because MIC failures usually indicate an active attack on your network, the interface will be put on hold for the configured time. During this hold time, stations using TKIP ciphers are disassociated and cannot reassociate until the hold time ends. At the end of the hold time, the interface operates normally.\n\n". \
+			"Recommended Action: Michael MIC failures usually indicate an active attack on your network. Search for and remove potential rogue devices from your wireless LAN. If this is a false alarm and the interface should not be on hold this long, use the countermeasure tkip hold-time command to adjust the hold time. \n\n\n"; \
+		$ret .= `/bin/grep TKIP_MIC_FAILURE /var/log/AP/messages`; \
+		$ret .= "Explanation DOT11-TKIP_MIC_FAILURE_REPORT: The access point received an EAPOL-key from a station notifying the access point that TKIP Michael MIC failed on a packet transmitted by this access point.\n\n"; \
+		$ret .= "Recommended Action DOT11-TKIP_MIC_FAILURE_REPORT: None.\n\n\n"; \
+		$ret .= "Explanation DOT11-TKIP_MIC_FAILURE: TKIP Michael MIC failure was detected on a unicast frame decrypted locally with the pairwise key.\n\n"; \
+		$ret .= "Recommended Action DOT11-TKIP_MIC_FAILURE: A failure of the Michael MIC in a packet usually indicates an active attack on your network. Search for and remove potential rogue devices from your wireless LAN.\n\n\n"; \
+		return $ret; \
+	); \
+	fill E %o; \
+	report E /usr/bin/mail -s 'SEC: AP TKIP MIC failure repeted!' svsoldatov@yourdomaoin.ru; \
+	delete E; \
+	create TKIP_MIC_FAILURE_REPEATED_Mail_sent 1800
+
+
+#
+# DOT11-6-ROGUE_AP
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\-ROGUE_AP:\s+Rogue\s+AP\s+(\S+)\s+reported\.\s+Reason:\s+(.*)$
+context=APLOG && !ROGUE_AP_$1_MailSent
+desc=potential ROGUE AP $1 with reason $2
+action=eval %o ( my $ret = ""; \
+		$ret .= "$0\n\n"; \
+		$ret .= "Explanation: A station has reported a potential rogue access point for the stated reason.\n\n". \
+			"Recommended Action: None.\n\n\n"; \
+		return $ret; \
+	); \
+	fill E %o; \
+	report E /usr/bin/mail -s 'SEC: AP ROGUE $1' svsoldatov@yourdomaoin.ru; \
+	delete E; \
+	create ROGUE_AP_$1_MailSent 600
+
+
+

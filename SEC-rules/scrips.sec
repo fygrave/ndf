@@ -1,0 +1,101 @@
+################################
+# Analyze logs from my scripts #
+################################
+#
+# Sergey V Soldatov, 2005-07-07
+#
+#
+#
+
+#
+# check that logs come...
+# no CONTEXT, because many sources!
+#
+##Oct 26 00:21:14 c6513-a86.moscow.adm.yourdomaoin.ru 2005 Oct 26 00:21:13 %DVLAN-1-DENYHOST:Host 00-0d-60-5f-cc-88 denied on port 1/23 
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=^\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}\s+((?!ap1230)\S+\.moscow\.adm\.yourdomain\.ru)\s+
+desc=Logs from $1
+action=create LOGS_$1 86400 ( \
+		eval %o (\
+			my $ret = "".localtime()."\n"; \
+			return $ret; \
+		);\
+		fill LOGS_$1  %o; \
+		report LOGS_$1 /usr/bin/mail -s 'SEC: No logs from $1' svsoldatov@yourdomaoin.ru; \
+	)
+
+#########
+
+
+#
+# update MACs from $TNK::Defs::SC_VAR."/update_macs/last.err.log", $TNK::Defs::SC_VAR."/update_macs/last.log"
+# search patterns only in $TNK::Defs::SC_VAR."/update_macs/last.err.log"
+#
+## not:  cs_diag(CS_INIT) failed at /usr/lib/perl/5.8/DynaLoader.pm line 245.
+#type=SingleWith2Thresholds
+#continue=TakeNext
+#ptype=RegExp
+#pattern=(?!cs_diag\(CS_INIT\)\s+failed\s+at\s+\/usr\/lib\/perl\/5\.8\/DynaLoader\.pm\s+line\s+245)
+#context=UMLASTLOG 
+#desc=update_macs last.err.log: $1
+#action=eval %o ( \
+#		use TNK::Defs; \
+#		my $last_log = $TNK::Defs::SC_VAR."/update_macs/last.log";\
+#		my $last_err_log = $TNK::Defs::SC_VAR."/update_macs/last.err.log";\
+#		my $ret = "".localtime()."\n\n$last_log:\n"; \
+#		$ret .= `/usr/bin/cat $last_log`; \
+#		$ret .= "\n\n\n$last_err_log:\n"; \
+#		$ret .= `/usr/bin/cat $last_err_log`; \
+#		$ret .= "\n"; \
+#		return $ret; \
+#	); \
+#	fill E %o; \
+#	report E /usr/bin/mail -s 'SEC: update_macs error' svsoldatov@yourdomaoin.ru; \
+#	delete E; 
+#window=3600
+#thresh=2
+#desc2=update_macs completed without errors
+#action2=event 
+#window2=1800
+#thresh2=0
+
+#
+# New Device found! from /var/log/cisco/messages
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+(\S+\.moscow\.adm\.yourdomain\.ru)\s+.+\s+\%DVLAN\-7\-ASSIGNVLAN\:VLAN\s+\d+\s+assigned\s+to\s+Port\s+
+context=CISCOLOG \
+	&& =(\
+		use TNK::Defs; \
+		require $TNK::Defs::SWITCHES_CONF; \
+		use vars qw(%SWITCHES, %ROUTERS, %SSH_PARAMS_DEFAULT, @DESIRED_ROUTERS_LOCAL); \
+		return ( !$SWITCHES{"$1"}->{CON} ); \
+	) \
+	&& !NewDevice_$1_MailSent
+desc=New device $1 found
+action=eval %o (\
+		my $ret = "".localtime()."\n$0\n\n"; \
+		return $ret; \
+	); \
+	fill NewDev_$1 %o; set NewDev_$1 18; \
+	report NewDev_$1 /usr/bin/mail -s 'SEC: New device $1' svsoldatov@yourdomaoin.ru; \
+	create NewDevice_$1_MailSent 86400;
+
+#
+# BLOCKED VLAN ACCESS from /var/log/cisco/messages
+# 
+## Jul  7 12:42:34 c6509-ac51.moscow.adm.yourdomaoin.ru 2005 Jul 07 12:42:34 %DVLAN-7-ASSIGNVLAN:VLAN 63 assigned to Port 5/20
+
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+(\S+\.moscow\.adm\.yourdomain\.ru)\s+.+\s+\%DVLAN\-7\-ASSIGNVLAN\:VLAN\s+26\s+assigned\s+to\s+Port\s+(\S+)
+context=CISCOLOG && !BLOCED26_$1_$2_MailSent
+desc=$1 $2
+action=shellcmd /home/svs/bin/process_BLOCKED26.pl "%s"; \
+	create BLOCED26_$1_$2_MailSent 3600;
+

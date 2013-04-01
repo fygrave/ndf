@@ -1,0 +1,61 @@
+#################################
+# SEC ruleset for RealSecure SP #
+#################################
+#
+# snmptrapd with ISS-MIB output is used as
+# input for SEC.pl
+
+#
+#             !!!Important!!!
+# This ruleset is tuned for yourdomaoin HQ office and may not
+# give desired results in other LANs. So, I don't recommend
+# to use it as it is without modifications.
+#
+#                      Sergey V Soldatov, 2005-06-17
+
+
+### ISS-MIB::eventEntryName25."" = STRING: Email_Virus_Suspicious_Zip       ISS-MIB::eventEntryTime25."" = STRING: 2006-01-20 09:29:45      ISS-MIB::eventEntryProtocol25."" = STRING: TCP (6)      ISS-MIB::eventEntrySourceIpAddress25."" = STRING: 195.131.100.13       ISS-MIB::eventEntryDestinationIpAddress25."" = STRING: 193.30.236.28    ISS-MIB::eventEntryIcmpType25."" = STRING: None ISS-MIB::eventEntryIcmpCode25."" = STRING: None ISS-MIB::eventEntrySourcePort25."" = STRING: 63892     ISS-MIB::eventEntryDestinationPort25."" = STRING: 25    ISS-MIB::eventEntryUserActionList25."" = STRING: DISPLAY=Default:0,LOGDB=LogWithoutRaw:0,SNMP=Default:0 ISS-MIB::eventEntryEventSpecificInfo25."" = STRING:  :FILENAME:file.txt.scr;  :CRC:0xCA9C293F;  :SIZE:54976;  :C-SIZE:54976;  :VERSION:0xA;  :ENCRYPTED:FALSE;  :filename:file.zip;  :protocol:SMTP;  :from:"Post Office" <postmaster@rcsu.tnk.ru>;  :to:james@rcsu.tnk.ru;  :date:FriÀ¬ 20 Jan 2006 12:30:27 +0300;  :victim-ip-addr:193.30.236.28;  :victim-port:25;  :intruder-ip-addr:195.131.100.13;  :intruder-port:63892;
+
+
+
+##
+## Email bad attachments
+##
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(Email_\S+)\s+.+\s+:filename:(.+);\s+:protocol:SMTP;\s+:from:(.+);\s+:to:(.+);\s+:date:.*\s+:intruder-ip-addr:(\S+);\s+:intruder-port
+continue=TakeNext
+desc=First $1 attachment:$2 from:'$3' to:'$4' IP:$5
+context=ISSLOG && !EmailBadAttach_$5 && !MailSent_EmailBadAttach_$5
+action=create EmailBadAttach_$5 3600 eval %oo ( delete $EmailBadAttach{"$5"} )
+
+# count
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(Email_\S+)\s+.+\s+:filename:(.+);\s+:protocol:SMTP;\s+:from:(.+);\s+:to:(.+);\s+:date:.*\s+:intruder-ip-addr:(\S+);\s+:intruder-port
+continue=TakeNext
+desc=_ $1 attachment:$2 from:'$3' to:'$4' IP:$5
+context=ISSLOG && EmailBadAttach_$5 && !MailSent_EmailBadAttach_$5
+action=add EmailBadAttach_$5 %t: %s; \
+	eval %oo ( \
+		$EmailBadAttach{"$5"}->{COUNT}++; \
+		$EmailBadAttach{"$5"}->{STAT} .= "\r\n".localtime()." $1: attachment:".'$2'." from:".'$3'." to:".'$4'." \r\n"; \
+	)
+
+# response
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(Email_\S+)\s+.+\s+:filename:(.+);\s+:protocol:SMTP;\s+:from:(.+);\s+:to:(.+);\s+:date:.*\s+:intruder-ip-addr:(\S+);\s+:intruder-port
+continue=TakeNext
+desc=Last $1 attachment:$2 from:'$3' to:'$4' IP:$5
+context=ISSLOG && EmailBadAttach_$5 && !MailSent_EmailBadAttach_$5 \
+	&& =( $EmailBadAttach{"$5"}->{COUNT} > 60 )
+action=eval %o (return $EmailBadAttach{"$5"}->{STAT}); \
+	fill EmailBadAttach_$5 %o ; \
+	report EmailBadAttach_$5 /usr/bin/mail -s 'SEC: Bad emails from $5' svsoldatov@yourdomaoin.ru; \
+	create MailSent_EmailBadAttach_$5 10800;\
+	obsolete EmailBadAttach_$5
+
+#######
+
+

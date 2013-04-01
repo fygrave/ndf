@@ -1,0 +1,2 @@
+$connect::data::pad = 'password';
+# CN=ldapbrowser,CN=Users,DC=external,DC=yourdomaoin,DC=ru

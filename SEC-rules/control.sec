@@ -1,0 +1,26 @@
+########################
+# Control log usage    #
+# svsoldatov, 11.07.05 #
+########################
+
+#
+# check that logs come...
+#
+##Any row from /var/log/unixes/TACACS/messages
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=^\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}\s+(\S+)\s+TACACS
+context=TACLOG2
+desc=Logs from $1
+action=create LOGS_$1 86400 ( \
+                eval %o (\
+                        my $ret = localtime()."\n1. On mngmt-2, mngmt-3 /home/svs/sbin/sec.pl with /home/svs/sbin/syslog-client.sec is working under /var/log/tac_plus.log\n2. Meaasges are comming to syslog and put to /var/log/unixes/TACACS/messages\n"; \
+                        return $ret; \
+                );\
+                fill LOGS_$1  %o; \
+                report LOGS_$1 /usr/bin/mail -s 'SEC: No TAC logs from $1' svsoldatov@yourdomaoin.ru \
+        )
+
+#########
+

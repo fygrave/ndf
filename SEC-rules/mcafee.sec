@@ -1,0 +1,69 @@
+##################################################
+#                 Analyze McAfee traps           #
+##################################################
+#
+# Sergey V Soldatov, 2009-06-05
+#
+
+# Detect Conficker network infection
+# 
+####
+#
+
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.4\.1\.1\.15\.\d+\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.4\.1\.1\.32\.\d+\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.4\.1\.1\.14\.\d+\s+=\s+STRING\:\s+\"([^"]+)\"\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.4\.1\.1\.22\.\d+\s+=\s+STRING\:\s+\"(W32\/Conficker[^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.4\.1\.1\.24\.\d+\s+=\s+STRING\:\s+\"(\d+\.\d+\.\d+\.\d+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.4\.1\.1\.26\.\d+\s+=\s+STRING\:\s+\"([^"]+system[^"]+)\"\s+
+context=MCAFEE && !MailSent_Conficker_$5
+desc=Time: $1; Error_msg: $2; Action_status: $3; Conficker_variant: $4; IP: $5; Path: $6 
+action=pipe '%s . Actual Message:  $0' /usr/bin/mail -s 'SEC: $4 in $6 on $5 $3' soc@yourdomain.com; \
+	create MailSent_Conficker_$5 600;
+
+#
+# Conficker worm infection (new wariant)
+#
+###
+
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.320\s+=\s+STRING\:\s+\"(W32\/Conficker[^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.200\s+=\s+STRING\:\s+\"([^"]+)\"\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.280\s+=\s+STRING\:\s+\"([^"]+system[^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.20\s+=\s+STRING\:\s+\"([^"]+)\"\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.370\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.220\s+=\s+STRING\:\s+\"(\d+\.\d+\.\d+\.\d+)\"
+context=MCAFEE && !MailSent_Conficker2_$5
+desc=Time: $4; Error_msg: $5; Conficker_variant: $1; IP: $6; Hostname: $2; Path: $3 
+action=pipe '%s . Actual Message:  $0' /usr/bin/mail -s 'SEC: $1 in $3 on $6($2) $5' soc@yourdomain.com; \
+	create MailSent_Conficker2_$5 600;
+
+
+#
+# Trojan.MulDrop1.53426 (Dr.Web) 
+# W32/Autorun.worm!kn (ED) (McAfee)
+#
+##
+#1 NAI-MIB::nai.12.2.1.1.5.2.320 = STRING: "W32/Autorun.worm!kn (ED)" (.+) {W32\/Autorun\.worm\!kn\s+\(ED\)}
+#2 NAI-MIB::nai.12.2.1.1.5.2.240 = STRING: "CORP\\EPMagnevskaya" (.+)
+#3 NAI-MIB::nai.12.2.1.1.5.2.200 = STRING: "DACZC5340XH0" 
+#4 NAI-MIB::nai.12.2.1.1.5.2.280 = Hex-STRING: 43 3A 5C 44 6F 63 75 6D 65 6E 74 73 20 61 6E 64  20 53 65 74 74 69 6E 67 73 5C 41 6C 6C 20 55 73  65 72 73 5C 41 70 70 6C 69 63 61 74 69 6F 6E 20  44 61 74 61 5C 73 72 74 73 65 72 76 5C CA EE ED  F2 F0 E0 EA F2 EE E2 E0 ED E8 E5 2E 65 78 65 NAI-MIB::nai.12.2.1.1.5.2.170 (.+)
+#5 NAI-MIB::nai.12.2.1.1.5.2.400 = STRING: "GlobalRoot\\Directory\\NIZHNEVARTOVSK\\SNGDU-2\\SNGDU-2 ABK\\Workstations SNGDU-2 ABK" (.+)
+#6 NAI-MIB::nai.12.2.1.1.5.2.20 = STRING: "01/26/11 10:25:26 UTC"
+#7 NAI-MIB::nai.12.2.1.1.5.2.370 = STRING: "file infected.  Undetermined clean error, delete failed" (.+)
+#8 NAI-MIB::nai.12.2.1.1.5.2.220 = STRING: "10.8.89.69"
+#
+#
+#
+
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.320\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.240\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.200\s+=\s+STRING\:\s+\"([^"]+)\"\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.280\s+=\s+\S+\:(.+)\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.170\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.400\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.20\s+=\s+STRING\:\s+\"([^"]+)\"\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.370\s+=\s+STRING\:\s+\"(file infected\.\s+.*\s+delete failed)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.220\s+=\s+STRING\:\s+"(\d+\.\d+\.\d+\.\d+)"
+context=MCAFEE && !Virus_$3_$1
+desc=Time: $6; Error_msg: $7; Virus_name: $1; IP: $8; Hostname: $3; Path: $4; ePOPath: $5; Username: $2
+action=create Virus_$3_$1 600 (report Virus_$3_$1 /usr/bin/mail -s 'SEC: $1 on $3 $6' soc@yourdomain.com; )
+
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.320\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.240\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.200\s+=\s+STRING\:\s+\"([^"]+)\"\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.280\s+=\s+\S+\:(.+)\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.170\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.400\s+=\s+STRING\:\s+\"([^"]+)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.20\s+=\s+STRING\:\s+\"([^"]+)\"\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.370\s+=\s+STRING\:\s+\"(file infected\.\s+.*\s+delete failed)\"\s+.+\s+NAI\-MIB\:\:nai\.12\.2\.1\.1\.5\.2\.220\s+=\s+STRING\:\s+"(\d+\.\d+\.\d+\.\d+)"
+context=MCAFEE && Virus_$3_$1
+desc=Time: $6; Error_msg: $7; Virus_name: $1; IP: $8; Hostname: $3; Path: $4; ePOPath: $5; Username: $2
+action=add Virus_$3_$1 %s
+

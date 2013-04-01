@@ -1,0 +1,498 @@
+#################################
+# SEC ruleset for RealSecure SP #
+#################################
+#
+# snmptrapd with ISS-MIB output is used as
+# input for SEC.pl
+
+#
+#             !!!Important!!!
+# This ruleset is tuned for yourdomaoin HQ office and may not
+# give desired results in other LANs. So, I don't recommend
+# to use it as it is without modifications.
+#
+#                      Sergey V Soldatov, 2005-06-17
+
+###ISS-MIB::eventEntryName25."" = STRING: TCP_Probe_HTTP   ISS-MIB::eventEntryTime25."" = STRING: 2005-09-15 13:45:51      ISS-MIB::eventEntryProtocol25."" = STRING: TCP (6)      ISS-MIB::eventEntrySourceIpAddress25."" = STRING: 10.4.67.93    ISS-MIB::eventEntryDestinationIpAddress25."" = STRING: 10.4.56.116 ISS-MIB::eventEntryIcmpType25."" = STRING: None ISS-MIB::eventEntryIcmpCode25."" = STRING: None ISS-MIB::eventEntrySourcePort25."" = STRING: 80 ISS-MIB::eventEntryDestinationPort25."" = STRING: 2979  ISS-MIB::eventEntryUserActionList25."" = STRING: DISPLAY=Default:0,LOGDB=LogFiltered:0,SNMP=Default:0   ISS-MIB::eventEntryEventSpecificInfo25."" = STRING:  :port:80;  :reason:RSTsent;  :victim-ip-addr:10.4.67.93;  :victim-port:80;  :intruder-ip-addr:10.4.56.116;  :intruder-port: 2979;
+
+# simply check that rows are coming
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+\S+\s+
+continue=TakeNext
+desc=check rows from SP are coming
+action=set ISSLOG 600 (report ISSLOG /usr/bin/mail -s 'SEC: No new messages from SP' soc@yourdomaoin.com; )
+
+# Port Scan
+# Look for more then $EVENT_COUNT different events
+# old (r17): (\S+_Probe_\S+)|(\S+_Scan)|(\S+_Sweep)|(\S+_OS_Fingerprint)
+# (\S+Probe\S+|\S+Scan|\S+OS_Fingerprint|\S+Sweep|Telnet_Abuse)
+# more then $EVENT_COUNT_TOTAL times
+# from single source IP within 300 sec
+# IMPORTANT: PROBES ARE SHOWING ATTACKER IP AS DESTINATION AND VICTIM AS SOURCE!!!
+
+# E-mail Worm
+# Look for more then $SMTP_EVENT_COUNT_TOTAL times of TCP_Probe_SMTP
+# to more then $SMTP_DEST_COUNT different destiantions within 300 sec
+
+# Destination scan
+# Look for more then $EVENT_DEST_COUNT different destination
+# for every event. Calculations are held within $DEST_SCAN_TIME_TO_COUNT
+
+# e-mail report wil be sent not more then ones per 3 hours (10800 sec)
+#
+# 1 event name
+# 2 :victim-ip-addr
+# 3 :intruder-ip-addr
+
+# Different scans first event
+# DEST_SCAN_TIME_TO_COUNT - min number of seconds after which speed started to calculate
+# EVENT_COUNT  - number of DIFFERENT events
+# EVENT_COUNT_TOTAL - total (may not be different) number of events
+# SMTP_EVENT_COUNT_TOTAL - total number of TCP_Probe_SMTP events
+# SMTP_DEST_COUNT - number of different destination for TCP_Probe_SMTP
+# EVENT_DEST_COUNT - number of different destinations of each event for destination scan to trigger
+# MAX_SPEED - max speed for destination scan to trigger
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(\S+Probe\S+|\S+Scan|\S+OS_Fingerprint|\S+Sweep|Telnet_Abuse)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=!Scan_$3 && ISSLOG
+continue=TakeNext
+desc=First $1: $3 -> $2
+action=create Scan_$3 300  eval %oxj ( delete $Scan{"$3"} ); \
+	eval %o ( $MAX_SPEED = 0.5; \
+		$DEST_SCAN_TIME_TO_COUNT = 60; \
+		$EVENT_COUNT = 5; \ 
+		$EVENT_COUNT_TOTAL = 10; \
+		$SMTP_EVENT_COUNT_TOTAL = 10; \
+		$SMTP_DEST_COUNT = 4; \
+		$EVENT_DEST_COUNT = 7; \
+		$TOO_MANY_PROBES = 10; \
+		$Scan{"$3"}->{TIME}->{FIRST} = time(); \
+	); \
+	
+	#write /tmp/sec.log
+
+##########
+### X-TCP_Probe_445|UDP_Probe_DNS|X-TCP_Probe_McAfeeFwSrv
+##########
+# X-TCP_Probe_445|UDP_Probe_DNS second event
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(X\-TCP_Probe_445|UDP_Probe_DNS|X\-TCP_Probe_McAfeeFwSrv)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && ISSLOG \
+	&& !=( `/bin/grep \"\\\ $3\\\ \" /perllib/Probers.txt` ) \
+continue=TakeNext
+desc=_  X-TCP_Probe_445|UDP_Probe_DNS|X-TCP_Probe_McAfeeFwSrv: $3 -> $2
+action=eval %o ( $Scan{"$3"}->{EVENTS}->{"$1"}->{"$2"}++; \
+		$Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL}++; \
+		$Scan{"$3"}->{TOTAL_EVENTS}++; \
+		$Scan{"$3"}->{TIME}->{LAST} = time(); \
+		my $time_diff = $Scan{"$3"}->{TIME}->{LAST}-$Scan{"$3"}->{TIME}->{FIRST}; \
+		if ($time_diff > 0){ \
+			$Scan{"$3"}->{SPEED} = $Scan{"$3"}->{TOTAL_EVENTS}/$time_diff; \
+		} \
+		else { \
+			$Scan{"$3"}->{SPEED} = 0; \
+		} \
+	); \
+	create Scan_$1_$3 300 ; \
+	
+	#write /tmp/sec.log
+
+# Response to too many X-TCP_Probe_445 UDP_Probe_DNS X-TCP_Probe_McAfeeFwSrv
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(X\-TCP_Probe_445|UDP_Probe_DNS|X\-TCP_Probe_McAfeeFwSrv)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && ISSLOG && Scan_$1_$3 && !MailSent_TooMany_$1_$3 \
+	&& =( \
+		$Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL} > 30 \
+	) \
+	&& !=( `/bin/grep \"\\\ $3\\\ \" /perllib/Probers.txt` ) \
+continue=TakeNext
+desc=e-mail too many X-TCP_Probe_445|UDP_Probe_DNS|X-TCP_Probe_McAfeeFwSrv  from $3
+action=eval %ooo (my $ret = "\nMax number of events of one kind from $3: ".$Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL}." > 30 (event of one kind)\n". \
+		"Total events: ".$Scan{"$3"}->{TOTAL_EVENTS}." > $EVENT_COUNT_TOTAL (EVENT_COUNT_TOTAL) ". \
+		"\nDifferent events: ".scalar(keys(%{$Scan{"$3"}->{EVENTS}}))." > $EVENT_COUNT (EVENT_COUNT) ". \
+		"\nAverage speed from ".localtime($Scan{"$3"}->{TIME}->{FIRST})." to ".localtime($Scan{"$3"}->{TIME}->{LAST})." is ".$Scan{"$3"}->{SPEED}."\n\n\n"; \
+		my $i = 1; \
+		foreach my $e (sort keys %{$Scan{"$3"}->{EVENTS}}) { \
+			$ret .= "$i. $e:\n"; my $j = 1; \
+			foreach my $d (sort keys %{$Scan{"$3"}->{EVENTS}->{$e}}) { \
+				$ret .= "\t$j. $d\t\t".$Scan{"$3"}->{EVENTS}->{$e}->{$d}."\n"; \
+				$j++; \
+			} \
+			$ret .= "============================\n"; \
+			$i++; \
+		} \
+		return $ret; \
+	); \
+	fill Scan_$3 %t: %ooo; \
+	report Scan_$3 /usr/bin/mail -s 'SEC: Too many $1 from $3' soc@yourdomaoin.com; \
+	add Target_$2 %t: %ooo; \
+	set Target_$2 1200 (report Target_$2 /usr/bin/mail -s 'SEC: Too many $1 to $2' soc@yourdomaoin.com); \
+	create MailSent_TooMany_$1_$3 10800;
+	
+### X-TCP_Probe_445|UDP_Probe_DNS ENDs
+#########################################################################################################################################
+
+# Different scans second event except X-TCP_Probe_445|UDP_Probe_DNS|X-TCP_Probe_McAfeeFwSrv
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(\S+Probe\S+|\S+Scan|\S+OS_Fingerprint|\S+Sweep|Telnet_Abuse)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && ISSLOG \
+	&& !=( `/bin/grep \"\\\ $3\\\ \" /perllib/Probers.txt` ) \
+	&& !=( grep {$_ eq "$1" } ("X-TCP_Probe_445","UDP_Probe_DNS","X-TCP_Probe_McAfeeFwSrv") )
+continue=TakeNext
+desc=_  $1: $3 -> $2
+action=eval %o ( $Scan{"$3"}->{EVENTS}->{"$1"}->{"$2"}++; \
+		$Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL}++; \
+		$Scan{"$3"}->{TOTAL_EVENTS}++; \
+		$Scan{"$3"}->{TIME}->{LAST} = time(); \
+		my $time_diff = $Scan{"$3"}->{TIME}->{LAST}-$Scan{"$3"}->{TIME}->{FIRST}; \
+		if ($time_diff > 0){ \
+			$Scan{"$3"}->{SPEED} = $Scan{"$3"}->{TOTAL_EVENTS}/$time_diff; \
+		} \
+		else { \
+			$Scan{"$3"}->{SPEED} = 0; \
+		} \
+	); \
+	
+	#write /tmp/sec.log
+
+# Response to too many probes except X-TCP_Probe_445 UDP_Probe_DNS
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(\S+Probe\S+|\S+Scan|\S+OS_Fingerprint|\S+Sweep|Telnet_Abuse)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && ISSLOG && !MailSent_TooMany_$1_$3 \
+	&& =( \
+		$Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL} > $TOO_MANY_PROBES \
+	) \
+	&& !=( `/bin/grep \"\\\ $3\\\ \" /perllib/Probers.txt` ) \
+continue=TakeNext
+desc=e-mail too many $1 from $3
+action=eval %ooo (my $ret = "\nMax number of events of one kind from $3: ".$Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL}." > $TOO_MANY_PROBES\n". \
+		"Total events: ".$Scan{"$3"}->{TOTAL_EVENTS}." > $EVENT_COUNT_TOTAL (EVENT_COUNT_TOTAL) ". \
+		"\nDifferent events: ".scalar(keys(%{$Scan{"$3"}->{EVENTS}}))." > $EVENT_COUNT (EVENT_COUNT) ". \
+		"\nAverage speed from ".localtime($Scan{"$3"}->{TIME}->{FIRST})." to ".localtime($Scan{"$3"}->{TIME}->{LAST})." is ".$Scan{"$3"}->{SPEED}."\n\n\n"; \
+		my $i = 1; \
+		foreach my $e (sort keys %{$Scan{"$3"}->{EVENTS}}) { \
+			$ret .= "$i. $e:\n"; my $j = 1; \
+			foreach my $d (sort keys %{$Scan{"$3"}->{EVENTS}->{$e}}) { \
+				$ret .= "\t$j. $d\t\t".$Scan{"$3"}->{EVENTS}->{$e}->{$d}."\n"; \
+				$j++; \
+			} \
+			$ret .= "============================\n"; \
+			$i++; \
+		} \
+		return $ret; \
+	); \
+	fill Scan_$3 %t: %ooo; \
+	report Scan_$3 /usr/bin/mail -s 'SEC: Too many $1 from $3' soc@yourdomaoin.com; \
+	add Target_$2 %t: %ooo; \
+	set Target_$2 1200 (report Target_$2 /usr/bin/mail -s 'SEC: Too many $1 to $2' soc@yourdomaoin.com); \
+	create MailSent_TooMany_$1_$3 10800;
+###
+### Different scans ENDs
+#########################################################################################################################################
+
+# Aggregated response to too many probes to (SEC: Too many $1 to $2)
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(\S+Probe\S+|\S+Scan|\S+OS_Fingerprint|\S+Sweep|Telnet_Abuse)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && ISSLOG && Target_$2 \
+	&& =( \
+		($Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL} > $TOO_MANY_PROBES) \
+	) \
+	&& !=( `/bin/grep \"\\\ $3\\\ \" /perllib/Probers.txt` )
+continue=TakeNext
+desc=e-mail too many $1 from $3 (Target)
+action=eval %ooo (my $ret = "\nMax number of events of one kind from $3: ".$Scan{"$3"}->{EVENTS}->{"$1"}->{TOTAL}." > $TOO_MANY_PROBES\n". \
+	"Total events: ".$Scan{"$3"}->{TOTAL_EVENTS}." > $EVENT_COUNT_TOTAL (EVENT_COUNT_TOTAL) ". \
+	"\nDifferent events: ".scalar(keys(%{$Scan{"$3"}->{EVENTS}}))." > $EVENT_COUNT (EVENT_COUNT) ". \
+	"\nAverage speed from ".localtime($Scan{"$3"}->{TIME}->{FIRST})." to ".localtime($Scan{"$3"}->{TIME}->{LAST})." is ".$Scan{"$3"}->{SPEED}."\n\n\n"; \
+	my $i = 1; \
+	foreach my $e (sort keys %{$Scan{"$3"}->{EVENTS}}) { \
+		$ret .= "$i. $e:\n"; my $j = 1; \
+		foreach my $d (sort keys %{$Scan{"$3"}->{EVENTS}->{$e}}) { \
+			$ret .= "\t$j. $d\t\t".$Scan{"$3"}->{EVENTS}->{$e}->{$d}."\n"; \
+			$j++; \
+		} \
+		$ret .= "============================\n"; \
+		$i++; \
+	} \
+	return $ret; \
+	); \
+	add Target_$2 %t: %ooo; \
+	set Target_$2 1200 (report Target_$2 /usr/bin/mail -s 'SEC: Too many $1 to $2' soc@yourdomaoin.com);
+
+
+# response for e-mail worm
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(TCP_Probe_SMTP)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && !MailSent_MailWorm_$3 && ISSLOG \
+	&& !=( `/bin/grep \"\\\ $3\\\ \" /perllib/EmailRelays.txt` ) \
+	&& =( \ 
+		($Scan{"$3"}->{EVENTS}->{TCP_Probe_SMTP}->{TOTAL}>$SMTP_EVENT_COUNT_TOTAL) && (scalar(keys(%{$Scan{"$3"}->{EVENTS}->{TCP_Probe_SMTP}}))> $SMTP_DEST_COUNT) \
+	) 
+continue=TakeNext
+desc=e-mail worm $1: $3 -> $2
+action=eval %ooo (my $ret = "\nTotal events: ".$Scan{"$3"}->{TOTAL_EVENTS}." > $EVENT_COUNT_TOTAL (EVENT_COUNT_TOTAL) ". \
+		"\nDifferent events: ".scalar(keys(%{$Scan{"$3"}->{EVENTS}}))." ~ $EVENT_COUNT (EVENT_COUNT) ". \
+		"\nDifferent destination for TCP_Probe_SMTP: ".scalar(keys(%{$Scan{"$3"}->{EVENTS}->{TCP_Probe_SMTP}}))." > $SMTP_DEST_COUNT (SMTP_DEST_COUNT) ". \
+		"\nAverage speed from ".localtime($Scan{"$3"}->{TIME}->{FIRST})." to ".localtime($Scan{"$3"}->{TIME}->{LAST})." is ".$Scan{"$3"}->{SPEED}."\n\n\n"; \
+		my $i = 1; \
+		foreach my $e (sort keys %{$Scan{"$3"}->{EVENTS}}) { \
+			$ret .= "$i. $e:\n"; my $j = 1; \
+			foreach my $d (sort keys %{$Scan{"$3"}->{EVENTS}->{$e}}) { \
+				$ret .= "\t$j. $d\t\t".$Scan{"$3"}->{EVENTS}->{$e}->{$d}."\n"; \
+				$j++; \
+			} \
+			$ret .= "============================\n"; \
+			$i++; \
+		} \
+		return $ret; \
+	); \
+	fill Scan_$3 %t: %ooo; \
+	report Scan_$3 /usr/bin/mail -s 'SEC: E-Mail Worm from $3' soc@yourdomaoin.com; \
+	create MailSent_MailWorm_$3 10800; \
+	
+	#write /tmp/sec.log
+
+# response destination scan
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(\S+Probe\S+|\S+Scan|\S+OS_Fingerprint|\S+Sweep|Telnet_Abuse)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && !MailSent_DestScan_$3 && ISSLOG \
+	&& =( \ 
+		foreach my $e ( keys (%{$Scan{"$3"}->{EVENTS}}) ){ \
+			if ( (scalar(keys(%{$Scan{"$3"}->{EVENTS}->{$e}}))> $EVENT_DEST_COUNT+1) && ( $Scan{"$3"}->{TIME}->{LAST}-$Scan{"$3"}->{TIME}->{FIRST} > $DEST_SCAN_TIME_TO_COUNT) && ($Scan{"$3"}->{SPEED} >= $MAX_SPEED) ) { \
+			 	$EVENT_NAME_MAX_DEST = $e; return 1; \
+			} \
+		}\
+		return 0; \
+	) 
+continue=TakeNext
+desc=destination scan $1: $3 -> $2
+action=eval %ooo (my $ret = "\nTotal events: ".$Scan{"$3"}->{TOTAL_EVENTS}." ~ $EVENT_COUNT_TOTAL (EVENT_COUNT_TOTAL) ". \
+		"\nDifferent events: ".scalar(keys(%{$Scan{"$3"}->{EVENTS}}))." ~ $EVENT_COUNT (EVENT_COUNT) ". \
+		"\nDifferent destination for $EVENT_NAME_MAX_DEST: ".(scalar(keys(%{$Scan{"$3"}->{EVENTS}->{$EVENT_NAME_MAX_DEST}}))-1)." > $EVENT_DEST_COUNT (EVENT_DEST_COUNT) ". \
+		"\nAverage speed from ".localtime($Scan{"$3"}->{TIME}->{FIRST})." to ".localtime($Scan{"$3"}->{TIME}->{LAST})." is ".$Scan{"$3"}->{SPEED}."\n\n\n"; \
+		my $i = 1; \
+		foreach my $e (sort keys %{$Scan{"$3"}->{EVENTS}}) { \
+			$ret .= "$i. $e:\n"; my $j = 1; \
+			foreach my $d (sort keys %{$Scan{"$3"}->{EVENTS}->{$e}}) { \
+				$ret .= "\t$j. $d\t\t".$Scan{"$3"}->{EVENTS}->{$e}->{$d}."\n"; \
+				$j++; \
+			} \
+			$ret .= "============================\n"; \
+			$i++; \
+		} \
+		return $ret; \
+	); \
+	fill Scan_$3 %t: %ooo; \
+	report Scan_$3 /usr/bin/mail -s 'SEC: Destination scan from $3' soc@yourdomaoin.com; \
+	create MailSent_DestScan_$3 10800; \
+	
+	#write /tmp/sec.log
+
+# response for scans
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(\S+Probe\S+|\S+Scan|\S+OS_Fingerprint|\S+Sweep|Telnet_Abuse)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=Scan_$3 && !MailSent_Scan_$3 && ISSLOG \
+	&& =( (($Scan{"$3"}->{TOTAL_EVENTS}>$EVENT_COUNT_TOTAL)&&(scalar(keys(%{$Scan{"$3"}->{EVENTS}}))>$EVENT_COUNT)) \
+	) 
+continue=TakeNext
+desc=scan $1: $3 -> $2
+action=eval %ooo (my $ret = "\nTotal events: ".$Scan{"$3"}->{TOTAL_EVENTS}." > $EVENT_COUNT_TOTAL (EVENT_COUNT_TOTAL) ". \
+		"\nDifferent events: ".scalar(keys(%{$Scan{"$3"}->{EVENTS}}))." > $EVENT_COUNT (EVENT_COUNT) ". \
+		"\nAverage speed from ".localtime($Scan{"$3"}->{TIME}->{FIRST})." to ".localtime($Scan{"$3"}->{TIME}->{LAST})." is ".$Scan{"$3"}->{SPEED}."\n\n\n"; \
+		my $i = 1; \
+		foreach my $e (sort keys %{$Scan{"$3"}->{EVENTS}}) { \
+			$ret .= "$i. $e:\n"; my $j = 1; \
+			foreach my $d (sort keys %{$Scan{"$3"}->{EVENTS}->{$e}}) { \
+				$ret .= "\t$j. $d\t\t".$Scan{"$3"}->{EVENTS}->{$e}->{$d}."\n"; \
+				$j++; \
+			} \
+			$ret .= "============================\n"; \
+			$i++; \
+		} \
+		return $ret; \
+	); \
+	fill Scan_$3 %t: %ooo; \
+	report Scan_$3 /usr/bin/mail -s 'SEC: Scan from $3' soc@yourdomaoin.com; \
+	create MailSent_Scan_$3 10800; \
+	
+	#write /tmp/sec.log
+
+
+# G2 email worm first event 
+# Geeration 2 email worms don't try to send e-mails blindly, thay somewhere get SMTP relay address, and
+# try to use it as MTA (found Jul 12 2005 on Sveta's Avvacumova workstation: W32/Eyevg.worm.k (McAfee))
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(TCP_Probe_SMTP)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(10\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=!EMAIL_WORM_G2_$3 && ISSLOG \
+	&& !=( `/bin/grep \"\\\ $3\\\ \" /perllib/EmailRelays.txt` )
+continue=TakeNext
+desc=First Email Worm G2 TCP_Probe_SMTP: $3 -> $2
+action=create EMAIL_WORM_G2_$3 3600 eval %oo ( delete $SMTP_G2_Worm{"$3"} )
+
+
+# E-mail worm G2 counting
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(TCP_Probe_SMTP)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(10\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=EMAIL_WORM_G2_$3 && ISSLOG
+continue=TakeNext
+desc=Email Worm G2 TCP_Probe_SMTP: $3 -> $2
+action=eval %o ( return ++$SMTP_G2_Worm{"$3"}->{COUNT} ); \
+	eval %d ( return "$2" ); \
+	add EMAIL_WORM_G2_$3 %t: %d: TOTAL - %o
+	
+
+# E-mail worm G2 response
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+(TCP_Probe_SMTP)\s+.+\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+.+\s+\:intruder\-ip\-addr\:\s*(10\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+
+context=EMAIL_WORM_G2_$3 && ISSLOG \ 
+	&& =( $SMTP_G2_Worm{"$3"}->{COUNT} > 7 ) \
+	&& !MailSent_EMAIL_WORM_G2_$3
+continue=TakeNext
+desc=Response Email Worm G2 TCP_Probe_SMTP: $3 -> $2
+action=report EMAIL_WORM_G2_$3 /usr/bin/mail -s 'SEC: G2 E-Mail Worm from $3' soc@yourdomaoin.com; \
+	create MailSent_EMAIL_WORM_G2_$3 10800; \
+	eval %o ( delete $SMTP_G2_Worm{"$3"} )
+
+############### G2 email worm ######################
+
+# Domain account scan
+# Multile "User Account Locked Out" from one host
+#
+#        ISS-MIB::eventEntryName25."" = STRING: User_account_locked_out  ISS-MIB::eventEntryTime25."" = STRING: 2005-09-02 08:24:39      ISS-MIB::eventEntryProtocol25."" = STRING: Unassigned (253)     ISS-MIB::eventEntrySourceIpAddress25."" = STRING: 10.4.67.203    ISS-MIB::eventEntryDestinationIpAddress25."" = STRING: 10.4.67.203      ISS-MIB::eventEntryIcmpType25."" = STRING: None ISS-MIB::eventEntryIcmpCode25."" = STRING: None ISS-MIB::eventEntrySourcePort25."" = STRING: 0   ISS-MIB::eventEntryDestinationPort25."" = STRING: 0     ISS-MIB::eventEntryUserActionList25."" = STRING: DISPLAY=Default:0,LOGDB=LogWithoutRaw:0,SNMP=Default:0 ISS-MIB::eventEntryEventSpecificInfo25."" = STRING:  SystemAgent:MSK-DC01;  AttackOrigin:Local;  Target Account Name:NNZobnina;  Target Account ID:{S-1-5-21-2470146651-3958396388-2989495117-37250};  Caller Machine Name:WSPDO06;  Caller User Name:MSK-DC01$;  Caller Domain:CORP;  Caller Logon ID:(0x0,0x3E7);
+
+# 1 - eventEntryTime
+# 2 - eventEntrySourceIpAddress
+# 3 - Target Account Name
+# 4 - Target Account ID
+# 5 - Caller Machine Name
+# 6 - Caller User Name
+# 7 - Caller Domain
+type=Single
+ptype=RegExp
+pattern=\s+ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+User_account_locked_out\s+ISS\-MIB\:\:eventEntryTime25\.\"\"\s+=\s+STRING\:\s+(.+)\s+ISS\-MIB\:\:eventEntryProtocol25.+\s+ISS\-MIB\:\:eventEntrySourceIpAddress25\.\"\"\s+=\s+STRING\:\s+(\S+)\s+.+\s+Target\s+Account\s+Name\:\s*(\S+)\;\s+Target\s+Account\s+ID\:\s*(\S+)\;\s+Caller\s+Machine\s+Name\:\s*(\S+)\;\s+Caller\s+User\s+Name\:\s*(\S+)\;\s+Caller\s+Domain\:\s*(\S+)\;\s+
+context=!ACCOUNT_SCAN_$5 && ISSLOG
+continue=TakeNext
+desc=First User Account Locked Out (644) From $5 $6  Domain $7 Account Name $3 ($4)
+action=create ACCOUNT_SCAN_$5 1200 eval %o ( delete $Account_scan{"$5"} )
+
+# Account scan counting and write log
+type=Single
+ptype=RegExp
+pattern=\s+ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+User_account_locked_out\s+ISS\-MIB\:\:eventEntryTime25\.\"\"\s+=\s+STRING\:\s+(.+)\s+ISS\-MIB\:\:eventEntryProtocol25.+\s+ISS\-MIB\:\:eventEntrySourceIpAddress25\.\"\"\s+=\s+STRING\:\s+(\S+)\s+.+\s+Target\s+Account\s+Name\:\s*(\S+)\;\s+Target\s+Account\s+ID\:\s*(\S+)\;\s+Caller\s+Machine\s+Name\:\s*(\S+)\;\s+Caller\s+User\s+Name\:\s*(\S+)\;\s+Caller\s+Domain\:\s*(\S+)\;\s+
+context=ACCOUNT_SCAN_$5 && ISSLOG
+continue=TakeNext
+desc=$1 User Account Locked Out (644) on $2 From $5 $6 Domain $7 Account Name $3 ($4)
+action=eval %o ( ++$Account_scan{"$5"}->{"$3 ($4)"} ); \
+	write /var/log/siteprotector/User_account_locked_out/messages;\
+	add ACCOUNT_SCAN_$5 %t: %s 
+
+# Account scan response
+type=Single
+ptype=RegExp
+pattern=\s+ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+User_account_locked_out\s+ISS\-MIB\:\:eventEntryTime25\.\"\"\s+=\s+STRING\:\s+(.+)\s+ISS\-MIB\:\:eventEntryProtocol25.+\s+ISS\-MIB\:\:eventEntrySourceIpAddress25\.\"\"\s+=\s+STRING\:\s+(\S+)\s+.+\s+Target\s+Account\s+Name\:\s*(\S+)\;\s+Target\s+Account\s+ID\:\s*(\S+)\;\s+Caller\s+Machine\s+Name\:\s*(\S+)\;\s+Caller\s+User\s+Name\:\s*(\S+)\;\s+Caller\s+Domain\:\s*(\S+)\;\s+
+context=ACCOUNT_SCAN_$5 && ISSLOG \
+	&& =( 1 < scalar(keys(%{$Account_scan{"$5"}})) ) \
+	&& !MailSent_ACCOUNT_SCAN_$5
+continue=TakeNext
+desc=Response on User Account Locked Out (644) on $2 From $5 $6 Domain $7 Account Name $3 ($4)
+action=report ACCOUNT_SCAN_$5 /usr/bin/mail -s 'SEC: Account scan from $5 $6' soc@yourdomaoin.com; \
+	create MailSent_ACCOUNT_SCAN_$5 300
+
+########### Domain account scan #####################
+
+# FTP_Put
+# correlate FTP_Put and FTP_Pass and send e-mail to me
+# 
+#         ISS-MIB::eventEntryName25."" = STRING: FTP_Pass ISS-MIB::eventEntryTime25."" = STRING: 2005-09-02 12:45:00      ISS-MIB::eventEntryProtocol25."" = STRING: TCP (6)      ISS-MIB::eventEntrySourceIpAddress25."" = STRING: 10.8.177.2     ISS-MIB::eventEntryDestinationIpAddress25."" = STRING: 10.4.66.30       ISS-MIB::eventEntryIcmpType25."" = STRING: None ISS-MIB::eventEntryIcmpCode25."" = STRING: None ISS-MIB::eventEntrySourcePort25."" = STRING: 18050       ISS-MIB::eventEntryDestinationPort25."" = STRING: 21    ISS-MIB::eventEntryUserActionList25."" = STRING: DISPLAY=Default:0,LOGDB=LogWithoutRaw:0,SNMP=Default:0 ISS-MIB::eventEntryEventSpecificInfo25."" = STRING:  :vlan:94;  :user:anonymous;  :passwd:valuedcustomer@domain.com;  :victim-ip-addr:10.4.66.30;  :victim-port:21;  :intruder-ip-addr:10.8.177.2;  :intruder-port:18050;
+# 1 - eventEntrySourceIpAddress
+# 2 - eventEntryDestinationIpAddress
+# 3 - :user | :file
+# 4 - :passwd
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+FTP_Pass\s+.+\s+ISS\-MIB\:\:eventEntrySourceIpAddress25\.\"\"\s+=\s+STRING\:\s+(\S+)\s+ISS\-MIB\:\:eventEntryDestinationIpAddress25\.\"\"\s+=\s+STRING\:\s+(\S+)\s+.+\s+\:user\:\s*(\S+)\;\s+\:passwd\:\s*(\S+)\;\s+
+context=!FTP_Session_$1_$2 && ISSLOG
+continue=TakeNext
+desc=FTP_Pass: $1 -> $2 :user $3 :passwd $4
+action=add FTP_Session_$1_$2 %t: %s; \
+	set FTP_Session_$1_$2 600
+
+# FTP_Put event need to be responsed
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+FTP_Put\s+.+\s+ISS\-MIB\:\:eventEntrySourceIpAddress25\.\"\"\s+=\s+STRING\:\s+(\S+)\s+ISS\-MIB\:\:eventEntryDestinationIpAddress25\.\"\"\s+=\s+STRING\:\s+(\S+)\s+.+\s+\:file\:\s*(.+)\;\s+\:victim\-ip\-addr\:
+context=FTP_Session_$1_$2 && ISSLOG 
+continue=TakeNext
+desc=FTP_Put: $1 -> $2 :file $3
+action=add FTP_Session_$1_$2 %t: %s ; \
+	set FTP_Session_$1_$2 600 (report FTP_Session_$1_$2 /usr/bin/mail -s 'SEC: FTP_Put $1 -> $2' soc@yourdomaoin.com; report FTP_Session_$1_$2 /bin/cat >>/var/log/siteprotector/FTP_Put/messages)
+
+#######################################################
+
+# Network_Quiet, Network_Normal
+# correlate if SPAN port is down or not
+#
+type=PairWithWindow
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+Network_Quiet\s+
+desc=Network_Quiet
+action=create Network_Quiet 1200; add Network_Quiet %t: %s; report Network_Quiet  /usr/bin/mail -s 'SEC: Network_Quiet' soc@yourdomaoin.com
+ptype2=RegExp
+pattern2=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+Network_Normal\s+
+desc2=Short Network_Quiet interval
+action2=create Network_Quiet 1200; add Network_Quiet %t: %s; report Network_Quiet  /usr/bin/mail -s 'SEC: Short Network_Quiet interval' soc@yourdomaoin.com
+window=60
+#######################################################
+
+# ARP Poisoning response
+# The only way in ISS is to analyse IP_Duplicate
+#
+# ISS-MIB::eventEntryName25."" = STRING: IP_Duplicate     ISS-MIB::eventEntryTime25."" = STRING: 2005-09-20 15:16:23      ISS-MIB::eventEntryProtocol25."" = STRING: 0    ISS-MIB::eventEntrySourceIpAddress25."" = STRING: 10.4.67.1    ISS-MIB::eventEntryDestinationIpAddress25."" = STRING: 10.4.80.106      ISS-MIB::eventEntryIcmpType25."" = STRING: None ISS-MIB::eventEntryIcmpCode25."" = STRING: None ISS-MIB::eventEntrySourcePort25."" = STRING: 0 ISS-MIB::eventEntryDestinationPort25."" = STRING: 0     ISS-MIB::eventEntryUserActionList25."" = STRING: DISPLAY=Default:0,LOGDB=LogWithoutRaw:0,SNMP=Default:0 ISS-MIB::eventEntryEventSpecificInfo25."" = STRING:  :MAC1:00:00:0c:07:ac:2a;  :MAC2:00:00:0c:07:ac:14;  :victim-ip-addr:10.4.80.106;  :intruder-ip-addr:10.4.67.1;
+#
+# 1 - intruder MAC1
+# 2 - intruder MAC2
+# 3 - victim
+# 4 - attacker
+# 
+# Event will be triggered if: 
+# a) MAC1 and MAC2 are not in  /perllib/ClusterMACs.txt simultaneously
+# b) attacker's IP is router's IP (^\d{1,3}\.\d{1,3}\.\d{1,3}\.1$)
+# c) This event already not triggered (600 sec still not passed)
+
+type=Single
+ptype=RegExp
+pattern=ISS\-MIB\:\:eventEntryName25\.\"\"\s+=\s+STRING\:\s+IP_Duplicate\s+.+\s+ISS\-MIB\:\:eventEntryEventSpecificInfo25\.\"\"\s+=\s+STRING\:\s+\:MAC1\:\s*(\S+)\s*\;\s+\:MAC2\:\s*(\S+)\s*\;\s+\:victim\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;\s+\:intruder\-ip\-addr\:\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s*\;
+context=ISSLOG \
+	&& !=( my $mac1_info = `/bin/grep -i \"\\\ $1\\\ \" /perllib/ClusterMACs.txt`; my $mac2_info = `bin/grep -i \"\\\ $2\\\ \" /perllib/ClusterMACs.txt`; \
+		chomp $mac1_info; chomp $mac2_info; \
+		return ($mac1_info&&$mac2_info); \
+	) \
+	&& =( $4 =~ /^\d{1,3}\.\d{1,3}\.\d{1,3}\.1$/ ) \
+	&& !IP_Duplicate_$1_$2_$4
+continue=TakeNext
+desc=IP_Duplicate intruder: $4 ($1,$2) -> $3
+action=create IP_Duplicate_$1_$2_$4 600; \
+	add IP_Duplicate_$1_$2_$4 %t: %s; \
+	report IP_Duplicate_$1_$2_$4  /usr/bin/mail -s 'SEC: IP_Duplicate for $4' soc@yourdomaoin.com
+
+#######################################################
+
+#
+# DHCP_Ack
+#
+#         ISS-MIB::eventEntryName25."" = STRING: DHCP_Ack ISS-MIB::eventEntryTime25."" = STRING: 2006-03-16 12:28:29      ISS-MIB::eventEntryProtocol25."" = STRING: UDP (17)     ISS-MIB::eventEntrySourceIpAddress25."" = STRING: 10.4.81.4    ISS-MIB::eventEntryDestinationIpAddress25."" = STRING: 10.4.81.99       ISS-MIB::eventEntryIcmpType25."" = STRING: None ISS-MIB::eventEntryIcmpCode25."" = STRING: None ISS-MIB::eventEntrySourcePort25."" = STRING: 67        ISS-MIB::eventEntryDestinationPort25."" = STRING: 68    ISS-MIB::eventEntryUserActionList25."" = STRING: DISPLAY=Default:0,LOGDB=LogWithoutRaw:0,SNMP=Default:0 ISS-MIB::eventEntryEventSpecificInfo25."" = STRING:  :Client IP Address:0.0.0.0;  :Client Ethernet Address:00:09:6b:82:19:ff;  :Renewal Time:0;  :Rebinding Time:0;  :Lease Time:100800;  :Server Identifier:10.4.67.108;  :Subnet Mask:255.255.255.0;  :Domain Name:dynamic.hq.tnk;  :Router:10.4.81.1;  :victim-ip-addr:10.4.81.99;  :victim-port:68;  :intruder-ip-addr:10.4.81.4;  :intruder-port:67;
+##
+##

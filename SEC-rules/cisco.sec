@@ -1,0 +1,99 @@
+##################################################
+# Analyze Cisco switches and routers logs        #
+##################################################
+#
+# Sergey V Soldatov, 2006-04-26
+#
+
+# Apr 25 19:02:30 yourdomain 2006 Apr 25 19:02:29 %SECURITY-1-PORTSHUTDOWN:Port 9/41 shutdown due to security violation 00-09-6b-10-f0-46
+#
+# %SECURITY-1-PORTSHUTDOWN
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\%SECURITY\-1\-PORTSHUTDOWN\:Port\s+(\S+)\s+shutdown\s+due\s+to\s+security\s+violation\s+(\S+)
+context=CISCOLOG 
+desc=Port $1 shutdown due to security violation $2
+action=eval %o ( my $ret = ""; \
+		$ret .= "$0\n\n"; \
+		$ret .= "Explanation: this message indicates that a port has been shut down due to an insecure host sourcing a packet into that port.\n\n"; \
+		return $ret; \
+	); \
+	fill E %o; \
+	report E /usr/bin/mail -s 'SEC: Port $1 shutdown due to security violation $2' svsoldatov@yourdomaoin.com aalileev@yourdomaoin.com soc@yourdomaoin.com; \
+	delete E;
+
+# May 30 06:47:40 yourdomain proxy_poll: %CE-HTTP-3-270002: HTTP Outgoing Proxy monitor failure. Timeout on proxy server 10.4.68.10 port 9090
+# Jun  1 10:43:27 yourdomain proxy_poll: %CE-HTTP-3-270002: Outgoing Proxy monitor failure. Timeout on proxy server 10.4.192.48 port 9090
+# 
+# Cisco Cache Engine is unable to connect to next proxy - WebWasher
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+\d+\:\d+\:\d+\s+(\S+)\s+proxy_poll\:\s+\%CE\-HTTP\-3\-270002\:.+Outgoing\s+Proxy\s+monitor\s+failure\.\s+Timeout\s+on\s+proxy\s+server\s+(\S+)\s+port\s+(\S+)
+context=CELOG 
+desc=$0
+action=add E_$2_$3 %s
+rem=_store_ Timeout events in add E_$2_$3
+
+type=SingleWithThreshold
+continue=TakeNext
+ptype=RegExp
+pattern=\s+\d+\:\d+\:\d+\s+(\S+)\s+proxy_poll\:\s+\%CE\-HTTP\-3\-270002\:.+Outgoing\s+Proxy\s+monitor\s+failure\.\s+Timeout\s+on\s+proxy\s+server\s+(\S+)\s+port\s+(\S+)
+context=CELOG && E_$2_$3
+desc=SingleWithThreshold: $0
+thresh=2
+window=300
+action=report E_$2_$3 /usr/bin/mail -s 'SEC: $1 timeout to $2:$3 (2 times in 300 sec)' svsoldatov@yourdomaoin.com svshumov@yourdomaoin.com soc@yourdomaoin.com
+action2=delete E_$2_$3
+rem=will _count_ Connection reset events
+
+
+#
+# Jun  1 07:44:28 wc3..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.49 on port 9090
+# Jun  1 07:44:28 wc3..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.48 on port 9090
+# Jun  1 07:44:28 wc3..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.49 on port 9090
+# Jun  1 07:44:28 wc3..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.48 on port 9090
+# Jun  1 07:43:44 wc4..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.48 on port 9090
+# Jun  1 07:43:44 wc4..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.49 on port 9090
+# Jun  1 07:43:44 wc4..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.48 on port 9090
+# Jun  1 07:43:44 wc4..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.49 on port 9090
+# Jun  1 07:45:28 wc3..yourdomain proxy_poll: %CE-HTTP-3-270000: update_status() Connection reset by proxy 10.4.192.49 on port 9090
+#
+# CCE parent proxy was reset by WW
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\d+:\d+:\d+\s+(\S+)\s+proxy_poll\: \%CE\-HTTP\-3\-270000\: update_status\(\) Connection reset by proxy\s+(\S+)\s+on port\s+(\d+)
+context=CELOG
+desc=$0
+action=add RESET_$1_$2_$3 %s
+rem=will just _store_ Connection reset events in context RESET_$1_$2_$3
+
+type=SingleWithThreshold
+continue=TakeNext
+ptype=RegExp
+pattern=\d+:\d+:\d+\s+(\S+)\s+proxy_poll\: \%CE\-HTTP\-3\-270000\: update_status\(\) Connection reset by proxy\s+(\S+)\s+on port\s+(\d+)
+context=CELOG && RESET_$1_$2_$3
+desc=SingleWithThreshold: $0
+thresh=5
+window=300
+action=report RESET_$1_$2_$3 /usr/bin/mail -s 'SEC: $1 Connection reset by $2:$3 (5 times in 300 sec)' svsoldatov@yourdomaoin.com svshumov@yourdomaoin.com soc@yourdomaoin.com
+action2=delete RESET_$1_$2_$3
+rem=will _count_ Connection reset events
+
+##
+# Jan 11 05:16:28 yourdomain 2008 Jan 11 05:16:27 MSK +03:00 %SYS-3-PKTBUFFERFAIL_ERRDIS:Packet buffer failure detected. Err-disabling port 5/1.
+# 
+# Err-disabling port on Cisco Switch
+#
+type=Single
+continue=TakeNext
+ptype=RegExp
+pattern=\s+(\S+)\.your\.domain\.com\s+.+Err-disabling\s+port\s+(\S+)\.
+context=CISCOLOG
+desc=$0
+action=add E_$1_$2 %s; report E_$1_$2 /usr/bin/mail -s 'SEC: $1 Err-disabling port $2' svsoldatov@yourdomaoin.com svshumov@yourdomaoin.com soc@yourdomaoin.com; set E_$1_$2 86400 report E_$1_$2 /usr/bin/mail -s 'SEC: $1 Err-disabling port $2 context expired' svsoldatov@yourdomaoin.com svshumov@yourdomaoin.com soc@yourdomaoin.com
