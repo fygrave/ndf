@@ -128,7 +128,7 @@ elsif($list_search){
 											my ($func, $dlevel) = split ':', $a->{FUNC};
 											$dlevel = 3 unless $dlevel;
 											
-											my @dnames = split '.', $f[$i];
+											my @dnames = split /\./, $f[$i];
 											my @rdnames = ();
 											my $nn = $dlevel > @dnames ? $#dnames : ($dlevel-1);
 											for (0 ..  $nn){
@@ -136,7 +136,7 @@ elsif($list_search){
 											}
 											$serach_pattern = join '.', @rdnames;
 										}
-										#print "\t\t\t\t -- DomainSearch (pattern: $serach_pattern) --"; #DEBUG
+										#print "\t\t\t\t -- DomainSearch (pattern: $serach_pattern (".$f[$i].") ) --\n"; #DEBUG
 										$linescore += $lists{$fn}->{$a->{FUNC}}->{$serach_pattern};
 										#print " ($linescore) \n"; #DEBUG
 										
@@ -175,30 +175,41 @@ elsif($list_search){
 
 						#print map {"$_\n"} ($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},$ParserCfg::Lists{WhiteList}->{OutFileFD},$ParserCfg::Lists{GrayList}->{OutFileFD},$ParserCfg::Lists{BlackList}->{OutFileFD},$ParserCfg::Lists{ExpBlackList}->{OutFileFD}); #DEBUG
 			
+						$| = 1; #flush 
 						if ( $ParserCfg::Lists{ExpWhiteList}->{OutFileFD} && ($linescore > $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
 							#print "Line goes to ExpWhiteList\n"; #DEBUG
+							flock($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{ExpWhiteList}->{OutFileFD}} "$l\n";
-							$ParserCfg::Lists{ExpWhiteList}->{OutFileLCNT}++;
+							flock($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},LOCK_UN);
+							#$ParserCfg::Lists{ExpWhiteList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{WhiteList}->{OutFileFD} && ($ParserCfg::Lists{WhiteList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
 							#print "Line goes to WhiteList\n"; #DEBUG
+							flock($ParserCfg::Lists{WhiteList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{WhiteList}->{OutFileFD}} "$l\n";
-							$ParserCfg::Lists{WhiteList}->{OutFileLCNT}++;
+							flock($ParserCfg::Lists{WhiteList}->{OutFileFD},LOCK_UN);
+							#$ParserCfg::Lists{WhiteList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{GrayList}->{OutFileFD} && ($ParserCfg::Lists{BlackList}->{Thr} < $linescore) && ($linescore < $ParserCfg::Lists{WhiteList}->{Thr}) ){
 							#print "Line goes to GrayList\n"; #DEBUG
+							flock($ParserCfg::Lists{GrayList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{GrayList}->{OutFileFD}} "$l\n";
-							$ParserCfg::Lists{GrayList}->{OutFileLCNT}++;
+							flock($ParserCfg::Lists{GrayList}->{OutFileFD},LOCK_UN);
+							#$ParserCfg::Lists{GrayList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{BlackList}->{OutFileFD} && ($ParserCfg::Lists{ExpBlackList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{BlackList}->{Thr}) ){
 							#print "Line goes to BlackList\n"; #DEBUG
+							flock($ParserCfg::Lists{BlackList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{BlackList}->{OutFileFD}} "$l\n";
-							$ParserCfg::Lists{BlackList}->{OutFileLCNT}++;
+							flock($ParserCfg::Lists{BlackList}->{OutFileFD},LOCK_UN);
+							#$ParserCfg::Lists{BlackList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{ExpBlackList}->{OutFileFD} && ($linescore < $ParserCfg::Lists{ExpBlackList}->{Thr}) ){
 							#print "Line goes to ExpBlackList\n"; #DEBUG
+							flock($ParserCfg::Lists{ExpBlackList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{ExpBlackList}->{OutFileFD}} "$l\n";
-							$ParserCfg::Lists{ExpBlackList}->{OutFileLCNT}++;
+							flock($ParserCfg::Lists{ExpBlackList}->{OutFileFD},LOCK_UN);
+							#$ParserCfg::Lists{ExpBlackList}->{OutFileLCNT}++;
 						}
 					}
 					
