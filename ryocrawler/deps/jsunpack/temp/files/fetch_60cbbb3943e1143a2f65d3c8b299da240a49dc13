@@ -1,7 +1,0 @@
-var rcblkX12iZUVW04 = document.getElementById('bn_X12iZUVW04');
-if (rcblkX12iZUVW04)
-{
-	rcblkX12iZUVW04.innerHTML = "";
-	rcblkX12iZUVW04.style.padding = '0px';
-	rcblkX12iZUVW04.style.margin = '0px';
-}
