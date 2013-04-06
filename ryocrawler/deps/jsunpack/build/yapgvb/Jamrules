@@ -1,0 +1,7 @@
+# Points BOOST_ROOT towards the directory that contains the boost/ subdirectory (and boost/python subdirectory with .hpp headers)
+
+path-global BOOST_ROOT : /home/lonnie/boost ;
+
+#path-global BOOST_ROOT : /usr/include ;
+
+project boost : $(BOOST_ROOT) ;

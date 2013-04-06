@@ -1,0 +1,6 @@
+# should point to the tools/build/v1 directory, which is probably somewhere under $(BOOST_ROOT)
+
+boost-build /home/lonnie/boost/tools/build/v1 ;
+
+#boost-build /usr/share/boost-build/v1 ;
+

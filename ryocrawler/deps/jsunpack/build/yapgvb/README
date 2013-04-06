@@ -1,0 +1,83 @@
+CHANGES: As of version 1.2.0, there is a pure-Python backend that does not require any compiling or screwing around with Graphviz and Boost.Python libraries.  The Boost.Python backend is still available, and is the default on Linux.  The Boost.Python backend is no longer supported on Windows.
+
+The Pure Python backend is incomplete, but it does allow for creation and rendering of graphs.
+
+
+Installation Guide
+------------------
+
+Linux:
+
+  You can use either the Pure Python or Boost.Python backends with Linux.
+
+  Also, there may be a distribution of yapgvb for your flavor of Linux.
+
+  For example, Ubuntu users can type:
+    sudo apt-get install python-yapgvb
+
+
+  I. Pure Python backend installation
+  -----------------------------------
+    
+    0. Install Graphviz
+
+    1. Edit config_linux2.py.  Change the use_boost variable to False.
+
+    2. python setup.py install   (may need to run as root)
+
+
+  II. Boost.Python backend installation
+  -------------------------------------
+
+    1. make sure that boost.python and graphviz are installed.  
+       graphviz must be >= version 2.6, and should be compiled as 
+       dynamically linked libraries.
+    
+    2. optionally install the boost.graph python bindings.
+    
+    3. edit config.py to match your system
+
+    4. run 'python setup.py build'
+
+    5. if that works, run 'python setup.py install'
+
+
+Windows:
+
+    0. Install Graphviz.  Edit your PATH environment variable so that 
+       the Graphviz binaries will be found.
+
+    1. python setup.py install
+
+
+
+
+
+
+------------- DEPRECATED:  Windows Boost.Python backend installation ---------
+
+    1. Install Graphviz.
+    
+    2. Build boost.   
+        I. Download and extract the .zip archive for boost_1_33_1 (or better)
+        II.     Download the bjam binary for windows.  
+        III.    Edit your PATH so that bjam is in it.  
+        IV.   Open a cmd shell.
+        V.   Make sure that your Visual Studio .NET 2003* environment is set up.
+               This can usually be accomplished by running the vcvars32.bat script
+               that comes with Visual Studio.
+        VI.     chdir to the boost_1_33_1 directory
+        VII.    Type 'bjam'
+
+    3. Edit yapgvb/config_win32.py to match your setup
+    
+    4. From the command line, run:
+        python setup.py build
+        python setup.py install
+        
+        (or python setup.py bdist_wininst to build an installer)
+
+* afaik, Visual Studio .NET 2003 is the only version of visual studio that can be used
+to build extensions for the stock distribution of Python 2.4 without modification.
+The free compiler suite /can/ be used, but requires some kind of ugly hack to distutils.
+Search the web/usenet for more info (in particular, search on comp.lang.python)

@@ -1,0 +1,18 @@
+this script is built from various bits and pieces. Reference is given where reference is due.
+
+INSTALLATION
+------------
+
+You'll need to compile yara, and yara python extenstions, which come with yara code:
+
+http://code.google.com/p/yara-project/
+
+In addition to that jsunpack should be in deps folder. We use it to unpack obfuscated javascripts before we do match to javascript API calls.
+
+and remember to Enjoy the thing ;-)
+
+
+LICENSE
+--------
+
+This code is provided with no warranity under 'free as beer' license ;)

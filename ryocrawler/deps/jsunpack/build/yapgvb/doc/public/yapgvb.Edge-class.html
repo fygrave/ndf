@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yapgvb.Edge</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="yapgvb-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          yapgvb
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="yapgvb-module.html">Package&nbsp;yapgvb</a> ::
+        Class&nbsp;Edge
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="../private/yapgvb.Edge-class.html">show&nbsp;private</a>&nbsp;|&nbsp;hide&nbsp;private]</font></td></tr>
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="yapgvb.Edge-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Class Edge</h2>
+
+<hr/>
+
+Edges are created either through the GraphBase.add_node, or by using 
+the overloaded Node operators &lt;&lt;, &gt;&gt; , and - operators (for 
+directed, directed, and undirected graphs respectively).
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.Edge-class.html#__iter__" class="summary-sig-name"><code>__iter__</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Iterates over (tail, head)</td></tr>
+</table><br />
+
+
+<!-- =========== START OF PROPERTY SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Property Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#arrowhead"><code>arrowhead</code></a></b>: Style of arrowhead on the head node of an edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#arrowsize"><code>arrowsize</code></a></b>: Multiplicative scale factor for arrowheads.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#arrowtail"><code>arrowtail</code></a></b>: Style of arrowhead on the tail node of an edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#color"><code>color</code></a></b>: Basic drawing color for graphics, not text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#colorscheme"><code>colorscheme</code></a></b>: This attribute specifies a color scheme namespace.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#comment"><code>comment</code></a></b>: Comments are inserted into output.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#constraint"><code>constraint</code></a></b>: If false, the edge is not used in ranking the nodes.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#decorate"><code>decorate</code></a></b>: If true, attach edge label to edge by a 2-segment polyline, 
+underlining the label, then going to the closest point of spline.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#dir"><code>dir</code></a></b>: Set edge type for drawing arrowheads.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#fontcolor"><code>fontcolor</code></a></b>: Color used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#fontname"><code>fontname</code></a></b>: Font used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#fontsize"><code>fontsize</code></a></b>: Font size, in points, used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><a name="graph"></a><b><code>graph</code></b></td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#head"><code>head</code></a></b>: The edge's head (source) node</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#headclip"><code>headclip</code></a></b>: If true, the head of an edge is clipped to the boundary of the head 
+node; otherwise, the end of the edge goes to the center of the node, or 
+the center of a port, if applicable.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#headhref"><code>headhref</code></a></b>: Synonym for headURL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#headlabel"><code>headlabel</code></a></b>: Text label to be placed near head of edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#headport"><code>headport</code></a></b>: Indicates where on the head node to attach the head of the edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#headtarget"><code>headtarget</code></a></b>: If the edge has a headURL, this attribute determines which window of 
+the browser is used for the URL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#headtooltip"><code>headtooltip</code></a></b>: Tooltip annotation attached to the head of an edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#headURL"><code>headURL</code></a></b>: For the output format imap or cmap, if headURL is defined, it is 
+output as part of the head label of the edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#href"><code>href</code></a></b>: Synonym for URL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#label"><code>label</code></a></b>: Text label attached to objects.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#labelangle"><code>labelangle</code></a></b>: This, along with labeldistance, determine where the headlabel 
+(taillabel) are placed with respect to the head (tail) in polar 
+coordinates.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#labeldistance"><code>labeldistance</code></a></b>: Multiplicative scaling factor adjusting the distance that the 
+headlabel(taillabel) is from the head(tail) node.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#labelfloat"><code>labelfloat</code></a></b>: If true, allows edge labels to be less constrained in position.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#labelfontcolor"><code>labelfontcolor</code></a></b>: Color used for headlabel and taillabel.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#labelfontname"><code>labelfontname</code></a></b>: Font used for headlabel and taillabel.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#labelfontsize"><code>labelfontsize</code></a></b>: Font size, in points, used for headlabel and taillabel.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#layer"><code>layer</code></a></b>: Specifies layers in which the node or edge is present.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#len"><code>len</code></a></b>: Preferred edge length, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#lhead"><code>lhead</code></a></b>: Logical head of an edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">(x,y) or (x,y,z) tuple</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#lp"><code>lp</code></a></b>: Label position, in points.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#ltail"><code>ltail</code></a></b>: Logical tail of an edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#minlen"><code>minlen</code></a></b>: Minimum edge length (rank difference between head and tail).</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#nojustify"><code>nojustify</code></a></b>: By default, the justification of multi-line labels is done within the 
+largest context that makes sense.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">object</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#pos"><code>pos</code></a></b>: Position of node, or spline control points, in points.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#samehead"><code>samehead</code></a></b>: Edges with the same head and the same samehead value are aimed at the 
+same point on the head.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#sametail"><code>sametail</code></a></b>: Edges with the same tail and the same sametail value are aimed at the 
+same point on the tail.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#showboxes"><code>showboxes</code></a></b>: Print guide boxes in PostScript at the beginning of routesplines if 1, 
+or at the end if 2.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#style"><code>style</code></a></b>: Set style for node or edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tail"><code>tail</code></a></b>: The edge's tail (destination) node</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tailclip"><code>tailclip</code></a></b>: If true, the tail of an edge is clipped to the boundary of the tail 
+node; otherwise, the end of the edge goes to the center of the node, or 
+the center of a port, if applicable.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tailhref"><code>tailhref</code></a></b>: Synonym for tailURL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#taillabel"><code>taillabel</code></a></b>: Text label to be placed near tail of edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tailport"><code>tailport</code></a></b>: Indicates where on the tail node to attach the tail of the edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tailtarget"><code>tailtarget</code></a></b>: If the edge has a tailURL, this attribute determines which window of 
+the browser is used for the URL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tailtooltip"><code>tailtooltip</code></a></b>: Tooltip annotation attached to the tail of an edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tailURL"><code>tailURL</code></a></b>: When the output format is imap or cmap, if tailURL is defined, it is 
+output as part of the tail label of the edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#target"><code>target</code></a></b>: If the object has a URL, this attribute determines which window of the 
+browser is used for the URL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#tooltip"><code>tooltip</code></a></b>: Tooltip annotation attached to the node or edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#URL"><code>URL</code></a></b>: Hyperlinks incorporated into device-dependent output.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Edge-class.html#weight"><code>weight</code></a></b>: Weight of edge.</td></tr></table><br />
+
+
+<!-- =========== START OF METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Method Details</th></tr>
+</table>
+
+<a name="__iter__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__iter__</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Iterates over (tail, head)
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF PROPERTY DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Property Details</th></tr>
+</table>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="arrowhead"></a>
+<h3>arrowhead</h3>
+<p>Style of arrowhead on the head node of an edge. See also the dir 
+attribute, and a limitation.</p>
+Possible values: 'normal', 'inv', 'dot', 'invdot', 'odot', 'invodot', 
+'none', 'tee', 'empty', 'invempty', 'diamond', 'odiamond', 'ediamond', 
+'crow', 'box', 'obox', 'open', 'halfopen', 'vee'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="arrowsize"></a>
+<h3>arrowsize</h3>
+Multiplicative scale factor for arrowheads.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="arrowtail"></a>
+<h3>arrowtail</h3>
+<p>Style of arrowhead on the tail node of an edge. See also the dir 
+attribute, and a limitation.</p>
+Possible values: 'normal', 'inv', 'dot', 'invdot', 'odot', 'invodot', 
+'none', 'tee', 'empty', 'invempty', 'diamond', 'odiamond', 'ediamond', 
+'crow', 'box', 'obox', 'open', 'halfopen', 'vee'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="color"></a>
+<h3>color</h3>
+<p>Basic drawing color for graphics, not text. For the latter, use the 
+fontcolor attribute.</p>
+<p>For edges, the value can either be a single color or a colorList. In 
+the latter case, the edge is drawn using parallel splines or lines, one 
+for each color in the list, in the order given. The head arrow, if any, 
+is drawn using the first color in the list, and the tail arrow, if any, 
+the second color. This supports the common case of drawing opposing 
+edges, but using parallel splines instead of separately routed 
+multiedges. For example, the graph</p>
+<p>digraph G { a -&gt; b [dir=both color=&quot;red:blue&quot;] }</p>
+yields
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="colorscheme"></a>
+<h3>colorscheme</h3>
+This attribute specifies a color scheme namespace. If defined, it 
+specifies the context for interpreting color names. In particular, if a 
+color value has form &quot;xxx&quot; or &quot;//xxx&quot;, then the color 
+xxx will be evaluated according to the current color scheme. If no color 
+scheme is set, the standard X11 naming is used. For example, if 
+colorscheme=bugn9, then color=7 is interpreted as 
+&quot;/bugn9/7&quot;.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="comment"></a>
+<h3>comment</h3>
+Comments are inserted into output. Device-dependent
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="constraint"></a>
+<h3>constraint</h3>
+<p>If false, the edge is not used in ranking the nodes. For example, in 
+the graph</p>
+<p>digraph G { a -&gt; c; a -&gt; b; b -&gt; c [constraint=false]; }</p>
+the edge b -&gt; c does not add a constraint during rank assignment, 
+so the only constraints are that a be above b and c, yielding the 
+graph:
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="decorate"></a>
+<h3>decorate</h3>
+If true, attach edge label to edge by a 2-segment polyline, 
+underlining the label, then going to the closest point of spline.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="dir"></a>
+<h3>dir</h3>
+<p>Set edge type for drawing arrowheads. This indicates which ends of the 
+edge should be decorated with an arrowhead. The actual style of the 
+arrowhead can be specified using the arrowhead and arrowtail attributes. 
+See limitation.</p>
+dirtype description
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontcolor"></a>
+<h3>fontcolor</h3>
+Color used for text.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontname"></a>
+<h3>fontname</h3>
+<p>Font used for text. This very much depends on the output format and, 
+for non-bitmap output such as PostScript or SVG, the availability of the 
+font when the graph is displayed or printed. As such, it is best to rely 
+on font faces that are generally available, such as Times-Roman, 
+Helvetica or Courier.</p>
+<p>If Graphviz was built using the fontconfig library, the latter library 
+will be used to search for the font. However, if the fontname string 
+contains a slash character &quot;/&quot;, it is treated as a pathname for 
+the font file, though font lookup will append the usual font 
+suffixes.</p>
+If Graphviz does not use fontconfig, fontname will be considered the 
+name of a Type 1 or True Type font file. If you specify fontname=schlbk, 
+the tool will look for a file named schlbk.ttf or schlbk.pfa or 
+schlbk.pfb in one of the directories specified by the fontpath attribute. 
+The lookup does support various aliases for the common fonts.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontsize"></a>
+<h3>fontsize</h3>
+Font size, in points, used for text.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="head"></a>
+<h3>head</h3>
+The edge's head (source) node
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="headclip"></a>
+<h3>headclip</h3>
+If true, the head of an edge is clipped to the boundary of the head 
+node; otherwise, the end of the edge goes to the center of the node, or 
+the center of a port, if applicable.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="headhref"></a>
+<h3>headhref</h3>
+Synonym for headURL.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="headlabel"></a>
+<h3>headlabel</h3>
+Text label to be placed near head of edge. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="headport"></a>
+<h3>headport</h3>
+<p>Indicates where on the head node to attach the head of the edge. In 
+the default case, the edge is aimed towards the center of the node, and 
+then clipped at the node boundary. See limitation.</p>
+Possible values: 'n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw', 
+'center'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="headtarget"></a>
+<h3>headtarget</h3>
+If the edge has a headURL, this attribute determines which window of 
+the browser is used for the URL. Setting it to &quot;_graphviz&quot; will 
+open a new window if it doesn't already exist, or reuse it if it does. If 
+undefined, the value of the target is used.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="headtooltip"></a>
+<h3>headtooltip</h3>
+Tooltip annotation attached to the head of an edge. This is used only 
+if the edge has a headURL attribute.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="headURL"></a>
+<h3>headURL</h3>
+For the output format imap or cmap, if headURL is defined, it is 
+output as part of the head label of the edge. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="href"></a>
+<h3>href</h3>
+Synonym for URL.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="label"></a>
+<h3>label</h3>
+Text label attached to objects. If a node's shape is record, then the 
+label can have a special format which describes the record layout.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labelangle"></a>
+<h3>labelangle</h3>
+<p>This, along with labeldistance, determine where the headlabel 
+(taillabel) are placed with respect to the head (tail) in polar 
+coordinates. The origin in the coordinate system is the point where the 
+edge touches the node. The ray of 0 degrees goes from the origin back 
+along the edge, parallel to the edge at the origin.</p>
+The angle, in degrees, specifies the rotation from the 0 degree ray, 
+with positive angles moving counterclockwise and negative angles moving 
+clockwise.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labeldistance"></a>
+<h3>labeldistance</h3>
+Multiplicative scaling factor adjusting the distance that the 
+headlabel(taillabel) is from the head(tail) node. The default distance is 
+10 points. See labelangle for more details.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labelfloat"></a>
+<h3>labelfloat</h3>
+If true, allows edge labels to be less constrained in position. In 
+particular, it may appear on top of other edges.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labelfontcolor"></a>
+<h3>labelfontcolor</h3>
+Color used for headlabel and taillabel. If not set, defaults to edge's 
+fontcolor.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labelfontname"></a>
+<h3>labelfontname</h3>
+Font used for headlabel and taillabel. If not set, defaults to edge's 
+fontname.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labelfontsize"></a>
+<h3>labelfontsize</h3>
+Font size, in points, used for headlabel and taillabel. If not set, 
+defaults to edge's fontsize.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="layer"></a>
+<h3>layer</h3>
+Specifies layers in which the node or edge is present.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="len"></a>
+<h3>len</h3>
+Preferred edge length, in inches.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="lhead"></a>
+<h3>lhead</h3>
+Logical head of an edge. When compound is true, if lhead is defined 
+and is the name of a cluster containing the real head, the edge is 
+clipped to the boundary of the cluster. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="lp"></a>
+<h3>lp</h3>
+Label position, in points.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="ltail"></a>
+<h3>ltail</h3>
+Logical tail of an edge. When compound is true, if ltail is defined 
+and is the name of a cluster containing the real tail, the edge is 
+clipped to the boundary of the cluster. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="minlen"></a>
+<h3>minlen</h3>
+Minimum edge length (rank difference between head and tail).
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="nojustify"></a>
+<h3>nojustify</h3>
+By default, the justification of multi-line labels is done within the 
+largest context that makes sense. Thus, in the label of a polygonal node, 
+a left-justified line will align with the left side of the node (shifted 
+by the prescribed margin). In record nodes, left-justified line will line 
+up with the left side of the enclosing column of fields. If nojustify is 
+&quot;true&quot;, multi-line labels will be justified in the context of 
+itself. For example, if the attribute is set, the first label line is 
+long, and the second is shorter and left-justified, the second will align 
+with the left-most character in the first line, regardless of how large 
+the node might be.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="pos"></a>
+<h3>pos</h3>
+Position of node, or spline control points, in points. In neato and 
+fdp, pos can be used to set initial position of a node. Concerning this, 
+see the -s command line flag.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="samehead"></a>
+<h3>samehead</h3>
+Edges with the same head and the same samehead value are aimed at the 
+same point on the head. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="sametail"></a>
+<h3>sametail</h3>
+Edges with the same tail and the same sametail value are aimed at the 
+same point on the tail. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="showboxes"></a>
+<h3>showboxes</h3>
+Print guide boxes in PostScript at the beginning of routesplines if 1, 
+or at the end if 2. (Debugging)
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="style"></a>
+<h3>style</h3>
+Set style for node or edge. For cluster subgraph, if 
+&quot;filled&quot;, the cluster box's background is filled.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tail"></a>
+<h3>tail</h3>
+The edge's tail (destination) node
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tailclip"></a>
+<h3>tailclip</h3>
+If true, the tail of an edge is clipped to the boundary of the tail 
+node; otherwise, the end of the edge goes to the center of the node, or 
+the center of a port, if applicable.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tailhref"></a>
+<h3>tailhref</h3>
+Synonym for tailURL.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="taillabel"></a>
+<h3>taillabel</h3>
+Text label to be placed near tail of edge. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tailport"></a>
+<h3>tailport</h3>
+<p>Indicates where on the tail node to attach the tail of the edge. See 
+limitation.</p>
+Possible values: 'n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw', 
+'center'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tailtarget"></a>
+<h3>tailtarget</h3>
+If the edge has a tailURL, this attribute determines which window of 
+the browser is used for the URL. Setting it to &quot;_graphviz&quot; will 
+open a new window if it doesn't already exist, or reuse it if it does. If 
+undefined, the value of the target is used.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tailtooltip"></a>
+<h3>tailtooltip</h3>
+Tooltip annotation attached to the tail of an edge. This is used only 
+if the edge has a tailURL attribute.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tailURL"></a>
+<h3>tailURL</h3>
+When the output format is imap or cmap, if tailURL is defined, it is 
+output as part of the tail label of the edge. See limitation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="target"></a>
+<h3>target</h3>
+If the object has a URL, this attribute determines which window of the 
+browser is used for the URL. See W3C documentation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tooltip"></a>
+<h3>tooltip</h3>
+Tooltip annotation attached to the node or edge. If unset, Graphviz 
+will use the object's label if defined. Note that if the label is a 
+record specification or an HTML-like label, the resulting tooltip may be 
+unhelpful. In this case, if tooltips will be generated, the user should 
+set a tooltip attribute explicitly.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="URL"></a>
+<h3>URL</h3>
+<p>Hyperlinks incorporated into device-dependent output. At present, used 
+in ps2, cmap, i*map and svg formats. For all these formats, URLs can be 
+attached to nodes, edges and clusters. URL attributes can also be 
+attached to the root graph in ps2, cmap and i*map formats. This serves as 
+the base URL for relative URLs in the former, and as the default image 
+map file in the latter.</p>
+<p>The active area for a node or cluster is its bounding box. For edges, 
+the active areas are small circles where the edge contacts its head and 
+tail nodes. These areas may overlap the related node, and the edge URL 
+dominates. If the edge has a label, this will also be active. Finally, if 
+the edge has a head or tail label, this will also be active. Note, 
+however, that if the edge has a headURL attribute, it is this value that 
+is used near the head node and on the head label, if defined. The similar 
+restriction holds when tailURL is defined.</p>
+The URL of the root graph is only treated as an escString if the 
+output format is cmap.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="weight"></a>
+<h3>weight</h3>
+Weight of edge. In dot, the heavier the weight, the shorter, 
+straighter and more vertical the edge is. In neato, the heavier the 
+weight, the more neato will try to place the end points so that the 
+length of the edge is len.
+</td></tr></table><br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="yapgvb-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          yapgvb
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Tue Feb 21 14:34:48 2006</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

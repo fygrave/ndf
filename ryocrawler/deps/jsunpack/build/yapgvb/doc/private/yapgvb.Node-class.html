@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yapgvb.Node</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="yapgvb-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          yapgvb
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="yapgvb-module.html">Package&nbsp;yapgvb</a> ::
+        Class&nbsp;Node
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[show&nbsp;private&nbsp;|&nbsp;<a href="../public/yapgvb.Node-class.html">hide&nbsp;private</a>]</font></td></tr>
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="yapgvb.Node-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Class Node</h2>
+
+<hr/>
+
+<p>Nodes are created by calling Graph.add_node.</p>
+Edges can be created through the use of overloaded operators -, 
+&lt;&lt;, and &gt;&gt;.
+<hr/>
+
+
+<!-- =========== START OF PROPERTY SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Property Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#color"><code>color</code></a></b>: Basic drawing color for graphics, not text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#colorscheme"><code>colorscheme</code></a></b>: This attribute specifies a color scheme namespace.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#comment"><code>comment</code></a></b>: Comments are inserted into output.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#distortion"><code>distortion</code></a></b>: Distortion factor for shape=polygon.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#fillcolor"><code>fillcolor</code></a></b>: Color used to fill the background of a node or cluster.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Node-class.html#fixedsize"><code>fixedsize</code></a></b>: If true, the node size is specified by the values of the width and 
+height attributes only and is not expanded to contain the text label.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#fontcolor"><code>fontcolor</code></a></b>: Color used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#fontname"><code>fontname</code></a></b>: Font used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#fontsize"><code>fontsize</code></a></b>: Font size, in points, used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#group"><code>group</code></a></b>: If the end points of an edge belong to the same group, i.e., have the 
+same group attribute, parameters are set to avoid crossings and keep the 
+edges straight.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#height"><code>height</code></a></b>: Height of node, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#label"><code>label</code></a></b>: Text label attached to objects.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#layer"><code>layer</code></a></b>: Specifies layers in which the node or edge is present.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#margin"><code>margin</code></a></b>: For graphs, this sets x and y margins of canvas, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Node-class.html#nojustify"><code>nojustify</code></a></b>: By default, the justification of multi-line labels is done within the 
+largest context that makes sense.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#orientation"><code>orientation</code></a></b>: Angle, in degrees, used to rotate node shapes.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.Node-class.html#peripheries"><code>peripheries</code></a></b>: Set number of peripheries used in polygonal shapes and cluster 
+boundaries.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Node-class.html#pin"><code>pin</code></a></b>: If true and the node has a pos attribute on input, neato prevents the 
+node from moving from the input position.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">(x,y) or (x,y,z) tuple</font></td>
+  <td><b><a href="yapgvb.Node-class.html#pos"><code>pos</code></a></b>: Position of node, or spline control points, in points.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">rect</font></td>
+  <td><b><a href="yapgvb.Node-class.html#rects"><code>rects</code></a></b>: Rectangles for fields of records, in points.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Node-class.html#regular"><code>regular</code></a></b>: If true, force polygon to be regular.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.Node-class.html#root"><code>root</code></a></b>: This specifies nodes to be used as the center of the layout and the 
+root of the generated spanning tree.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.Node-class.html#shape"><code>shape</code></a></b>: Set the shape of a node.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#shapefile"><code>shapefile</code></a></b>: If defined, shapefile specifies a file containing user-supplied node 
+content.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.Node-class.html#showboxes"><code>showboxes</code></a></b>: Print guide boxes in PostScript at the beginning of routesplines if 1, 
+or at the end if 2.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.Node-class.html#sides"><code>sides</code></a></b>: Number of sides if shape=polygon.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#skew"><code>skew</code></a></b>: Skew factor for shape=polygon.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#style"><code>style</code></a></b>: Set style for node or edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#target"><code>target</code></a></b>: If the object has a URL, this attribute determines which window of the 
+browser is used for the URL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#tooltip"><code>tooltip</code></a></b>: Tooltip annotation attached to the node or edge.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Node-class.html#URL"><code>URL</code></a></b>: Hyperlinks incorporated into device-dependent output.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.Node-class.html#vertices"><code>vertices</code></a></b>: If the input graph defines this attribute, the node is polynomial, and 
+output is dot or xdot, this attribute provides the coordinates of the 
+vertices of the node's polynomial, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#width"><code>width</code></a></b>: Width of node, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.Node-class.html#z"><code>z</code></a></b>: Provides z coordinate value for 3D layouts and displays.</td></tr><tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Graph Definition</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Node-class.html#__sub__"><code>__sub__</code></a></b>: The syntax tail_node - head_node creates an undirected edge between 
+two nodes.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Node-class.html#__lshift__"><code>__lshift__</code></a></b>: The syntax head_node &lt;&lt; tail_node creates a directed edge 
+between two nodes.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Node-class.html#__rshift__"><code>__rshift__</code></a></b>: The syntax tail_node &gt;&gt; head_node creates a directed edge 
+between two nodes.</td></tr><tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Graph Traversal</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><a name="edges"></a><b><code>edges</code></b></td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><a name="inbound_edges"></a><b><code>inbound_edges</code></b></td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><a name="outbound_edges"></a><b><code>outbound_edges</code></b></td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.Node-class.html#graph"><code>graph</code></a></b>: The graph to which a Node belongs.</td></tr></table><br />
+
+
+<!-- =========== START OF PROPERTY DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Property Details</th></tr>
+</table>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="__sub__"></a>
+<h3>__sub__</h3>
+The syntax tail_node - head_node creates an undirected edge between 
+two nodes. It is a convenient short syntax for 
+tail_node.graph.add_edge(tail_node, head_node). An Edge object is 
+returned. This should only be used for undirected graphs; use &lt;&lt; 
+and &gt;&gt; to create directed edges.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="__lshift__"></a>
+<h3>__lshift__</h3>
+The syntax head_node &lt;&lt; tail_node creates a directed edge 
+between two nodes. It is a convenient short syntax for 
+head_node.graph.add_edge(tail_node, head_node). An Edge object is 
+returned. For undirected graphs, a &lt;&lt; b is equivalent to a - b.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="__rshift__"></a>
+<h3>__rshift__</h3>
+The syntax tail_node &gt;&gt; head_node creates a directed edge 
+between two nodes. It is a convenient short syntax for 
+tail_node.graph.add_edge(tail_node, head_node). An Edge object is 
+returned. For undirected graphs, a &gt;&gt; b is equivalent to b - a.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="graph"></a>
+<h3>graph</h3>
+The graph to which a Node belongs.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="color"></a>
+<h3>color</h3>
+<p>Basic drawing color for graphics, not text. For the latter, use the 
+fontcolor attribute.</p>
+<p>For edges, the value can either be a single color or a colorList. In 
+the latter case, the edge is drawn using parallel splines or lines, one 
+for each color in the list, in the order given. The head arrow, if any, 
+is drawn using the first color in the list, and the tail arrow, if any, 
+the second color. This supports the common case of drawing opposing 
+edges, but using parallel splines instead of separately routed 
+multiedges. For example, the graph</p>
+<p>digraph G { a -&gt; b [dir=both color=&quot;red:blue&quot;] }</p>
+yields
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="colorscheme"></a>
+<h3>colorscheme</h3>
+This attribute specifies a color scheme namespace. If defined, it 
+specifies the context for interpreting color names. In particular, if a 
+color value has form &quot;xxx&quot; or &quot;//xxx&quot;, then the color 
+xxx will be evaluated according to the current color scheme. If no color 
+scheme is set, the standard X11 naming is used. For example, if 
+colorscheme=bugn9, then color=7 is interpreted as 
+&quot;/bugn9/7&quot;.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="comment"></a>
+<h3>comment</h3>
+Comments are inserted into output. Device-dependent
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="distortion"></a>
+<h3>distortion</h3>
+Distortion factor for shape=polygon. Positive values cause top part to 
+be larger than bottom; negative values do the opposite.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fillcolor"></a>
+<h3>fillcolor</h3>
+<p>Color used to fill the background of a node or cluster. If fillcolor 
+is not defined, color is used. (For clusters, if color is not defined, 
+bgcolor is used.) If this is not defined, the default is used, except for 
+shape=point or when the output format is MIF, which use black by 
+default.</p>
+Note that a cluster inherits the root graph's attributes if defined. 
+Thus, if the root graph has defined a fillcolor, this will override a 
+color or bgcolor attribute set for the cluster.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fixedsize"></a>
+<h3>fixedsize</h3>
+If true, the node size is specified by the values of the width and 
+height attributes only and is not expanded to contain the text label.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontcolor"></a>
+<h3>fontcolor</h3>
+Color used for text.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontname"></a>
+<h3>fontname</h3>
+<p>Font used for text. This very much depends on the output format and, 
+for non-bitmap output such as PostScript or SVG, the availability of the 
+font when the graph is displayed or printed. As such, it is best to rely 
+on font faces that are generally available, such as Times-Roman, 
+Helvetica or Courier.</p>
+<p>If Graphviz was built using the fontconfig library, the latter library 
+will be used to search for the font. However, if the fontname string 
+contains a slash character &quot;/&quot;, it is treated as a pathname for 
+the font file, though font lookup will append the usual font 
+suffixes.</p>
+If Graphviz does not use fontconfig, fontname will be considered the 
+name of a Type 1 or True Type font file. If you specify fontname=schlbk, 
+the tool will look for a file named schlbk.ttf or schlbk.pfa or 
+schlbk.pfb in one of the directories specified by the fontpath attribute. 
+The lookup does support various aliases for the common fonts.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontsize"></a>
+<h3>fontsize</h3>
+Font size, in points, used for text.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="group"></a>
+<h3>group</h3>
+If the end points of an edge belong to the same group, i.e., have the 
+same group attribute, parameters are set to avoid crossings and keep the 
+edges straight.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="height"></a>
+<h3>height</h3>
+Height of node, in inches. This is taken as the initial, minimum 
+height of the node. If fixedsize is true, this will be the final height 
+of the node. Otherwise, if the node label requires more height to fit, 
+the node's height will be increased to contain the label. Note also that, 
+if the output format is dot, the value given to height will be the final 
+value.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="label"></a>
+<h3>label</h3>
+Text label attached to objects. If a node's shape is record, then the 
+label can have a special format which describes the record layout.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="layer"></a>
+<h3>layer</h3>
+Specifies layers in which the node or edge is present.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="margin"></a>
+<h3>margin</h3>
+<p>For graphs, this sets x and y margins of canvas, in inches. If the 
+margin is a single double, both margins are set equal to the given 
+value.</p>
+For nodes, this attribute specifies space left around the node's 
+label. By default, the value is 0.11,0.055.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="nojustify"></a>
+<h3>nojustify</h3>
+By default, the justification of multi-line labels is done within the 
+largest context that makes sense. Thus, in the label of a polygonal node, 
+a left-justified line will align with the left side of the node (shifted 
+by the prescribed margin). In record nodes, left-justified line will line 
+up with the left side of the enclosing column of fields. If nojustify is 
+&quot;true&quot;, multi-line labels will be justified in the context of 
+itself. For example, if the attribute is set, the first label line is 
+long, and the second is shorter and left-justified, the second will align 
+with the left-most character in the first line, regardless of how large 
+the node might be.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="orientation"></a>
+<h3>orientation</h3>
+Angle, in degrees, used to rotate node shapes.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="peripheries"></a>
+<h3>peripheries</h3>
+Set number of peripheries used in polygonal shapes and cluster 
+boundaries. Note that user-defined shapes are treated as a form of box 
+shape, so the default peripheries value is 1 and the user-defined shape 
+will be drawn in a bounding rectangle. Setting peripheries=0 will turn 
+this off. Also, 1 is the maximum peripheries value for clusters.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="pin"></a>
+<h3>pin</h3>
+If true and the node has a pos attribute on input, neato prevents the 
+node from moving from the input position. This property can also be 
+specified in the pos attribute itself (cf. the point type).
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="pos"></a>
+<h3>pos</h3>
+Position of node, or spline control points, in points. In neato and 
+fdp, pos can be used to set initial position of a node. Concerning this, 
+see the -s command line flag.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="rects"></a>
+<h3>rects</h3>
+<p>Rectangles for fields of records, in points.</p>
+description of rect type
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="regular"></a>
+<h3>regular</h3>
+If true, force polygon to be regular.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="root"></a>
+<h3>root</h3>
+This specifies nodes to be used as the center of the layout and the 
+root of the generated spanning tree. As a graph attribute, this gives the 
+name of the node. As a node attribute (circo only), it specifies that the 
+node should be used as a central node. In twopi, this will actually be 
+the central node. In circo, the block containing the node will be central 
+in the drawing of its connected component. If not defined, twopi will 
+pick a most central node, and circo will pick a random node.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="shape"></a>
+<h3>shape</h3>
+<p>Set the shape of a node.</p>
+Possible values: 'box', 'polygon', 'ellipse', 'circle', 'point', 
+'egg', 'triangle', 'plaintext', 'diamond', 'trapezium', 'parallelogram', 
+'house', 'pentagon', 'hexagon', 'septagon', 'octagon', 'doublecircle', 
+'doubleoctagon', 'tripleoctagon', 'invtriangle', 'invtrapezium', 
+'invhouse', 'Mdiamond', 'Msquare', 'Mcircle', 'rect', 'rectangle', 
+'none', 'record', 'Mrecord'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="shapefile"></a>
+<h3>shapefile</h3>
+<p>If defined, shapefile specifies a file containing user-supplied node 
+content. The shape of the node is set to box. The image in the shapefile 
+must be rectangular. The image formats supported as well as the precise 
+semantics of how the file is used depends on the output format. For 
+further details, see External PostScript files.</p>
+<p>There is one exception to this usage. If shape is set to 
+&quot;epsf&quot;, shapefile gives a filename containing a definition of 
+the node in PostScript. The graphics defined must be contain all of the 
+node content, including any desired boundaries. For further details, 
+see</p>
+External PostScript files.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="showboxes"></a>
+<h3>showboxes</h3>
+Print guide boxes in PostScript at the beginning of routesplines if 1, 
+or at the end if 2. (Debugging)
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="sides"></a>
+<h3>sides</h3>
+Number of sides if shape=polygon.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="skew"></a>
+<h3>skew</h3>
+Skew factor for shape=polygon. Positive values skew top of polygon to 
+right; negative to left.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="style"></a>
+<h3>style</h3>
+Set style for node or edge. For cluster subgraph, if 
+&quot;filled&quot;, the cluster box's background is filled.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="target"></a>
+<h3>target</h3>
+If the object has a URL, this attribute determines which window of the 
+browser is used for the URL. See W3C documentation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="tooltip"></a>
+<h3>tooltip</h3>
+Tooltip annotation attached to the node or edge. If unset, Graphviz 
+will use the object's label if defined. Note that if the label is a 
+record specification or an HTML-like label, the resulting tooltip may be 
+unhelpful. In this case, if tooltips will be generated, the user should 
+set a tooltip attribute explicitly.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="URL"></a>
+<h3>URL</h3>
+<p>Hyperlinks incorporated into device-dependent output. At present, used 
+in ps2, cmap, i*map and svg formats. For all these formats, URLs can be 
+attached to nodes, edges and clusters. URL attributes can also be 
+attached to the root graph in ps2, cmap and i*map formats. This serves as 
+the base URL for relative URLs in the former, and as the default image 
+map file in the latter.</p>
+<p>The active area for a node or cluster is its bounding box. For edges, 
+the active areas are small circles where the edge contacts its head and 
+tail nodes. These areas may overlap the related node, and the edge URL 
+dominates. If the edge has a label, this will also be active. Finally, if 
+the edge has a head or tail label, this will also be active. Note, 
+however, that if the edge has a headURL attribute, it is this value that 
+is used near the head node and on the head label, if defined. The similar 
+restriction holds when tailURL is defined.</p>
+The URL of the root graph is only treated as an escString if the 
+output format is cmap.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="vertices"></a>
+<h3>vertices</h3>
+If the input graph defines this attribute, the node is polynomial, and 
+output is dot or xdot, this attribute provides the coordinates of the 
+vertices of the node's polynomial, in inches. If the node is an ellipse 
+or circle, the samplepoints attribute affects the output.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="width"></a>
+<h3>width</h3>
+Width of node, in inches. This is taken as the initial, minimum width 
+of the node. If fixedsize is true, this will be the final width of the 
+node. Otherwise, if the node label requires more width to fit, the node's 
+width will be increased to contain the label. Note also that, if the 
+output format is dot, the value given to width will be the final 
+value.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="z"></a>
+<h3>z</h3>
+<p>Provides z coordinate value for 3D layouts and displays. If the graph 
+has dim set to 3 (or more), neato will use a node's z value for the z 
+coordinate of its initial position if its pos attribute is also 
+defined.</p>
+<p>Even if no z values are specified in the input, it is necessary to 
+declare a z attribute for nodes, e.g, using node[z=&quot;&quot;] in order 
+to get z values on output. Thus, setting dim=3 but not declaring z will 
+cause neato -Tvrml to layout the graph in 3D but project the layout onto 
+the xy-plane for the rendering. If the z attribute is declared, the final 
+rendering will be in 3D.</p>
+Attribute Type Descriptions The following list gives the legal strings 
+corresponding to values of the given types.
+</td></tr></table><br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="yapgvb-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          yapgvb
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Tue Feb 21 14:34:48 2006</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

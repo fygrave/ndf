@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/68/trunk/depends
+END
+BeautifulSoup-3.2.0.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/68/trunk/depends/BeautifulSoup-3.2.0.tar.gz
+END
+js-1.8.0-rc1-src.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/68/trunk/depends/js-1.8.0-rc1-src.tar.gz
+END
+pynids-0.6.1.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/68/trunk/depends/pynids-0.6.1.tar.gz
+END
+pycrypto-2.4.1.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/68/trunk/depends/pycrypto-2.4.1.tar.gz
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/68/trunk/depends/README
+END
+yara-python-1.6.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/68/trunk/depends/yara-python-1.6.tar.gz
+END
+sha1sum
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/68/trunk/depends/sha1sum
+END
+yara-1.6.tar.gz
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/68/trunk/depends/yara-1.6.tar.gz
+END

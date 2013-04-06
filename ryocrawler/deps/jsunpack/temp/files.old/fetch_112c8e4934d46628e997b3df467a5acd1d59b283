@@ -1,0 +1,112 @@
+/* ================================================================ 
+This copyright notice must be untouched at all times.
+Copyright (c) 2009 Stu Nicholls - stunicholls.com - all rights reserved.
+=================================================================== */
+jQuery(function(){
+	var current = 1;
+	var button = 4;
+	var images = 4;
+	var width = 990;
+	var $ = jQuery;
+	
+	
+	$('#p1').css({"left": "0px"}, 990, "swing");
+	//$('#b1').css("backgroundPosition", "left top");
+	$('#b1 b').css("color","#fff");
+	$('#loading').css("display","none");
+	
+	$('#buttons a#b1').addClass('active_slide');
+	//$('a#b2').addClass('active_slide');
+	//$('a#b1').removeClass('active_slide');
+	
+	function click_handler() {
+	    activate_slide(this, true);
+	    
+    	return false;
+	}
+	
+	function make_inactive(elem){
+	    var id = elem.attr('id');
+	    var tx = elem.text();
+	    elem.replaceWith('<a href="#" id="'+id+'">' + tx + "</a>");
+	    var ret = $('#'+id);
+	    
+    	add_events(ret);
+    	
+	   return ret;
+	}
+	function make_active(elem) {
+	    var id = elem.attr('id');
+	    var tx = elem.text();
+	    elem.replaceWith('<a href="#" class="active_slide" id="'+id+'">' + tx + "</a>");
+	    var ret = $('#'+id);
+	    
+    	add_events(ret);
+    	
+	   return ret;
+	}
+	
+	function activate_slide(_this, disable_timers) {
+		button=current;
+		clickButton = $(_this).attr('id');
+		var prev_button = $('#b'+current);
+		current = parseInt(clickButton.slice(1));
+		
+				
+		if ($(_this).hasClass('active_slide')) {
+		    return;
+		}
+
+		prev_button = make_inactive(prev_button);
+
+		make_active($(_this));
+
+		if (current > button) {animateLeft(current,button);}
+		if (current < button) {animateRight(current,button);}
+		
+		if (disable_timers) {
+			$('body').stopTime('rotator');
+		}
+	}
+	function add_events(elem) {
+	    elem.click(click_handler);
+	    elem.mouseover(function() {
+		  if (($(this).css("color")) == "#16a" || ($(this).css("color")) == "rgb(17, 102, 170)") {$(this).css("color","#000");}
+	    });
+	   	elem.mouseout(function() {
+	       if (($(this).css("color")) == "#000" || ($(this).css("color")) == "rgb(0, 0, 0)") {$(this).css("color","#16a");}
+    	});
+	}
+	
+	add_events($("#buttons a"));
+	
+	function animateLeft(current,button) {
+		$('#p'+current).css("left",width +"px");
+		$('#p'+current).animate({"left": "0px"}, 990, "swing");
+		$('#p'+button).animate({"left": -width+"px"}, 990, "swing");
+		setbutton() 		
+	}
+	
+	function animateRight(current,button) {
+		$('#p'+current).css("left",-width+"px");
+		$('#p'+current).animate({"left": "0px"}, 990, "swing");
+		$('#p'+button).animate({"left": width+"px"}, 990, "swing");
+		setbutton()
+	}
+	
+	function setbutton () {
+		//$('#b'+button).css("backgroundPosition", "left top")
+		$('#b'+button+' b').css("color","#16a");
+		//$('#b'+current).css("backgroundPosition", "left bottom")
+		$('#b'+current+' b').css("color","#fff");
+	}
+	function rotate() {
+		var next = current + 1;
+		if (next > images) next = 1;
+		$('#buttons a#b'+(next)).trigger('click');
+	    $('body').oneTime(8000, 'rotator', rotate)
+	}
+	// automatic slider... until user clicks on buttons
+	$('body').oneTime(8000, 'rotator', rotate);
+
+});

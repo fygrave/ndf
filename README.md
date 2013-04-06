@@ -25,7 +25,7 @@ enterprise proxy ogs
 
 * anomalizer - anomaly detection mechanics
 
-* wackmonitor - proactive network crawler. built to identify potential Drive by Download attack points. (utilizes Yara for rapid content analysis)
+* ryocrawler - proactive "Roll Your Own" network crawler. built to identify potential Drive by Download attack points. (utilizes jsunpack and Yara for rapid content analysis)
 
 
 

@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: yapgvb
+Version: 1.2.3
+Summary: Yet Another Graphviz Binding
+Home-page: http://sourceforge.net/projects/yapgvb
+Author: Lonnie Princehouse
+Author-email: finite.automaton@gmail.com
+License: New BSD
+Description: Python bindings for Graphviz, using Boost.Python.
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: New BSD (see included LICENSE file)
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: C++
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules

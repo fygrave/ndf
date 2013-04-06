@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Xecure Lab</title>
+    <meta name="author" content="Xecure Lab Co., Ltd." />
+    <meta name="description" content="Xecure Lab Co., Ltd." />
+    <meta name="keywords" content="Xecure, Xecure Lab, APT, Malware, Targeted Attacks, Document Exploit" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <link rel="SHORTCUT ICON" href="themes/default/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="themes/default/style.css" />
+    <script type="text/javascript" src="jslib/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="themes/default/js/jquery-timer.js"></script>
+    <script type="text/javascript" src="themes/default/js/info-slide.js"></script>
+    
+    <script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-20132361-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  		})();
+		</script>
+		
+</head>
+<body>
+  <a name="top" id="top"></a>
+
+  <div id="header_wrapper">
+    <div id="header">
+      <div id="header_left">
+        <div id="header_logo">
+          <a href="index.html" class="header_link"></a>
+        </div>
+      </div>
+      <div id="header_right">
+        <div id="header_metanavigation_wrapper">
+          <div id="bg_left"></div>
+          <div id="header_metanavigation">
+            <div id="header_members">
+              <ul>
+                <li id="header_border1"><a href="http://scan.xecure-lab.com">XecScan</a></li>
+                <li id="header_border"><a href="http://blog.xecure-lab.com">Blog</a></li>
+              </ul>
+            </div>
+          </div>
+          <div id="bg_right"></div>
+        </div>
+        <div id="header_language_choose">
+          <a id="header_language_opener" name="header_language_opener"><img src="themes/default/images/icons/language_icon.jpg" alt="" /><b>&nbsp;&nbsp;Language</b></a>
+          <div id="header_language" style="display: none;">
+            <a onclick="window.open('../en/index.html', '_self')" class="zhTW" title="English">English</a>
+            <a onclick="window.open('../zhTW/index.html', '_self')" class="zhTW" title="Traditional Chinese">繁體中文</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="navigation_wrapper">
+    <div id="navigation_middle">
+      <div id="navigation">
+        <ul id="navmenu-h">
+          <li>
+            <p>Solutions</p>
+            <ul id="menubuilder1" class="menu">
+              <li><a href="products_overview.html" title="Product overview">Overview</a></li>
+              <li><a href="xecmail_enterprise.html" title="XecMail® Enterprise">XecMail</a></li>
+              <!-- <li><a href="xecnet.html" title="XecNet® Enterprise">XecNet</a></li> -->
+              <li><a href="xeccloud.html" title="XecCloud">XecCloud</a></li>
+            </ul>
+          </li>
+          <li>
+            <p>Cloud Services</p>
+            <ul id="menubuilder2" class="menu">
+              <li><a href="xecmail_for_webmail.html" title="Protect your Gmail from APT! ">XecMail Cloud</a></li>
+              <li><a href="xecscan.html" title="Free and Rapid APT Identification Service !">XecScan</a></li>
+            </ul>
+          </li>
+          <li>
+            <p>Research and Publication</p>
+            <ul id="menubuilder3" class="menu">
+             <!-- <li><a href="news.html" title="Xecure New">最新消息</a></li>
+              <li><a href="press.html" title="Press Releases">新聞稿</a></li> -->
+              <li><a href="http://blog.xecure-lab.com" target = "_blank" title="Xecure Lab Blog">Xecure Lab Blog</a></li>
+            </ul>
+          </li>
+          <li>
+            <p>About Us</p>
+            <ul id="menubuilder4" class="menu">
+              <li><a href="company.html" title="About Company">Company</a></li>
+              <li><a href="xecure_lab.html" title="Xecure Lab">Xecure Lab</a></li>
+              <li><a href="contact.html" title="Contact Us">Contact Us</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="banner_wrapper_home">
+    <div id="banner_home">
+      <div id="slide">
+        <div id="p1"><img width="990" height="300" src="themes/default/images/openers/opener_1.jpg" alt="" /></div>
+        <div id="p2"><img width="990" height="300" src="themes/default/images/openers/opener_2.jpg" alt="" /></div>
+        <div id="p3"><img width="990" height="300" src="themes/default/images/openers/opener_3.jpg" alt="" /></div>
+        <div id="p4"><img width="990" height="300" src="themes/default/images/openers/opener_4.jpg" alt="" /></div>
+      </div>
+      <div id="buttons">
+        <ul>
+          <li><a href="#" id="b1" name="b1">1</a></li>
+          <li><a href="#" id="b2" name="b2">2</a></li>
+          <li><a href="#" id="b3" name="b3">3</a></li>
+          <li><a href="#" id="b4" name="b4">4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div id="content_home_wrapper">
+    <div id="content_home_middle">
+      <div id="content_home_shadow">
+        <div id="content_home">
+          	<h3 id="newstitle_home">News</h3>
+          	<div id="content_home_top">
+          	  <div class="teasers"><a href="xecmail_enterprise.html">XecMail :<br> APT Email Firewall</a><br />
+                Real-time Protection on APT Targeted Emails. XecMail detects document exploit and advanced Malware with Signature-less and Sandbox-free technology. 
+
+                </div>
+              <div class="teasers">
+                  <a href="xecscan.html">
+                  XecScan :<br> Free Online APT Scanning Service</a><br />
+                Provides fast, reliable on-demand analysis for unknown APT file and suspicious document.
+                </div>
+                <div class="teasers">
+                  <a href="xecmail_for_webmail.html">
+                  XecMail Cloud :<br> Protects Your Gmail Box !</a><br />
+                 Extends APT detection onto personal Gmail account, fills the gap of current security controls in your corporate as well as personal use....
+              </div>
+         	 </div>
+          	<div id="content_home_bottom">
+            	<div id="fe_PreviewContent">
+              		<table border="0" cellpadding="1" cellspacing="1" width="910"></table><br />
+            	</div>
+          	</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer_wrapper">
+    <div id="footer">
+      <div id="footer_bottom">
+        
+        © 2012 Xecure Lab Co., Ltd.<br />
+        <!--
+        <a href="terms_and_conditions.html" title="Terms and conditions">Terms and conditions</a>&nbsp;&nbsp;|&nbsp;
+        <a href="terms_of_use.html" title="Terms of use">Terms of use</a>&nbsp;&nbsp;|&nbsp;
+        <a href="privacy.html" title="Privacy Policy">Privacy policy</a>
+        -->
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+//<![CDATA[
+        jQuery("#header_language_opener").click(function() {
+            var menu = jQuery("#header_language");
+            if (menu.is(':hidden')) menu.slideDown(200);
+            else                    menu.slideUp(200);
+        });
+        jQuery("#header_language").mouseleave(function() {
+            jQuery("#header_language").slideUp(200);
+        });
+  //]]>
+  </script>
+</body>
+</html>

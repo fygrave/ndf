@@ -1,0 +1,35 @@
+(function () {
+	if (window.sup_ad_width == null || window.sup_ad_height == null) {
+		document.write('<!-- cnt.sup.com/ad_show.js error: one of required parameters is missing, check sup_ad_width, sup_ad_height -->');
+		return;
+	}
+	
+	var r = Math.ceil(Math.random()*4000000000);
+	if (window.sup_service == null || window.sup_slot_id == null) {
+		document.write('<!-- cnt.sup.com/ad_show.js error: one of required parameters is missing, check sup_service, sup_slot_id -->');
+		return;
+	}
+	var sup_ad_query = '';
+	if (window.sup_context && typeof window.sup_context == 'object') {
+		var sup_context_map = new Array('i1', 'i2', 'cp');
+		for (var i = Math.min(window.sup_context.length, sup_context_map.length) - 1; i >= 0; --i)
+			if (window.sup_context[i] != null)
+				sup_ad_query = '&' + sup_context_map[i] + '=' + escape(window.sup_context[i]) + sup_ad_query;
+		window.sup_context = null;
+	}
+	var sup_ad_url = 'http://cnt.sup.com/adv?srv=' + window.sup_service.toString().replace(/\D/, '');
+	if (!window.sup_ad_vid)
+		window.sup_ad_vid = Math.ceil(Math.random() * 4000000000);
+	sup_ad_url += '&vid=' + sup_ad_vid;
+	sup_ad_url += '&r=' + r;
+	sup_ad_url += sup_ad_query;
+	sup_ad_url += '&adzone=' + escape(window.sup_slot_id);
+	if (window.sup_cnt_doc_id) sup_ad_url += '&doc_id=' + escape(window.sup_cnt_doc_id);
+	
+	window.sup_slot_id = null;
+	
+	var ad_id_rnd = 'sup_ad_' + Math.ceil(Math.random() * 4000000000);
+	document.write('<div id="' + ad_id_rnd + '_place" style="width: ' + window.sup_ad_width + 'px; height: ' + window.sup_ad_height + 'px"><iframe name="sup_ad" id="' + ad_id_rnd + '" width="' + window.sup_ad_width + 'px;" height="' + window.sup_ad_height + 'px" frameborder="no" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="padding: 0; margin: 0; display: block; z-index: 0"></iframe></div>');
+	
+	document.getElementById(ad_id_rnd).src = sup_ad_url;
+})();

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="zh-TW">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<link rel="SHORTCUT ICON" href="images/faviconntu.ico" />
+<title>國立臺灣大學</title>
+<meta name="keywords" content="NTU Taiwan University ">
+<meta name="keywords" content="NTU Taiwan University 臺灣 大學 入學 第一 歷史悠久 最具代表  高等教育學府">
+<meta name="description" content="臺灣第一所最完整，歷史最悠久，且最具代表之綜合性高等教育學府，肩負高深學術研究及教學之重任，並在強調基本理論之純學術性研究與提倡學術思想之自由學風之下，自始即朝著人文學、社會科學、生物科學及物理科學四大領域之目標發展，賦有致用性之科系發展之專業學院。">
+<link href="indexcss.css" rel="stylesheet" type="text/css">
+<script  language="JavaScript" type="text/JavaScript">
+/*function checkfrm(theForm)
+{
+ theForm.q.value=theForm.q.value+" site:www.ntu.edu.tw";
+ return true;
+}*/
+
+function checksearch(theForm)
+{
+  p=theForm.p.value
+  if (p.length==0){
+        alert("搜尋關鍵字未填，請重新輸入");
+        theForm.p.focus();
+        return(false);
+   }
+   return(true);
+}
+
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25468311-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<style type="text/css">
+<!--
+.style2 {color: #FFF5E9}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFF5E9">
+
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="版型表格">
+  <tr>
+    <td width="20%" rowspan="5">&nbsp;</td>
+    <td valign="bottom" bgcolor="#2F5A68" align="left"><div class="persons"><img src="images/heading_top.jpg" align="absbottom" alt="head img">
+       
+      | <a href="http://reg.aca.ntu.edu.tw/newstu" title="新生" tabindex="2">新生</a> | <a href="http://info.ntu.edu.tw/Sinfo/" title="學生" tabindex="3">學生</a> | <a href="http://www.oia.ntu.edu.tw/oia/index.php/index/change.user.type/sn/2/locale/zh_TW" title="國際生" tabindex="4">國際生</a> | <a href="http://info.ntu.edu.tw/finfo/" title="教職員" tabindex="5">教職員</a> | <a href="http://visitorcenter.cloud.ntu.edu.tw/" title="訪客" tabindex="6">訪客</a> | <a href="https://my.ntu.edu.tw/alumnusJob/cst01-1.aspx" title="校友"  tabindex="7">校友</a> | <a href="about/song.htm" title="校歌"   tabindex="8" >校歌</a> | </div></td>
+    <td bgcolor="#2F5A68" valign="bottom" class="searchtext" align="right">
+	  <form id="cse-search-box" action="http://www.google.com/cse">
+      <a accesskey="U" href="#" title="主導覽列" class="accesskey" >:::</a>|      
+	  <a href="sitemap.htm" title="網站導覽"  tabindex="1">網站導覽</a> | <a href="contact.htm" title="聯絡我們">聯絡我們</a> | <LABEL for="keyword"  tabindex="11">站內搜尋：</LABEL>
+        <input type="hidden" value="011987122760880416627:zsghqazzvk4" name="cx">
+        <input type="hidden" value="big-5" name="ie">
+        <input id="textfield" type="text" name="q" maxLength="2048"  size="14" style="margin-top:3px;font-size:1em;padding-bottom:0;vertical-align:bottom" onBlur="if(!this.value.length){this.style.color='#999999';this.value='請輸入關鍵字';}" onClick="if(this.value=='請輸入關鍵字'){this.style.color='';this.value='';}" onKeyPress="if(this.value=='請輸入關鍵字'){this.style.color='';this.value='';}" value="請輸入關鍵字" tabindex="12">
+        <input name="go" type="image"  src="images/go.gif" alt="開始搜尋" tabindex="13">
+        <input type="hidden" name="siteurl" value="www.google.com/cse/home?cx=011987122760880416627:zsghqazzvk4">
+        <input type="hidden" name="ref" value="www.google.com/cse/panel/basics?cx=011987122760880416627:zsghqazzvk4&amp;sig=__ojBF1PpI1CTk4OCeWf1DlJ4PyGE=">
+      </form>
+    </td>
+    <td width="20%" rowspan="5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#C98560"  align="left" valign="top" background="images/menubg.jpg" ><a href="http://www.ntu.edu.tw/" title="臺灣大學首頁"><img src="images/heading_left.jpg" alt="臺灣大學_標題" border="0" align="left" hspace="0"></a></td>
+    <td bgcolor="#C98560" valign="top" background="images/menubg.jpg" ><img src="images/index_menu.jpg" alt="主選單" border="0" usemap="#Map" align="right"></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+		<table width="100%"  border="0" cellspacing="0" cellpadding="0" summary="layout table">
+		  <tr>
+			<td colspan="2" bgcolor="#976648" class="linkbar">| <a href="http://www.lib.ntu.edu.tw"  title="圖書館">圖書館</a> | <a href="http://www.museums.ntu.edu.tw/"  title="博物館群">博物館群</a> | <a href=" http://info.ntu.edu.tw/index.asp?sel=course"  title="課程">課程</a> | <a href="http://www.aca.ntu.edu.tw/access2005/"  title="招生">招生</a> | <a href="http://training.dpd.ntu.edu.tw/"  title="推廣教育">推廣教育</a> | <a href="NTUcalendar.htm"  title="行事曆">行事曆</a> | <a href="http://giving.ntu.edu.tw/donate/index.html"  title="捐款">捐款</a> | <a href="http://ntu.clearvale.com/"  title="網路書院">網路書院</a> | <a href="http://info.ntu.edu.tw/"  title="INFO">INFO</a> | <a href="https://my.ntu.edu.tw/"  title="myNTU">myNTU</a> | </td>
+			<td width="60%" rowspan="2" bgcolor="#DDEFEF" background="images/newsbg.gif" class="main_newstitle">&nbsp;>>> 最新消息<a accesskey="R" href="#" title="highlights and events " class="accesskey"><font color=#5A7B84> ::: </font></a></td>
+		  </tr>
+		  <tr>
+			<td width="20%" class="main_subtitlebar">>>> 活動快報</td>
+			<td width="50%"class="main_subtitlebar">>>> 校園焦點</td>
+		  </tr>
+		  <tr>
+			<td rowspan="2" valign="top" bgcolor="#DEEFF0" class="main_activitiesarea"><a accesskey="L" href="#" title="activitiesarea" class="accesskey"><font color=#DEEFF0> ::: </font></a>
+				
+<!-- 			<p class="activities" align="center"><a href="http://www.ntu.edu.tw/activities/festival2011/" title="校慶活動"><img src="images/news_fesitival100.jpg" alt="校慶活動" width="150" height="50" border="0"></a></p>
+<p class="activities" align="center"><a href="http://www.ntu.edu.tw/actives/80th/" title="臺大八十"><img src="images/80th.jpg" alt="臺大八十" width="150" height="50" border="0"></a></p>
+	 			
+				<p class="activities" align="center"><a href="http://host.cc.ntu.edu.tw/help88/" title="救災專區"><img src="images/help88.jpg" width="150" height="50" border="0" alt="救災專區"></a></p>
+			<p class="activities" align="center"><a href="http://artfest.ntu.edu.tw/" title="2009臺大藝術季"><img src="images/news_art2009.jpg" alt="2009臺大藝術季" width="150" height="50" border="0"></a></p>
+			<p class="activities" align="center"><a href="http://gc.ntu.edu.tw" title="畢業典禮 "><img src="images/graduation.jpg" width="150" height="50" border="0" alt="畢業典禮 "></a></p>
+            <p class="activities" align="center"><a href="http://blog.ntu.edu.tw/" title="NTU Weblogs "><img src="images/news_ntuweblogs.jpg" width="150" height="50" border="0" alt="NTU Weblogs "></a></p>>
+            <p class="activities" align="center"><a href="http://www.ntu.edu.tw/activities/azalea2012/" title="2012杜鵑花節"><img src="images/ala2012.jpg" alt="2012杜鵑花節" width="150" height="50" border="0"></a></p>
+            <p class="activities" align="center"><a href="https://www.cloud.ntu.edu.tw/" title="NTU Cloud "><img src="images/news_cloud.jpg" width="150" height="50" border="0" alt="NTU Cloud "></a></p-->
+            <p class="activities" align="center"><a href="http://www.ntu.edu.tw/activities/festival2012/" title="臺灣大學創校84年校慶活動"><img src="images/news_fesitival101.jpg" width="150" height="50" border="0" alt="臺灣大學創校84年校慶活動"></a></p>
+            <p class="activities" align="center"><a href="http://www.ntu.edu.tw/president/" title="校長遴選專區"><img src="images/news_president.jpg" width="150" height="50" border="0" alt="校長遴選專區"></a></p>
+            <p class="activities" align="center"><a href="http://www.cc.ntu.edu.tw/ntuspace/" title="NTU Space"><img src="images/news_space.jpg" width="150" height="50" border="0" alt="NTU Space "></a></p>
+ 				<p class="activities" align="center"><a href="http://homepage.ntu.edu.tw/~secretor/ntunewsletter/" title="NTU Newsletter"><img src="images/newsletter banner.jpg" alt="NTU Newsletter" width="150" height="50" border="0"></a></p>
+				<p class="activities" align="center"><a href="http://epaper.ntu.edu.tw/" title="臺大電子報"><img src="images/news_epaper.jpg" width="150" height="50" border="0" alt="臺大電子報"></a></p>
+				<p class="activities" align="center"><a href="http://ann.cc.ntu.edu.tw/activities/" title="近期活動"><img src="images/activities2.jpg" alt="近期活動" width="150" height="50" border="0"></a></p>
+				<p class="activities" align="center"><a href="http://arts.ntu.edu.tw/" title="藝文中心消息"><img src="images/news_apromotion.jpg" alt="藝文中心消息" width="150" height="50" border="0"></a></p>
+				<p class="activities" align="center"><a href="http://www.pe.ntu.edu.tw/index.aspx" title="體育活動消息"><img src="images/news_sport1.jpg" alt="體育活動消息" width="150" height="50" border="0"></a></p>
+				
+				<p class="activities" align="center"><a href="http://ctld.ntu.edu.tw/ntuvideo/" title="臺大演講網/臺大開放式課程"><img src="images/speech_ocw.jpg" width="150" height="50" border="0" alt="臺大演講網/臺大開放式課程"></a></p>
+                <!--<p class="activities" align="center"><a href="service/100ntu.html" title="臺大慶祝建國一百年Logo"><img src="service/100ntu.jpg" border="0" alt="臺大慶祝建國一百年Logo下載"></a></p>-->
+                <p class="activities">&gt;&gt; <a href="http://www.ntubca.ntu.edu.tw/chupei.html" title="竹北分部產學合作">竹北分部產學合作</a></p>
+				<p class="activities">&gt;&gt; <a href="http://www.ntulc.ntu.edu.tw/foreign/index.htm" title="外語學習課程">外語學習課程</a></p>
+				<p class="activities">&gt;&gt; <a href="http://chinese.ntu.edu.tw/chinese/introduction.htm" title="臺大華語（華語學習）">臺大華語（華語學習）</a></p>
+				<!--<p class="activities">&gt;&gt; <a href="http://ocw.aca.ntu.edu.tw/ntu-ocw/" title="臺大開放式課程">臺大開放式課程</a></p>-->
+				<p class="activities">&gt;&gt; <a href="http://case.ntu.edu.tw/CASTUDIO/" title="CASE開放式影音課程">CASE開放式影音課程</a></p>
+				<p class="activities">&gt;&gt; <a href="https://my.ntu.edu.tw/register/" title="計資中心資訊應用課程">計資中心資訊應用課程</a></p>	    
+				<p class="activities">&gt;&gt; <a href="http://www.ee.ntu.edu.tw/training/" title="電機系電子計算機訓練班">電機系電子計算機訓練班</a></p>
+				<p class="activities">&gt;&gt; <a href="http://www.csie.ntu.edu.tw/%7Etrain/" title="資訊系統訓練班">資訊系統訓練班</a></p>
+				<p class="activities">&gt;&gt; <a href="https://host.cc.ntu.edu.tw/activities/" title="社團活動查詢">社團活動查詢</a></p>
+				<p class="activities">&gt;&gt; <a href="http://chinese.twgg.org/" title="臺大經典閱讀">臺大經典閱讀</a></p>
+				<!--<p class="activities">&gt;&gt; <a href="http://nbsc.cbt.ntu.edu.tw/" title="暑期生技課程">2011暑期生技課程</a></p>-->			</td>
+			<td rowspan="2" align="center" valign="top" bgcolor="#E5F3F4">
+				<a accesskey="C" href="#" title="Main Content " class="accesskey"><font color=#E5F3F4> ::: </font></a>
+				<div class="main_spotlightpicpic"><img src="spotlight/2012/121107_top.jpg" alt="解決統計分析推斷因果關係迷思──海洋研究所/生態學與演化生物學研究所謝志豪副教授研究成果刊登《Science》期刊"></div>
+              
+            <div class="main_spotlightpictext" align="left" style="width:358px ">如何以狀態空間重建法（State Space Reconstruction）檢驗因果關係（右為謝志豪副教授）。（101.11.07） </div>
+<div style="padding-top:20px ">
+				  <h2 align="center">『月暈而風  礎潤則雨』解決統計分析推斷因果關係迷思<br>
+		        海洋研究所/生態學與演化生物學研究所謝志豪副教授<br>
+		        研究成果刊登《Science》期刊</h2>
+			  </div>
+		    <div class="spotlighttext" align=left style="width:358px">謝志豪副教授（臺大海洋研究所/生態學與演化生物學研究所）國際研究團隊，在10月26日 的《科學》期刊上發表一套用於分析生態系統中生物與非生物因子間因果關係(causality)的新方法。這個方法能分析生態系等複雜系統改變的真正成因，分辨真實的因果關係，解決長久以來科學家以相關性的統計分析來推斷因果關係的迷思
+…
+ >><a href="spotlight/spotlight.htm" title="詳見全文">全文</a></p>
+		    </div>
+		    
+		    <!--<hr size="1">
+		    <a href="http://artfest.ntu.edu.tw/" title="臺大藝術季"><img src="spotlight/2009/090424_art.jpg" alt="流動樂園:臺大藝術季" border="0"></a>  --></td>
+			<td valign="top" bgcolor="#DDEFEF" class="main_newstext" width="60%">
+			<div class="news">
+				<ul>
+                
+               
+<!--             
+				<li  class="newsred" style="color:#cc0000"> <a href="http://ann.cc.ntu.edu.tw/asp/ShowContent.asp?num=19434#bpos" title="重要即時消息03"> 計中緊急公告(5/19日15:19)！因台電跳電，部份網路及資訊系統服務異常，造成不便，敬請見諒！</a><img src="images/new.gif" alt="NEW" border="0"></li>   
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1080&sn=10740" title="重要公告"> 重要公告! 2月27日因調整放假之故，改於3月3日補課</a></li>
+				<li  class="newsred" style="color:#cc0000"> <a href="http://host.cc.ntu.edu.tw/sec/President--2012/president--CMvote.html" title="重要即時消息">本校訂於101年6月25日舉行校務會議，選舉校長遴選委員會委員</a><img src="images/new.gif" alt="NEW" border="0"></li>-->
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11237" title="最新消息1.1">中華民國與日本和平條約生效60週年史料巡迴展暨專題演講</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11219" title="最新消息1.2">海洋研究所/生態學與演化生物學研究所謝志豪副教授研究成果刊登《Science》期刊</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11220" title="最新消息2">生農學院舉辦國際農學院院長會議　簽署臺北宣言－農業與生物資源教育 研究 推廣 實踐</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11221" title="最新消息3">兩岸專家共商育才機制 頂尖學院人才論壇11月14日揭幕</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11222" title="最新消息4">第六屆IECA國際合成生物學研討會登場</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11223" title="最新消息5">薰風一甲子 臺大國樂團六十團慶 創團社長親臨慶生</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11224" title="最新消息6">《中心到邊陲的重軌與分軌：日本帝國與臺灣文學‧文化 研究(上)(中)(下)》</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11225" title="最新消息7">臺大醫院與美商默沙東藥廠簽署合作備忘錄</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11227" title="最新消息8">本校與中央研究院11月12-15日聯合舉辦2012亞太數位圖書館國際會議</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11231" title="最新消息9">歡慶公衛創系40週年系慶活動</a></li>
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11234" title="最新消息10">碩、博士班學生101學年度第1學期申請學位考試注意事項</a></li>
+				<!--<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1107&sn=11126" title="最新消息_傳真"> 校園傳真</a> </li>-->
+				<li> <a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/ShowContent.asp?num=1113&sn=11235" title="最新消息_徵才"> 校內徵才</a></li>
+				</ul>
+				<a href="http://host.cc.ntu.edu.tw/sec/schinfo/schinfo_asp/show.asp" title="其它消息">>>其它最新消息</a></div></td>
+		  </tr>
+		  <tr>
+			<td bgcolor="#5B909F" class="main_implinksarea" valign="top" align="right">				
+				<p class="implinks"><a href="http://ann.cc.ntu.edu.tw/" title="校園公告">校園公告</a></p>
+				<p class="implinks"><a href="http://top100.ntu.edu.tw/" title="邁向頂尖大學">邁向頂尖大學</a></p>
+				<p class="implinks"><a href="http://www.aca.ntu.edu.tw/sec2007/100ntusa.htm" title="100年校務評鑑">100年校務評鑑</a></p>
+				<p class="implinks"><a href="http://esh.ntu.edu.tw/epc/team1_action.php" title="永續校園">永續校園</a></p>
+				<p class="implinks"><a href="http://homepage.ntu.edu.tw/~ntuvpadmin/" title="公共論壇">公共論壇</a></p>
+				<p class="implinks"><a href="about/statistics.htm" title="資訊公開/年報">資訊公開/年報</a></p>
+				<p class="implinks"><a href="http://archives.ntu.edu.tw/" title="檔案應用">檔案應用</a></p>
+				<p class="implinks"><a href="http://sad.osa.ntu.edu.tw/newsite/scholar_list.php" title="獎助學金訊息">獎助學金訊息</a></p>
+				<p class="implinks"><a href="../schooling/index.htm" title="學雜費專區">學雜費專區</a></p>
+				<p class="implinks"><a href="http://www.ntu.edu.tw/tipa/index.htm" title="智財權專區">智財權專區</a></p>
+				<p class="implinks"><a href="http://www.ga.ntu.edu.tw/committee/committee_06.jsp?s1=1" title="用電資訊">用電資訊</a></p>				
+			<a href="http://www.ga.ntu.edu.tw/purchasing/sample.jsp?ct_id=CT1200318556177" title="綠色消費"><img src="images/greenmark.jpg" alt="綠色消費" border="0"></a>          </td>
+		  </tr>
+	  </table>	
+	</td>
+  </tr>
+  <tr>
+    <td colspan="2" bgcolor="#2F5A68" class="footer"><a href="#" title="basic functions of this site " accesskey="B"> ::: </a> |　<a href="aboutus.htm" title="關於">關於</a>  |　<a href="faq/tele119.htm" title="緊急電話">緊急電話</a>  |　<a href="about/map.htm" title="交通資訊">交通資訊</a>  |　<a href="copyright.htm" title="隱私權及資訊安全政策">隱私權及資訊安全政策</a> |</td>
+  </tr>
+  <tr>
+    <td colspan="2"  class="copyright">
+	<a href="http://www.webguide.nat.gov.tw/enable.jsp?category=20080116113056" title="無障礙網站"><img src="images/aaa.jpg" border="0"  alt="通過第三優先等級無障礙網頁檢測" align="left"></a>
+	Copyright &copy; 2006 臺灣大學 National Taiwan University<br>
+	10617 臺北市羅斯福路四段一號　　No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)<br>
+	電話總機 (Phone)：+886-2-3366-3366　　傳真號碼 (Fax)：+886-2-2362-7651
+	<br>自2008/6/27 已累計人次約 <img src="http://www.ntu.edu.tw/cgi-bin/Count.cgi?df=ntuch.x.www&dd=E&ft=0" align="absmiddle" alt="計數器">人
+	<!--<br><a href="http://tw.webmaster.yahoo.com" title="count" class="style2">count</a>-->
+  </tr>
+</table>
+<map name="Map">
+  <area shape="rect" coords="-2,57,76,85" href="about/about.html" alt="認識台大">
+  <area shape="rect" coords="-1,87,77,110" href="administration/administration.html" alt="行政組織">
+  <area shape="rect" coords="88,57,165,86" href="academics/academics.html" alt="學術單位">
+  <area shape="rect" coords="89,86,166,114" href="faq/faq.html" alt="常見詢答">
+  <area shape="rect" coords="173,58,260,86" href="research/research.html" alt="研究發展">
+  <area shape="rect" coords="173,87,259,113" href="service/service.html" alt="服務資源">
+  <area shape="rect" coords="266,87,337,114" href="http://www.ntu.edu.tw/english/" alt="ENGLISH">
+
+</map>
+</body>

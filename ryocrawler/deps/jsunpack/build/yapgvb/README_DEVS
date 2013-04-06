@@ -1,0 +1,14 @@
+Instructions for release & distribution building
+
+
+1. When you make a change, increment the version string.
+  It appears in two places:  setup.py, __init__.py
+
+2. To build a source tarball for distribution:
+
+  svn export https://yapgvb.googlecode.com/svn/trunk/yapgvb yapgvb-VERSION-source
+  tar czf yapgvb-VERSION-source.tar.gz yapgvb-VERSION-source
+ 
+
+3. To build Windows installers:
+   (FIXME - write this section)

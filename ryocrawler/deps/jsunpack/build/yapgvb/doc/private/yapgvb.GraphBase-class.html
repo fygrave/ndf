@@ -1,0 +1,1113 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yapgvb.GraphBase</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="yapgvb-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          yapgvb
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="yapgvb-module.html">Package&nbsp;yapgvb</a> ::
+        Class&nbsp;GraphBase
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[show&nbsp;private&nbsp;|&nbsp;<a href="../public/yapgvb.GraphBase-class.html">hide&nbsp;private</a>]</font></td></tr>
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="yapgvb.GraphBase-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Class GraphBase</h2>
+
+<dl><dt><b>Known Subclasses:</b></dt>
+<dd>
+    <a href="yapgvb.Digraph-class.html"><code>Digraph</code></a>,
+    <a href="yapgvb.Graph-class.html"><code>Graph</code></a></dd></dl>
+
+<hr/>
+
+GraphBase is the base class for Graph and Digraph. GraphBase should 
+not be instantiated directly.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**keywords</span>)</span></code>
+<br />
+GraphBase is a base class used by Graph and Digraph.</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Graph Definition</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#add_node" class="summary-sig-name"><code>add_node</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>name</span>,
+          <span class="summary-sig-kwarg">**attributes</span>)</span></code>
+<br />
+Add a node to the graph.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#add_edge" class="summary-sig-name"><code>add_edge</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>tail</span>,
+          <span class=summary-sig-arg>head</span>)</span></code>
+<br />
+Create an edge between two nodes.</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Layout and Rendering</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#layout" class="summary-sig-name"><code>layout</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>engine</span>,
+          <span class=summary-sig-arg>rendering_context</span>)</span></code>
+<br />
+Process the graph with one of the layout engines supplied by 
+Graphviz.</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;I/O</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#render" class="summary-sig-name"><code>render</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>outstream</span>,
+          <span class=summary-sig-arg>format</span>,
+          <span class=summary-sig-arg>rendering_context</span>)</span></code>
+<br />
+Render the graph to a file.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#write" class="summary-sig-name"><code>write</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>output_stream_or_filename</span>)</span></code>
+<br />
+Output the graph in the dot language format.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#read" class="summary-sig-name"><code>read</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>input_stream_or_filename</span>)</span></code>
+<br />
+Read a graph from a dot file.    <i>(Class method)</i>
+</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Boost.Graph Compatibility</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#from_bgl" class="summary-sig-name"><code>from_bgl</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>bgraph</span>,
+          <span class=summary-sig-arg>node_properties</span>,
+          <span class=summary-sig-arg>edge_properties</span>)</span></code>
+<br />
+Translate a boost.python graph into a yapgvb graph.    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="yapgvb.GraphBase-class.html#to_bgl" class="summary-sig-name"><code>to_bgl</code></a>(<span class=summary-sig-arg>ygraph</span>,
+          <span class=summary-sig-arg>node_properties</span>,
+          <span class=summary-sig-arg>edge_properties</span>)</span></code>
+<br />
+Translate a graphviz graph into a boost.python graph.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF PROPERTY SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Property Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">rect</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#bb"><code>bb</code></a></b>: Bounding box of drawing in integer points.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#bgcolor"><code>bgcolor</code></a></b>: When attached to the root graph, this color is used as the background 
+for entire canvas.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#center"><code>center</code></a></b>: If true, the drawing is centered in the output canvas.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#charset"><code>charset</code></a></b>: Specifies the character encoding used when interpreting string input 
+as a text label.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#clusterrank"><code>clusterrank</code></a></b>: Mode used for handling clusters.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#colorscheme"><code>colorscheme</code></a></b>: This attribute specifies a color scheme namespace.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#comment"><code>comment</code></a></b>: Comments are inserted into output.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#compound"><code>compound</code></a></b>: If true, allow edges between clusters.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#concentrate"><code>concentrate</code></a></b>: If true, use edge concentrators.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#Damping"><code>Damping</code></a></b>: Factor damping force motions.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#defaultdist"><code>defaultdist</code></a></b>: This specifies the distance between nodes in separate connected 
+components.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#dim"><code>dim</code></a></b>: Set the number of dimensions used for the layout.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#directed"><code>directed</code></a></b>: True if directed, False if not.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#dpi"><code>dpi</code></a></b>: This specifies the expected number of pixels per inch on a display 
+device.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#epsilon"><code>epsilon</code></a></b>: Terminating condition.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#fontcolor"><code>fontcolor</code></a></b>: Color used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#fontname"><code>fontname</code></a></b>: Font used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#fontpath"><code>fontpath</code></a></b>: Directory list used by libgd to search for bitmap fonts if Graphviz 
+was not built with the fontconfig library.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#fontsize"><code>fontsize</code></a></b>: Font size, in points, used for text.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#graph"><code>graph</code></a></b>: graph to which this belongs (parent, if a subgraph, otherwise 
+self)</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#K"><code>K</code></a></b>: Spring constant used in virtual physical model.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#label"><code>label</code></a></b>: Text label attached to objects.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#labeljust"><code>labeljust</code></a></b>: Justification for cluster labels.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#labelloc"><code>labelloc</code></a></b>: Top/bottom placement of graph and cluster labels.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#landscape"><code>landscape</code></a></b>: If true, the graph is rendered in landscape mode.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#layers"><code>layers</code></a></b>: Specifies a linearly ordered list of layer names attached to the graph 
+The graph is then output in separate layers.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#layersep"><code>layersep</code></a></b>: Specifies the separator characters used to split the layers attribute 
+into a list of layer names.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#levelsgap"><code>levelsgap</code></a></b>: Specifies strictness of level constraints in neato when 
+mode=&quot;hier&quot;.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">(x,y) or (x,y,z) tuple</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#lp"><code>lp</code></a></b>: Label position, in points.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#margin"><code>margin</code></a></b>: For graphs, this sets x and y margins of canvas, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#maxiter"><code>maxiter</code></a></b>: Sets the number of iterations used.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#mclimit"><code>mclimit</code></a></b>: Multiplicative scale factor used to alter the MinQuit (default = 8) 
+and MaxIter (default = 24) parameters used during crossing 
+minimization.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#mindist"><code>mindist</code></a></b>: Specifies the minimum separation between all nodes.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#mode"><code>mode</code></a></b>: Technique for optimizing the layout.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#model"><code>model</code></a></b>: This value specifies how the distance matrix is computed for the input 
+graph.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#nodesep"><code>nodesep</code></a></b>: Minimum space between two adjacent nodes in the same rank, in 
+inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#nojustify"><code>nojustify</code></a></b>: By default, the justification of multi-line labels is done within the 
+largest context that makes sense.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#normalize"><code>normalize</code></a></b>: If set, normalize coordinates of final layout so that the first point 
+is at the origin, and then rotate the layout so that the first edge is 
+horizontal.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#nslimit"><code>nslimit</code></a></b></td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#nslimit1"><code>nslimit1</code></a></b></td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#ordering"><code>ordering</code></a></b>: If &quot;out&quot; for a graph G, and n is a node in G, then edges 
+n-&gt;* appear left-to-right in the same order in which they are 
+defined.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#orientation"><code>orientation</code></a></b>: Angle, in degrees, used to rotate node shapes.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#outputorder"><code>outputorder</code></a></b>: Specify order in which nodes and edges are drawn.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#overlap"><code>overlap</code></a></b>: Determines if and how node overlaps should be removed.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#pack"><code>pack</code></a></b>: This is true if the value of pack is &quot;true&quot; 
+(case-insensitive) or a non-negative integer.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#packmode"><code>packmode</code></a></b>: This indicates the granularity and method used for packing (cf.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">pointf</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#page"><code>page</code></a></b>: Width and height of output pages, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#pagedir"><code>pagedir</code></a></b>: If the page attribute is set and applicable, this attribute specifies 
+the order in which the pages are emitted.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#quantum"><code>quantum</code></a></b>: If quantum &gt; 0.0, node label dimensions will be rounded to integral 
+multiples of the quantum.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#rankdir"><code>rankdir</code></a></b>: Sets direction of graph layout.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#ranksep"><code>ranksep</code></a></b>: In dot, this the gives desired rank separation, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#ratio"><code>ratio</code></a></b>: Sets the aspect ratio (drawing height/drawing width) for the 
+drawing.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#remincross"><code>remincross</code></a></b>: If true and there are multiple clusters, run cross minimization a 
+second time.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#resolution"><code>resolution</code></a></b>: This is a synonym for the dpi attribute.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#root"><code>root</code></a></b>: This specifies nodes to be used as the center of the layout and the 
+root of the generated spanning tree.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#rotate"><code>rotate</code></a></b>: If 90, set drawing orientation to landscape.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#samplepoints"><code>samplepoints</code></a></b>: If the input graph defines the vertices attribute, and output is dot 
+or xdot, this give the number of points used to represent circles and 
+ellipses.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#searchsize"><code>searchsize</code></a></b>: During network simplex, maximum number of edges with negative cut 
+values to search when looking for one with minimum cut value.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#sep"><code>sep</code></a></b>: Fraction to increase polygons (multiply coordinates by 1 + sep) for 
+purposes of determining overlap.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">int</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#showboxes"><code>showboxes</code></a></b>: Print guide boxes in PostScript at the beginning of routesplines if 1, 
+or at the end if 2.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">pointf</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#size"><code>size</code></a></b>: Maximum width and height of drawing, in inches.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#splines"><code>splines</code></a></b>: Controls how, and if, edges are represented.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">string</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#start"><code>start</code></a></b>: Parameter used to determine the initial layout of nodes.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#strict"><code>strict</code></a></b>: True if strict, False if not.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#stylesheet"><code>stylesheet</code></a></b>: A URL or pathname specifying an XML style sheet, used in SVG 
+output.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#target"><code>target</code></a></b>: If the object has a URL, this attribute determines which window of the 
+browser is used for the URL.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">boolean</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#truecolor"><code>truecolor</code></a></b>: If set explicitly to true or false, the value determines whether or 
+not internal bitmap rendering relies on a truecolor color model or uses a 
+color palette.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#URL"><code>URL</code></a></b>: Hyperlinks incorporated into device-dependent output.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#viewport"><code>viewport</code></a></b>: Clipping window on final drawing.</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">float</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#voro_margin"><code>voro_margin</code></a></b></td></tr><tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Graph Traversal</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#nodes"><code>nodes</code></a></b>: An iterator over all nodes in the graph</td></tr><tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><b><a href="yapgvb.GraphBase-class.html#edges"><code>edges</code></a></b>: An iterator of edges contained in the graph.</td></tr></table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="add_node"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">add_node</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>name</span>=<span class=sig-default>None</span>,
+          <span class="sig-kwarg">**attributes</span>)</span>
+  </h3>
+  <p>Add a node to the graph. If a node of this name exists already, it 
+  will be returned and no new node will be created. If no name is 
+  specified, a random (and probably unique) name will be assigned. The 
+  keyword arguments are (attribute_name, value) pairs; this is a 
+  shorthand equivalent to assigning attributes individually:</p>
+  <p>n = mygraph.add_node('node_name', label=&quot;Hello World&quot;, 
+  fontsize=48)</p>
+  <p>is equivalent to:</p>
+  n = mygraph.add_node('node_name') n.label = 'Hello World' n.fontsize 
+  = 48
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="add_edge"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">add_edge</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>tail</span>,
+          <span class=sig-arg>head</span>)</span>
+  </h3>
+  Create an edge between two nodes. Returns the created edge 
+  object.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="layout"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">layout</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>engine</span>,
+          <span class=sig-arg>rendering_context</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Process the graph with one of the layout engines supplied by 
+  Graphviz.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>engine</b></code> -
+         Name of the layout engine. Possible values are 'fdp', 'twopi', 
+        'neato', 'dot', 'circo'.
+      <dd><code><b>rendering_context</b></code> -
+         Leave this as None for now. It will be explained when I have 
+        time to write more documentation ;-)
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="render"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">render</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>outstream</span>=<span class=sig-default>&lt;epydoc.imports._DevNull&nbsp;instance&nbsp;at&nbsp;0x2aaaab84b320&gt;</span>,
+          <span class=sig-arg>format</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>rendering_context</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Render the graph to a file. layout must be called prior to 
+  rendering.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>outstream</b></code> -
+         Either a filename or an open, writable file stream.
+      <dd><code><b>format</b></code> -
+         Desired file format. One of 'pic', 'jpg', 'ismap', 'gd', 
+        'hpgl', 'ps2', 'plain-ext', 'wbmp', 'ps', 'mif', 'gif', 
+        'canoncmap', 'fig', 'pcl', 'vtx', 'vrml', 'svgz', 'gd2', 'xdot', 
+        'jpeg', 'cmapx', 'imap', 'png', 'plain', 'dia', 'mp', 'svg', 
+        'dot'.
+      <dd><code><b>rendering_context</b></code> -
+         Leave this as None for now. It will be explained when I have 
+        time to write more documentation ;-)
+      </dd>
+    </dl>
+<p><b>Attention:</b> If you're writing a binary format, be sure to open outstream as a 
+binary stream.
+</p>
+
+<p><b>Note:</b> If format is None (the default) and outstream is a filename, render 
+will attempt to infer the correct format from the filename extension.
+</p>
+
+  </dd></dl>
+</td></tr></table>
+
+<a name="write"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">write</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>output_stream_or_filename</span>=<span class=sig-default>&lt;epydoc.imports._DevNull&nbsp;instance&nbsp;at&nbsp;0x2aaaab84b320&gt;</span>)</span>
+  </h3>
+  Output the graph in the dot language format. To render as an image, 
+  use the render() method. To read a dot file, use the __init__ 
+  constructor or the read() classmethod.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="to_bgl"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">to_bgl</span>(<span class=sig-arg>ygraph</span>,
+          <span class=sig-arg>node_properties</span>=<span class=sig-default>[]</span>,
+          <span class=sig-arg>edge_properties</span>=<span class=sig-default>[]</span>)</span>
+  </h3>
+  <p>Translate a graphviz graph into a boost.python graph.</p>
+  The returned translation_map behaves like a dictionary of all 
+  corresponding (boost_edge, yapgvb_edge), (yapgvb_edge, boost_edge), 
+  (boost_vertex, yapgvb_node), and (yapgvb_node, boost_vertex) key/value 
+  pairs.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>node_properties</b></code> -
+         A list of strings naming node properties to converted from 
+        yapgvb to boost.
+      <dd><code><b>edge_properties</b></code> -
+         A list of strings naming edge properties to converted from 
+        yapgvb to boost.
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        (bgraph, translation_map)
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**keywords</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  GraphBase is a base class used by Graph and Digraph. Do not 
+  instantiate it directly.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="read"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">read</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>input_stream_or_filename</span>)</span>
+  </h3>
+  Read a graph from a dot file. May be called from either the Digraph 
+  or Graph class; either way, the correct directed or undirected graph 
+  object will be returned.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="from_bgl"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">from_bgl</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>bgraph</span>,
+          <span class=sig-arg>node_properties</span>=<span class=sig-default>[]</span>,
+          <span class=sig-arg>edge_properties</span>=<span class=sig-default>[]</span>)</span>
+  </h3>
+  <p>Translate a boost.python graph into a yapgvb graph.</p>
+  The returned translation_map behaves like a dictionary of all 
+  corresponding (boost_edge, yapgvb_edge), (yapgvb_edge, boost_edge), 
+  (boost_vertex, yapgvb_node), and (yapgvb_node, boost_vertex) key/value 
+  pairs.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>bgraph</b></code> -
+         A boost.graph.Graph or boost.graph.Digraph instance
+      <dd><code><b>node_properties</b></code> -
+         A list of strings naming node properties to converted from 
+        boost to yapgvb.
+      <dd><code><b>edge_properties</b></code> -
+         A list of strings naming edge properties to converted from 
+        boost to yapgvb.
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        (ygraph, translation_map)
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF PROPERTY DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Property Details</th></tr>
+</table>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="nodes"></a>
+<h3>nodes</h3>
+An iterator over all nodes in the graph
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="edges"></a>
+<h3>edges</h3>
+An iterator of edges contained in the graph.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="bb"></a>
+<h3>bb</h3>
+<p>Bounding box of drawing in integer points.</p>
+description of rect type
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="bgcolor"></a>
+<h3>bgcolor</h3>
+<p>When attached to the root graph, this color is used as the background 
+for entire canvas. When a cluster attribute, it is used as the initial 
+background for the cluster. If a cluster has a filled style, the 
+cluster's fillcolor will overlay the background color.</p>
+If no background color is specified for the root graph, no graphics 
+operation are performed on the background. This works fine for PostScript 
+but for bitmap output, all bits are initialized to something. This means 
+that when the bitmap output is included in some other document, all of 
+the bits within the bitmap's bounding box will be set, overwriting 
+whatever color or graphics where already on the page. If this effect is 
+not desired, and you only want to set bits explicitly assigned in drawing 
+the graph, set background=&quot;transparent&quot;.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="center"></a>
+<h3>center</h3>
+If true, the drawing is centered in the output canvas.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="charset"></a>
+<h3>charset</h3>
+Specifies the character encoding used when interpreting string input 
+as a text label. The default value is &quot;UTF-8&quot;. The other legal 
+value is &quot;iso-8859-1&quot; or, equivalently, &quot;Latin1&quot;. The 
+charset attribute is case-insensitive. Note that if the character 
+encoding used in the input does not match the charset value, the 
+resulting output may be very strange.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="clusterrank"></a>
+<h3>clusterrank</h3>
+<p>Mode used for handling clusters. If clusterrank is &quot;local&quot;, 
+a subgraph whose name begins with &quot;cluster&quot; is given special 
+treatment. The subgraph is laid out separately, and then integrated as a 
+unit into its parent graph, with a bounding rectangle drawn about it. If 
+the cluster has a label parameter, this label is displayed within the 
+rectangle. Note also that there can be clusters within clusters. At 
+present, the modes &quot;global&quot; and &quot;none&quot; appear to be 
+identical, both turning off the special cluster processing.</p>
+Possible values: 'local', 'global', 'none'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="colorscheme"></a>
+<h3>colorscheme</h3>
+This attribute specifies a color scheme namespace. If defined, it 
+specifies the context for interpreting color names. In particular, if a 
+color value has form &quot;xxx&quot; or &quot;//xxx&quot;, then the color 
+xxx will be evaluated according to the current color scheme. If no color 
+scheme is set, the standard X11 naming is used. For example, if 
+colorscheme=bugn9, then color=7 is interpreted as 
+&quot;/bugn9/7&quot;.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="comment"></a>
+<h3>comment</h3>
+Comments are inserted into output. Device-dependent
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="compound"></a>
+<h3>compound</h3>
+If true, allow edges between clusters. (See lhead and ltail 
+below.)
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="concentrate"></a>
+<h3>concentrate</h3>
+If true, use edge concentrators.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="Damping"></a>
+<h3>Damping</h3>
+Factor damping force motions. On each iteration, a nodes movement is 
+limited to this factor of its potential motion. By being less than 1.0, 
+the system tends to ``cool'', thereby preventing cycling.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="defaultdist"></a>
+<h3>defaultdist</h3>
+This specifies the distance between nodes in separate connected 
+components. If set too small, connected components may overlap. Only 
+applicable if pack=false.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="dim"></a>
+<h3>dim</h3>
+Set the number of dimensions used for the layout. The maximum value 
+allowed is 10.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="directed"></a>
+<h3>directed</h3>
+True if directed, False if not. Read-only.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="dpi"></a>
+<h3>dpi</h3>
+This specifies the expected number of pixels per inch on a display 
+device. For bitmap output, this guarantees that text rendering will be 
+done more accurately, both in size and in placement. For SVG output, it 
+is used to guarantee that the dimensions in the output correspond to the 
+correct number of points or inches.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="epsilon"></a>
+<h3>epsilon</h3>
+Terminating condition. If the length squared of all energy gradients 
+are epsilon, the algorithm stops.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontcolor"></a>
+<h3>fontcolor</h3>
+Color used for text.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontname"></a>
+<h3>fontname</h3>
+<p>Font used for text. This very much depends on the output format and, 
+for non-bitmap output such as PostScript or SVG, the availability of the 
+font when the graph is displayed or printed. As such, it is best to rely 
+on font faces that are generally available, such as Times-Roman, 
+Helvetica or Courier.</p>
+<p>If Graphviz was built using the fontconfig library, the latter library 
+will be used to search for the font. However, if the fontname string 
+contains a slash character &quot;/&quot;, it is treated as a pathname for 
+the font file, though font lookup will append the usual font 
+suffixes.</p>
+If Graphviz does not use fontconfig, fontname will be considered the 
+name of a Type 1 or True Type font file. If you specify fontname=schlbk, 
+the tool will look for a file named schlbk.ttf or schlbk.pfa or 
+schlbk.pfb in one of the directories specified by the fontpath attribute. 
+The lookup does support various aliases for the common fonts.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontpath"></a>
+<h3>fontpath</h3>
+Directory list used by libgd to search for bitmap fonts if Graphviz 
+was not built with the fontconfig library. If fontpath is not set, the 
+environment variable DOTFONTPATH is checked. If that is not set, 
+GDFONTPATH is checked. If not set, libgd uses its compiled-in font path. 
+Note that fontpath is an attribute of the root graph.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="fontsize"></a>
+<h3>fontsize</h3>
+Font size, in points, used for text.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="graph"></a>
+<h3>graph</h3>
+graph to which this belongs (parent, if a subgraph, otherwise 
+self)
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="K"></a>
+<h3>K</h3>
+Spring constant used in virtual physical model. It roughly corresponds 
+to an ideal edge length (in inches), in that increasing K tends to 
+increase the distance between nodes. Note that the edge attribute len can 
+be used to override this value for adjacent nodes.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="label"></a>
+<h3>label</h3>
+Text label attached to objects. If a node's shape is record, then the 
+label can have a special format which describes the record layout.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labeljust"></a>
+<h3>labeljust</h3>
+Justification for cluster labels. If &quot;r&quot;, the label is 
+right-justified within bounding rectangle; if &quot;l&quot;, 
+left-justified; else the label is centered. Note that a subgraph inherits 
+attributes from its parent. Thus, if the root graph sets labeljust to 
+&quot;l&quot;, the subgraph inherits this value.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="labelloc"></a>
+<h3>labelloc</h3>
+Top/bottom placement of graph and cluster labels. If the attribute is 
+&quot;t&quot;, place label at the top; if the attribute is &quot;b&quot;, 
+place label at the bottom. By default, root graph labels go on the bottom 
+and cluster labels go on the top. Note that a subgraph inherits 
+attributes from its parent. Thus, if the root graph sets labelloc to 
+&quot;b&quot;, the subgraph inherits this value.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="landscape"></a>
+<h3>landscape</h3>
+If true, the graph is rendered in landscape mode. Synonymous with 
+rotate=90 or orientation=landscape.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="layers"></a>
+<h3>layers</h3>
+Specifies a linearly ordered list of layer names attached to the graph 
+The graph is then output in separate layers. Only those components 
+belonging to the current output layer appear. For more information, see 
+the page How to use drawing layers (overlays).
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="layersep"></a>
+<h3>layersep</h3>
+Specifies the separator characters used to split the layers attribute 
+into a list of layer names.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="levelsgap"></a>
+<h3>levelsgap</h3>
+Specifies strictness of level constraints in neato when 
+mode=&quot;hier&quot;. Larger positive values mean stricter constraints, 
+which demand more separation between levels. On the other hand, negative 
+values will relax the constraints by allowing some overlap between the 
+levels.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="lp"></a>
+<h3>lp</h3>
+Label position, in points.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="margin"></a>
+<h3>margin</h3>
+<p>For graphs, this sets x and y margins of canvas, in inches. If the 
+margin is a single double, both margins are set equal to the given 
+value.</p>
+For nodes, this attribute specifies space left around the node's 
+label. By default, the value is 0.11,0.055.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="maxiter"></a>
+<h3>maxiter</h3>
+Sets the number of iterations used.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="mclimit"></a>
+<h3>mclimit</h3>
+Multiplicative scale factor used to alter the MinQuit (default = 8) 
+and MaxIter (default = 24) parameters used during crossing minimization. 
+These correspond to the number of tries without improvement before 
+quitting and the maximum number of iterations in each pass.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="mindist"></a>
+<h3>mindist</h3>
+Specifies the minimum separation between all nodes.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="mode"></a>
+<h3>mode</h3>
+<p>Technique for optimizing the layout. If mode is &quot;major&quot;, 
+neato uses stress majorization. If mode is &quot;KK&quot;, neato uses a 
+version of the gradient descent method. The only advantage to the latter 
+technique is that it is sometimes appreciably faster for small (number of 
+nodes &lt; 100) graphs. A significant disadvantage is that it may 
+cycle.</p>
+There is a new, experimental mode in neato, &quot;hier&quot;, which 
+adds a top-down directionality similar to the layout used in dot.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="model"></a>
+<h3>model</h3>
+This value specifies how the distance matrix is computed for the input 
+graph. The distance matrix specifies the ideal distance between every 
+pair of nodes. neato attemps to find a layout which best achieves these 
+distances. By default, it uses the length of the shortest path, where the 
+length of each edge is given by its len attribute. If model is 
+&quot;circuit&quot;, neato uses the circuit resistance model to compute 
+the distances. This tends to emphasize clusters. If model is 
+&quot;subset&quot;, neato uses the subset model. This sets the edge 
+length to be the number of nodes that are neighbors of exactly one of the 
+end points, and then calculates the shortest paths. This helps to 
+separate nodes with high degree.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="nodesep"></a>
+<h3>nodesep</h3>
+Minimum space between two adjacent nodes in the same rank, in 
+inches.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="nojustify"></a>
+<h3>nojustify</h3>
+By default, the justification of multi-line labels is done within the 
+largest context that makes sense. Thus, in the label of a polygonal node, 
+a left-justified line will align with the left side of the node (shifted 
+by the prescribed margin). In record nodes, left-justified line will line 
+up with the left side of the enclosing column of fields. If nojustify is 
+&quot;true&quot;, multi-line labels will be justified in the context of 
+itself. For example, if the attribute is set, the first label line is 
+long, and the second is shorter and left-justified, the second will align 
+with the left-most character in the first line, regardless of how large 
+the node might be.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="normalize"></a>
+<h3>normalize</h3>
+If set, normalize coordinates of final layout so that the first point 
+is at the origin, and then rotate the layout so that the first edge is 
+horizontal.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="nslimit"></a>
+<h3>nslimit</h3>
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="nslimit1"></a>
+<h3>nslimit1</h3>
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="ordering"></a>
+<h3>ordering</h3>
+If &quot;out&quot; for a graph G, and n is a node in G, then edges 
+n-&gt;* appear left-to-right in the same order in which they are defined. 
+If &quot;in&quot;, the edges *-&gt;n appear left-to-right in the same 
+order in which they are defined for all nodes n.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="orientation"></a>
+<h3>orientation</h3>
+Angle, in degrees, used to rotate node shapes.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="outputorder"></a>
+<h3>outputorder</h3>
+<p>Specify order in which nodes and edges are drawn.</p>
+Possible values: 'breadthfirst', 'nodesfirst', 'edgesfirst'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="overlap"></a>
+<h3>overlap</h3>
+<p>Determines if and how node overlaps should be removed. Nodes are first 
+enlarged using the sep attribute. If &quot;true&quot; , overlaps are 
+retained. If the value is &quot;scale&quot;, overlaps are removed by 
+uniformly scaling in x and y. If the value converts to &quot;false&quot;, 
+node overlaps are removed by a Voronoi-based technique. If the value is 
+&quot;scalexy&quot;, x and y are separately scaled to remove overlaps. If 
+the value is &quot;orthoxy&quot; or &quot;orthoyx&quot;, overlaps are 
+moved by optimizing two constraint problems, one for the x axis and one 
+for the y. The suffix indicates which axis is processed first. If the 
+value is &quot;ortho&quot;, the technique is similar to 
+&quot;orthoxy&quot; except a heuristic is used to reduce the bias between 
+the two passes. If the value is &quot;ortho_yx&quot;, the technique is 
+the same as &quot;ortho&quot;, except the roles of x and y are reversed. 
+The values &quot;portho&quot;, &quot;porthoxy&quot;, 
+&quot;porthoxy&quot;, and &quot;portho_yx&quot; are similar to the 
+previous four, except only pseudo-orthogonal ordering is enforced.</p>
+<p>If the value is &quot;compress&quot;, the layout will be scaled down 
+as much as possible without introducing any overlaps, obviously assuming 
+there are none to begin with.</p>
+<p>Except for fdp, the layouts assume overlap=&quot;true&quot; as the 
+default. Fdp first uses a number of passes using built-in, force-directed 
+technique to remove overlaps. Thus, fdp accepts overlap with an integer 
+prefix followed by a colon, specifying the number of tries. If there is 
+no prefix, no initial tries will be performed. If there is nothing 
+following a colon, none of the above methods will be attempted. By 
+default, fdp uses overlap=&quot;9:portho&quot;. Note that 
+overlap=&quot;true&quot;, overlap=&quot;0:true&quot; and 
+overlap=&quot;0:&quot; all turn off all overlap removal.</p>
+<p>Except for the Voronoi method, all of these transforms preserve the 
+orthogonal ordering of the original layout. That is, if the x coordinates 
+of two nodes are originally the same, they will remain the same, and if 
+the x coordinate of one node is originally less than the x coordinate of 
+another, this relation will still hold in the transformed layout. The 
+similar properties hold for the y coordinates.</p>
+NOTEThe methods &quot;orthoxy&quot; and &quot;orthoyx&quot; are still 
+evolving. The semantics of these may change, or these methods may 
+disappear altogether.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="pack"></a>
+<h3>pack</h3>
+<p>This is true if the value of pack is &quot;true&quot; 
+(case-insensitive) or a non-negative integer. If true, each connected 
+component of the graph is laid out separately, and then the graphs are 
+packed tightly. If pack has an integral value, this is used as the size 
+(in points) of a margin around each part; otherwise, a default margin of 
+8 is used. If pack is interpreted as false, the entire graph is laid out 
+together. The granularity and method of packing is influenced by the 
+packmode attribute.</p>
+For layouts which always do packing, such a twopi, the pack attribute 
+is just used to set the margin.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="packmode"></a>
+<h3>packmode</h3>
+<p>This indicates the granularity and method used for packing (cf. 
+packMode). Note that defining packmode will automatically turn on packing 
+as though one had set pack=true.</p>
+Possible values: 'node', 'clust', 'graph'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="page"></a>
+<h3>page</h3>
+Width and height of output pages, in inches. If this is set and is 
+smaller than the size of the layout, a rectangular array of pages of the 
+specified page size is overlaid on the layout, with origins aligned in 
+the lower-left corner, thereby partitioning the layout into pages. The 
+pages are then produced one at a time, in pagedir order.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="pagedir"></a>
+<h3>pagedir</h3>
+<p>If the page attribute is set and applicable, this attribute specifies 
+the order in which the pages are emitted. This is limited to one of the 8 
+row or column major orders.</p>
+Possible values: 'BL', 'BR', 'TL', 'TR', 'RB', 'RT', 'LB', 'LT'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="quantum"></a>
+<h3>quantum</h3>
+If quantum &gt; 0.0, node label dimensions will be rounded to integral 
+multiples of the quantum.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="rankdir"></a>
+<h3>rankdir</h3>
+<p>Sets direction of graph layout. For example, if 
+rankdir=&quot;LR&quot;, and barring cycles, an edge T -&gt; H; will go 
+from left to right. By default, graphs are laid out from top to 
+bottom.</p>
+Possible values: 'TB', 'LR', 'BT', 'RL'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="ranksep"></a>
+<h3>ranksep</h3>
+In dot, this the gives desired rank separation, in inches. This is the 
+minimum vertical distance between the bottom of the nodes in one rank and 
+the tops of nodes in the next. If the value contains &quot;equally&quot;, 
+the centers of all ranks are spaced equally apart. Note that both 
+settings are possible, e.g., ranksep = &quot;1.2 equally&quot;. In twopi, 
+specifies radial separation of concentric circles.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="ratio"></a>
+<h3>ratio</h3>
+<p>Sets the aspect ratio (drawing height/drawing width) for the drawing. 
+Note that this is adjusted before the size attribute constraints are 
+enforced.</p>
+<p>If ratio is numeric, it is taken as the desired aspect ratio. Then, if 
+the actual aspect ratio is less than the desired ratio, the drawing 
+height is scaled up to achieve the desired ratio; if the actual ratio is 
+greater than that desired ratio, the drawing width is scaled up.</p>
+<p>If ratio = &quot;fill&quot; and the size attribute is set, node 
+positions are scaled, separately in both x and y, so that the final 
+drawing exactly fills the specified size.</p>
+<p>If ratio = &quot;compress&quot; and the size attribute is set, dot 
+attempts to compress the initial layout to fit in the given size. This 
+achieves a tighter packing of nodes but reduces the balance and symmetry. 
+This feature only works in dot.</p>
+<p>If ratio = &quot;expand&quot;, the size attribute is set, and both the 
+width and the height of the graph are less than the value in size, node 
+positions are scaled uniformly until at least one dimension fits size 
+exactly. Note that this is distinct from using size as the desired size, 
+as here the drawing is expanded before edges are generated and all node 
+and text sizes remain unchanged.</p>
+If ratio = &quot;auto&quot;, the page attribute is set and the graph 
+cannot be drawn on a single page, then size is set to an ``ideal'' value. 
+In particular, the size in a given dimension will be the smallest 
+integral multiple of the page size in that dimension which is at least 
+half the current size. The two dimensions are then scaled independently 
+to the new size. This feature only works in dot.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="remincross"></a>
+<h3>remincross</h3>
+If true and there are multiple clusters, run cross minimization a 
+second time.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="resolution"></a>
+<h3>resolution</h3>
+This is a synonym for the dpi attribute.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="root"></a>
+<h3>root</h3>
+This specifies nodes to be used as the center of the layout and the 
+root of the generated spanning tree. As a graph attribute, this gives the 
+name of the node. As a node attribute (circo only), it specifies that the 
+node should be used as a central node. In twopi, this will actually be 
+the central node. In circo, the block containing the node will be central 
+in the drawing of its connected component. If not defined, twopi will 
+pick a most central node, and circo will pick a random node.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="rotate"></a>
+<h3>rotate</h3>
+If 90, set drawing orientation to landscape.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="samplepoints"></a>
+<h3>samplepoints</h3>
+If the input graph defines the vertices attribute, and output is dot 
+or xdot, this give the number of points used to represent circles and 
+ellipses. It plays the same role in neato, when adjusting the layout to 
+avoid overlapping nodes.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="searchsize"></a>
+<h3>searchsize</h3>
+During network simplex, maximum number of edges with negative cut 
+values to search when looking for one with minimum cut value.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="sep"></a>
+<h3>sep</h3>
+Fraction to increase polygons (multiply coordinates by 1 + sep) for 
+purposes of determining overlap. Guarantees a minimal non-zero distance 
+between nodes. If unset but esep is defined, sep will be set to esep/0.8. 
+If esep is unset, the default value is used.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="showboxes"></a>
+<h3>showboxes</h3>
+Print guide boxes in PostScript at the beginning of routesplines if 1, 
+or at the end if 2. (Debugging)
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="size"></a>
+<h3>size</h3>
+<p>Maximum width and height of drawing, in inches. If defined and the 
+drawing is too large, the drawing is uniformly scaled down so that it 
+fits within the given size.</p>
+<p>If size ends in an exclamation point (!), then it is taken to be the 
+desired size. In this case, if both dimensions of the drawing are less 
+than size, the drawing is scaled up uniformly until at least one 
+dimension equals its dimension in size.</p>
+Note that there is some interaction between the size and ratio 
+attributes.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="splines"></a>
+<h3>splines</h3>
+<p>Controls how, and if, edges are represented. If true, edges are drawn 
+as splines routed around nodes; if false, edges are drawn as line 
+segments. (Note: at present (1 Jan 2006), setting splines=false has no 
+effect in dot.) If set to &quot;&quot;, no edges are drawn at all.</p>
+By default, the attribute is unset. How this is interpreted depends on 
+the layout. For dot, the default is to draw edges as splines. For all 
+other layouts, the default is to draw edges as line segments. Note that 
+for these latter layouts, if splines=&quot;true&quot;, this requires 
+non-overlapping nodes (cf. overlap). If fdp is used for layout and 
+splines=&quot;compound&quot;, then the edges are drawn to avoid clusters 
+as well as nodes.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="start"></a>
+<h3>start</h3>
+<p>Parameter used to determine the initial layout of nodes. By default, 
+nodes are randomly placed in a unit square. The same seed is always used 
+for the random number generator, so the initial placement is 
+repeatable.</p>
+Possible values: 'regular', 'self', 'random'
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="strict"></a>
+<h3>strict</h3>
+True if strict, False if not. Read-only.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="stylesheet"></a>
+<h3>stylesheet</h3>
+A URL or pathname specifying an XML style sheet, used in SVG 
+output.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="target"></a>
+<h3>target</h3>
+If the object has a URL, this attribute determines which window of the 
+browser is used for the URL. See W3C documentation.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="truecolor"></a>
+<h3>truecolor</h3>
+<p>If set explicitly to true or false, the value determines whether or 
+not internal bitmap rendering relies on a truecolor color model or uses a 
+color palette. If the attribute is unset, truecolor is not used unless 
+there is a shapefile property for some node in the graph. The output 
+model will use the input model when possible.</p>
+<p>Use of color palettes results in less memory usage during creation of 
+the bitmaps and smaller output files.</p>
+Usually, the only time it is necessary to specify the truetype model 
+is if the graph uses more than 256 colors. However, if one uses 
+bgcolor=transparent with a color palette, font antialiasing can show up 
+as a fuzzy white area around characters. Using truecolor=true avoids this 
+problem.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="URL"></a>
+<h3>URL</h3>
+<p>Hyperlinks incorporated into device-dependent output. At present, used 
+in ps2, cmap, i*map and svg formats. For all these formats, URLs can be 
+attached to nodes, edges and clusters. URL attributes can also be 
+attached to the root graph in ps2, cmap and i*map formats. This serves as 
+the base URL for relative URLs in the former, and as the default image 
+map file in the latter.</p>
+<p>The active area for a node or cluster is its bounding box. For edges, 
+the active areas are small circles where the edge contacts its head and 
+tail nodes. These areas may overlap the related node, and the edge URL 
+dominates. If the edge has a label, this will also be active. Finally, if 
+the edge has a head or tail label, this will also be active. Note, 
+however, that if the edge has a headURL attribute, it is this value that 
+is used near the head node and on the head label, if defined. The similar 
+restriction holds when tailURL is defined.</p>
+The URL of the root graph is only treated as an escString if the 
+output format is cmap.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="viewport"></a>
+<h3>viewport</h3>
+Clipping window on final drawing.
+</td></tr></table><table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+
+<a name="voro_margin"></a>
+<h3>voro_margin</h3>
+</td></tr></table><br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="yapgvb-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          yapgvb
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Tue Feb 21 14:34:48 2006</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>
