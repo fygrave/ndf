@@ -15,7 +15,7 @@ class Scanner(object):
     jsunpackopts = {"active": True}
 
     def __init__(self):
-        self.yara = yara.compile("%s/yara" % os.path.dirname(os.path.realpath(__file__)))
+        self.yara = yara.compile("%s/yara/web.yar" % os.path.dirname(os.path.realpath(__file__)))
 
     def _fil(self, s):
         return "".join(filter(lambda x: ord(x)<128, s))
@@ -24,15 +24,11 @@ class Scanner(object):
     #    js = jsunpack.jsunpackn.jsunpack("/tmp/a", ['', data, "/tmp/a"], self.jsunpackopts)
     #    print js
         rez = []
-        y = self.yara.match_data(self._fil(data))
-        for m in y.keys():
-            for item in y[m]:
-                if item["matches"]:
-                    rez.append(item["rule"])
-        if len(rez) != 0:
+        y = self.yara.match(data=self._fil(data))
+        if len(y) != 0 and y != "[]":
             print "Detected"
-            print rez
-        return rez
+            print y
+        return y
 
 # mainly for testing
 def ex(url):
