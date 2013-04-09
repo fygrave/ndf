@@ -8,3 +8,10 @@ rule Chinese_exploit_pack_sample
         $sample0
 }
 	
+rule BannerJS
+{
+    strings:
+        $redir = "annerJS"
+    condition:
+        $redir
+}

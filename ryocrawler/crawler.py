@@ -126,6 +126,7 @@ class Fetcher(object):
         return (request, handle)
 
     def fetch(self):
+        print "fetching %s" % self.url
         request, handle = self.open()
         self._addHeaders(request)
         if handle:
@@ -177,7 +178,17 @@ def submit_report(url, report, status):
 
 
 def crawl(tocrawl_url, depth, logger):
-    domain = urlparse.urlparse(tocrawl_url).hostname.replace("www.","")
+    if tocrawl_url.find('http') < 0:
+        print "WARNING: no protocol given. using http"
+        tocrawl_url = "http://%s"% tocrawl_url
+    domain = tocrawl_url
+    print "crawling url %s" %tocrawl_url
+
+    try:
+        domain = urlparse.urlparse(tocrawl_url).hostname.replace("www.","")
+    except:
+        print "no www prefix. following only the url %s" % tocrawl_url
+
     print "Crawling under domain: %s" %(domain)
 
     sTime = time.time()

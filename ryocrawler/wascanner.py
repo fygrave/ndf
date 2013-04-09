@@ -29,7 +29,9 @@ class Scanner(object):
             for item in y[m]:
                 if item["matches"]:
                     rez.append(item["rule"])
-        #print rez
+        if len(rez) != 0:
+            print "Detected"
+            print rez
         return rez
 
 # mainly for testing
