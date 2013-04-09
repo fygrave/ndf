@@ -7,7 +7,14 @@ You'll need to compile yara, and yara python extenstions, which come with yara c
 
 http://code.google.com/p/yara-project/
 
+install yara 1.7 and yara-python
+
 In addition to that jsunpack should be in deps folder. We use it to unpack obfuscated javascripts before we do match to javascript API calls.
+
+you will also need to install pycrypto and BeautifulSoup
+
+pip install pycrypto
+pip install BeautifulSoup
 
 and remember to Enjoy the thing ;-)
 
