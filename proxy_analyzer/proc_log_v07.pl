@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-# v.7 2013-03-22 svsoldatov
+# v.8 2013-04-02 svsoldatov
 #
 
 use lib "/root/perl5/lib/perl5"; #CPAN home
@@ -10,16 +10,21 @@ use IPC::Shareable;
 use Getopt::Long;
 use Net::IP::Match::XS;
 use Time::HiRes qw(gettimeofday);
+use Sys::CpuLoadX;
 
 do "Lists.conf"; # Threashold and Output files of colored lists
 
 #####################################
 # G L O B A L S 
 #####################################
-$BUF_SIZE = 100000; #lines in buffer
+$BUF_SIZE = 30000; #lines in buffer
+$MAX_LOAD_AVG = 5; #CPU load average after that we'd better go to sleep (used in --match only)
+$SLEEP = 10; #sleep when CPU overloaded (used in --match only)
+
 @buf = (); #array to store buffer 
-$CHILDREN_NUM = 9; #concurrent worker processes
-@CHILDREN = ();
+@buf2 = (); #array to store buffer 
+$CHILDREN_NUM = 7; #concurrent worker processes (used in --list only)
+@CHILDREN = (); #(used in --list only)
 #####################################
 
 #
@@ -37,6 +42,7 @@ GetOptions(
 	"list=s" => \$list_search, #perform list search (can be list:s, but doesn't work im my env :-(()
 	"match=s" => \$match_search, #perform exact match search
 	printscore => \$printscore, #print score into output file
+	dnconv => \$dnconert, #do not convert (log is already in OUTPUT format)
 );
 
 if($help){
@@ -170,7 +176,7 @@ elsif($list_search){
 							$i++;
 						}
 							
-						#print "Score: $linescore\n\n\n"; #DEBUG
+						#print "$$: Line: $l\nScore: $linescore\n\n\n"; #DEBUG
 						$l = "($linescore) ".$l if $printscore;
 
 						#print map {"$_\n"} ($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},$ParserCfg::Lists{WhiteList}->{OutFileFD},$ParserCfg::Lists{GrayList}->{OutFileFD},$ParserCfg::Lists{BlackList}->{OutFileFD},$ParserCfg::Lists{ExpBlackList}->{OutFileFD}); #DEBUG
@@ -178,37 +184,37 @@ elsif($list_search){
 						$| = 1; #flush 
 						if ( $ParserCfg::Lists{ExpWhiteList}->{OutFileFD} && ($linescore > $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
 							#print "Line goes to ExpWhiteList\n"; #DEBUG
-							flock($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},LOCK_EX);
+							#flock($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{ExpWhiteList}->{OutFileFD}} "$l\n";
-							flock($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},LOCK_UN);
+							#flock($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},LOCK_UN);
 							#$ParserCfg::Lists{ExpWhiteList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{WhiteList}->{OutFileFD} && ($ParserCfg::Lists{WhiteList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
 							#print "Line goes to WhiteList\n"; #DEBUG
-							flock($ParserCfg::Lists{WhiteList}->{OutFileFD},LOCK_EX);
+							#flock($ParserCfg::Lists{WhiteList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{WhiteList}->{OutFileFD}} "$l\n";
-							flock($ParserCfg::Lists{WhiteList}->{OutFileFD},LOCK_UN);
+							#flock($ParserCfg::Lists{WhiteList}->{OutFileFD},LOCK_UN);
 							#$ParserCfg::Lists{WhiteList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{GrayList}->{OutFileFD} && ($ParserCfg::Lists{BlackList}->{Thr} < $linescore) && ($linescore < $ParserCfg::Lists{WhiteList}->{Thr}) ){
 							#print "Line goes to GrayList\n"; #DEBUG
-							flock($ParserCfg::Lists{GrayList}->{OutFileFD},LOCK_EX);
+							#flock($ParserCfg::Lists{GrayList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{GrayList}->{OutFileFD}} "$l\n";
-							flock($ParserCfg::Lists{GrayList}->{OutFileFD},LOCK_UN);
+							#flock($ParserCfg::Lists{GrayList}->{OutFileFD},LOCK_UN);
 							#$ParserCfg::Lists{GrayList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{BlackList}->{OutFileFD} && ($ParserCfg::Lists{ExpBlackList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{BlackList}->{Thr}) ){
 							#print "Line goes to BlackList\n"; #DEBUG
-							flock($ParserCfg::Lists{BlackList}->{OutFileFD},LOCK_EX);
+							#flock($ParserCfg::Lists{BlackList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{BlackList}->{OutFileFD}} "$l\n";
-							flock($ParserCfg::Lists{BlackList}->{OutFileFD},LOCK_UN);
+							#flock($ParserCfg::Lists{BlackList}->{OutFileFD},LOCK_UN);
 							#$ParserCfg::Lists{BlackList}->{OutFileLCNT}++;
 						}
 						elsif( $ParserCfg::Lists{ExpBlackList}->{OutFileFD} && ($linescore < $ParserCfg::Lists{ExpBlackList}->{Thr}) ){
 							#print "Line goes to ExpBlackList\n"; #DEBUG
-							flock($ParserCfg::Lists{ExpBlackList}->{OutFileFD},LOCK_EX);
+							#flock($ParserCfg::Lists{ExpBlackList}->{OutFileFD},LOCK_EX);
 							print {$ParserCfg::Lists{ExpBlackList}->{OutFileFD}} "$l\n";
-							flock($ParserCfg::Lists{ExpBlackList}->{OutFileFD},LOCK_UN);
+							#flock($ParserCfg::Lists{ExpBlackList}->{OutFileFD},LOCK_UN);
 							#$ParserCfg::Lists{ExpBlackList}->{OutFileLCNT}++;
 						}
 					}
@@ -232,7 +238,7 @@ elsif($list_search){
 	closeOutputFiles(\%lists);
 }
 elsif($match_search){
-	print  "Enter match Search --$list_search--\n";#DEBUG
+	print  "Enter match Search --$match_search--\n";#DEBUG
 	do "$match_search"; #read checks detais
 
 	my %lists = ();
@@ -242,58 +248,100 @@ elsif($match_search){
 	openOutputFiles(\%lists);
 
 
-	my $buf_size = $BUF_SIZE*700;
-	print "Shared memory SIZE: ".IPC::Shareable::SHM_BUFSIZ()." will change to $buf_size\n\n"; #DEBUG
-	my $h = tie @buf, , 'IPC::Shareable', {
+	my $h = tie @buf, 'IPC::Shareable', {
 		key => 'GLUE',
 		create => 1,
 		mode => 0600, 
 		destroy => 1, 
-		#size => $buf_size, 
+	};
+	my $h2 = tie @buf2, 'IPC::Shareable', {
+		key => '_GLUE',
+		create => 1,
+		mode => 0600, 
+		destroy => 1, 
 	};
 	@CHILDREN = ();
 	
+	#print  "\t\t1 shlock\n";#DEBUG
+	$h->shlock();
+	#print  "\t\t1.5 shlock\n";#DEBUG
+	$h2->shlock();
+	#print  "\t\t2 shlock\n";#DEBUG
 	@buf = ();
-	while (get_next_buf_to_parse() > 0){
-	last if @buf == 0;
+	@buf2 = ();
+	
+	my $buf_ref = get_next_buf_to_parse2();
+	print "$$: buf size: ".@{$buf_ref}."\n"; #DEBUG
+	
+	while (@{$buf_ref} > 0){
 
 		foreach my $data (keys %{$lists{MatchSearch}}){
-			if ( (my $pid = fork()) > 0){
+			#print "fork...\n"; #DEBUG
+			my $pid = fork();
+			if ( $pid  > 0 ){
 				#PAPA
 				push @CHILDREN, $pid;
 
 				$SIG{CHLD} = \&child_handler;
 				$SIG{INT} = \&int_handler;
-
 			}
 			else {
 				#CHILD
 				@CHILDREN = ();
 				$SIG{INT} = \&int_handler;
+				$SIG{USR1} = \&usr_handler;
 
-				print "Child $$: data='$data' buf size=".@buf."\n";
+				print "Child $$: data='$data' buf size=".@{$buf_ref}."\n";
+				#print "$$: First line in buffer $buf_ref->[0] ..\n\n"; #DEBUG
+				#print "$$: Last line in buffer $buf_ref->[@{$buf_ref}-1] ..\n\n"; #DEBUG
 				#sleep 2;
 				#exit 0;
+
+				#find field indx
+				my $i = 0; #Output line field counter
+				foreach my $fn (@{$ParserCfg::Proclog{Output}}){ #field name
+					if ($fn eq $lists{MatchSearch}->{$data}->{FN}){
+						last;
+					}
+					$i++;
+				}
 				
-				foreach my $l (@buf){
+				#my $j = 0; #DEBUG
+				foreach my $l (@{$buf_ref}){ #lines
 					my @f = transform_log_line($l);
 					$l = join_log_line(@f);
+					#print "$$: $l\n"; #DEBUG
 
-					my $i = 0; #Output line field counter
-					foreach my $fn (@{$ParserCfg::Proclog{Output}}){ #field name
-						if ($fn eq $lists{MatchSearch}->{$data}->{FN}){
-							print {$lists{MatchSearch}->{$data}->{OFD}} "$l\n" if $f[$i] =~ /$data/;
-						}
-						$i++;
-					}
+					print {$lists{MatchSearch}->{$data}->{OFD}} "$l\n" if $f[$i] =~ /$data/;
+					#$j++; #DEBUG
+					#print "$$: line ", $j,"\n" if ($j%10000 == 0); #DEBUG
 				}
+
+				exit 0;
 			} #Child body
 		}
+		
+		my $buf_ref2 = get_next_buf_to_parse2();
+		
 		while(@CHILDREN > 0){ #wait for children
+			my ($load1,$load5,$load15) = Sys::CpuLoadX::get_cpu_load();
+			if ($load1 > $MAX_LOAD_AVG){
+				print "PAPA: ls = $load1 (>$MAX_LOAD_AVG)\n"; #DEBUG;
+				kill USR1 => @CHILDREN;
+
+				sleep 60; # can be 1 minute because minimum load average period is 1 min
+			}
+
+			#print "PAPA: Children count: ".@CHILDREN.": ".join(" ",@CHILDREN)."\n"; #DEBUG;
 			sleep 1;
 		}
 
-	}# get_next_buf_to_parse
+		@{$buf_ref} = (); #Children died => wee can empty buffer
+		$buf_ref = $buf_ref2;
+
+	}# get_next_buf_to_parse2
+	$h->shunlock();
+	$h2->shunlock();
 
 	# close files
 	closeOutputFiles(\%lists);
@@ -463,23 +511,31 @@ sub child_handler {
 	my $pid;
 
 	while ( ($pid = waitpid(-1, &WNOHANG)) > 0){
-		print "PAPA $$: Child $pid died....\n"; #DEBUG
+		#print "PAPA $$: Child $pid died....\n"; #DEBUG
 		for(my $ii=0; $ii<@CHILDREN;$ii++){
 			if($pid == $CHILDREN[$ii]){
 				splice(@CHILDREN,$ii,1);
 			}
 		}
 	}
-	print "PAPA: CHILDREN = [".join(",",@CHILDREN)."]\n"; #DEBUG
+	#print "PAPA: CHILDREN = [".join(",",@CHILDREN)."]\n"; #DEBUG
 
 	$SIG{CHLD} = \&child_handler;
+}
+#################################################
+# USR1 handler
+#################################################
+sub usr_handler {
+	print "CHILD $$: Caught USR1\n"; #DEBUG
+
+	sleep $SLEEP;
+	$SIG{USR1} = \&usr_handler;
 }
 ##################################################
 # SIGINT handler
 ##################################################
 sub int_handler {
-	if (@CHILDREN) {
-		#print "PAPA $$: Caught SIGINT\n"; #DEBUG
+	if (@CHILDREN) { #PAPA
 		#print "PAPA (INT handler): CHILDREN = [".join(",",@CHILDREN)."]\n"; #DEBUG
 	
 		kill -2 => @CHILDREN;
@@ -509,9 +565,40 @@ sub get_next_buf_to_parse {
 		#print "$l_read\n"; #DEBUG (check shared segment size)
 	}
 
-	print "$l_read lines read\n\n"; #DEBUG
+	print "$$: $l_read lines read\n\n"; #DEBUG
 	
 	return $l_read;
+}
+###################################################
+sub get_next_buf_to_parse2 { 
+	print " Entering get_next_buf2\n\n"; #DEBUG
+	my $buf_ref;
+
+	if (@buf == 0){
+		print "   Will use \@buf\n"; #DEBUG
+		$buf_ref = \@buf;
+	}
+	elsif (@buf2 == 0) {
+		print "   Will use \@buf2\n"; #DEBUG
+		$buf_ref = \@buf2;
+	}
+	else {
+		print "$$: no free buffer available\n\n"; #DEBUG
+		return undef;
+	}
+
+	my $l_read=0;
+
+	while (my $l = <STDIN>){
+		push @{$buf_ref}, $l;
+		last if (++$l_read == $BUF_SIZE);
+
+		#print "$l_read\n"; #DEBUG (check shared segment size)
+	}
+
+	print "$$: $l_read lines read\n\n"; #DEBUG
+	
+	return $buf_ref;
 }
 ######################################################
 # open output files
