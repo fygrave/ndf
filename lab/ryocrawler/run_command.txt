@@ -1,1 +1,3 @@
 ./crawler.py <url>
+
+for example ./crawler.py localhost 
