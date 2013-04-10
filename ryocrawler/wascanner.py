@@ -40,6 +40,7 @@ class Scanner(object):
 
     def __init__(self):
         self.yara = yara.compile("%s/yara/web.yar" % os.path.dirname(os.path.realpath(__file__)))
+        self.jsunpackopts.rules = open("%s/yara/web.yar"%os.path.dirname(os.path.realpath(__file__))).read()
 
     def _fil(self, s):
         return "".join(filter(lambda x: ord(x)<128, s))
