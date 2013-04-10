@@ -1,1 +1,6 @@
 ./crawler.py <url>
+<<<<<<< HEAD
+=======
+
+for example ./crawler.py localhost 
+>>>>>>> 06621a9c6e6f51037d20bf06bda61e9d0ec903c1

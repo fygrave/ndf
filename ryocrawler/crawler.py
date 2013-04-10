@@ -56,7 +56,7 @@ class Crawler(object):
             return True
         return False
     def scan(self, url, content):
-        r = self.scanner.scan(_fil(content))
+        r = self.scanner.scan(_fil(content), url)
         if len(r) > 0:
             self.matches[url] = r
 
