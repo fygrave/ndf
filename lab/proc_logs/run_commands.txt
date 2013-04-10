@@ -1,3 +1,6 @@
+In this directory there are just commands. You can take proc_log_v07.pl 'proxy_analyzer' directory.
+
+
 cat 20130202_w1000_1.csv | ./proc_log_v07.pl --io=InputOutputFileFormat-w1.conf --list=Checks4rawlogs_1st.conf
 cat logs_aug_mar_2013_bots.csv | ./proc_log_v07.pl --io=InputOutputFileFormat-hosts_bots.conf --match=Checks4rawlogs_2nd.conf
 cat logs_aug_mar_2013_hosts.csv | ./proc_log_v07.pl --io=InputOutputFileFormat-hosts_bots.conf --match=Checks4rawlogs_2nd.conf
