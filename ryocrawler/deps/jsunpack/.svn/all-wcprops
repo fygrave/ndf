@@ -3,6 +3,42 @@ svn:wc:ra_dav:version-url
 V 22
 /svn/!svn/ver/70/trunk
 END
+lzw.py
+K 25
+svn:wc:ra_dav:version-url
+V 28
+/svn/!svn/ver/2/trunk/lzw.py
+END
+htmlparse.config
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/18/trunk/htmlparse.config
+END
+detection.py
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/63/trunk/detection.py
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/68/trunk/INSTALL
+END
+samples.tgz
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/46/trunk/samples.tgz
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 29
+/svn/!svn/ver/2/trunk/COPYING
+END
 debug.py
 K 25
 svn:wc:ra_dav:version-url
@@ -104,40 +140,4 @@ K 25
 svn:wc:ra_dav:version-url
 V 29
 /svn/!svn/ver/70/trunk/pre.js
-END
-lzw.py
-K 25
-svn:wc:ra_dav:version-url
-V 28
-/svn/!svn/ver/2/trunk/lzw.py
-END
-htmlparse.config
-K 25
-svn:wc:ra_dav:version-url
-V 39
-/svn/!svn/ver/18/trunk/htmlparse.config
-END
-detection.py
-K 25
-svn:wc:ra_dav:version-url
-V 35
-/svn/!svn/ver/63/trunk/detection.py
-END
-INSTALL
-K 25
-svn:wc:ra_dav:version-url
-V 30
-/svn/!svn/ver/68/trunk/INSTALL
-END
-samples.tgz
-K 25
-svn:wc:ra_dav:version-url
-V 34
-/svn/!svn/ver/46/trunk/samples.tgz
-END
-COPYING
-K 25
-svn:wc:ra_dav:version-url
-V 29
-/svn/!svn/ver/2/trunk/COPYING
 END
