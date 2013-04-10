@@ -1,0 +1,4 @@
+\/[0-9a-fA-F]{32}\/q\.php\?##u/hex_q_php.txt
+\d[a-z]:\d[a-z]:\d[a-z]:\d[a-z]##u/bh2.txt
+7GIC|2T4T##u/7GIC_2T4T.txt
+search\?hl=[a-z]{2}\&source=[a-z]{2}\&q=\d+\&##u/fileless.txt
