@@ -1,0 +1,8 @@
+proc_log_v07.pl
+
+16.04.2013 Add ability to process log line as simple split. If %ParserCfg::Proclog in IO config contains defined
+	DELIMETER key, script will use simple `split' to transform log line into array of fields
+
+16.04.2013 Each process now writes its own output file containing time() and PID in name. This fixed issues with 
+	flock during simultaneous write by different processes and speed up script performance. An --append 
+	flag removed.
