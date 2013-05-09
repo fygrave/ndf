@@ -104,7 +104,7 @@ elsif($list_search){
 					# Open output file
 					foreach my $color (keys %ParserCfg::Lists){
 						my $out_file_name = $ParserCfg::Lists{$color}->{OutFile};
-						next unless $out_file_name;
+						next unless $out_file_name; #for empty filenames
 						my $t = time();
 						unless ( ($out_file_name =~ s/PID/$$/) && ($out_file_name =~ s/TIME/$t/) ){
 							my @tok = split /\./, $out_file_name;
