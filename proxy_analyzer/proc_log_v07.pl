@@ -105,8 +105,10 @@ elsif($list_search){
 					foreach my $color (keys %ParserCfg::Lists){
 						my $out_file_name = $ParserCfg::Lists{$color}->{OutFile};
 						next unless $out_file_name; #for empty filenames
+						
+						#compose color list file name	
 						my $t = time();
-						unless ( ($out_file_name =~ s/PID/$$/) && ($out_file_name =~ s/TIME/$t/) ){
+						unless ( ($out_file_name =~ s/PID/$$/) && ($out_file_name =~ s/TIME/$t/) ){ 
 							my @tok = split /\./, $out_file_name;
 							$tok[$#tok-1] .= "_${t}_$$";
 							$out_file_name = join ".",@tok;
@@ -193,34 +195,34 @@ elsif($list_search){
 						#print map {"$_\n"} ($ParserCfg::Lists{ExpWhiteList}->{OutFileFD},$ParserCfg::Lists{WhiteList}->{OutFileFD},$ParserCfg::Lists{GrayList}->{OutFileFD},$ParserCfg::Lists{BlackList}->{OutFileFD},$ParserCfg::Lists{ExpBlackList}->{OutFileFD}); #DEBUG
 			
 						$| = 1; #flush 
-						if ( $ParserCfg::Lists{ExpWhiteList}->{OutFileFD} && ($linescore > $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
+						if ( defined($ParserCfg::Lists{ExpWhiteList}->{OutFileFD}) && ($linescore > $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
 							#print "Line goes to ExpWhiteList\n"; #DEBUG
 							print {$ParserCfg::Lists{ExpWhiteList}->{OutFileFD}} "$l\n";
 						}
-						elsif( $ParserCfg::Lists{WhiteList}->{OutFileFD} && ($ParserCfg::Lists{WhiteList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
+						elsif( defined($ParserCfg::Lists{WhiteList}->{OutFileFD}) && ($ParserCfg::Lists{WhiteList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
 							#print "Line goes to WhiteList\n"; #DEBUG
 							print {$ParserCfg::Lists{WhiteList}->{OutFileFD}} "$$: $l\n";
 						}
-						elsif( $ParserCfg::Lists{GrayList}->{OutFileFD} && ($ParserCfg::Lists{BlackList}->{Thr} < $linescore) && ($linescore < $ParserCfg::Lists{WhiteList}->{Thr}) ){
+						elsif( defined($ParserCfg::Lists{GrayList}->{OutFileFD}) && ($ParserCfg::Lists{BlackList}->{Thr} < $linescore) && ($linescore < $ParserCfg::Lists{WhiteList}->{Thr}) ){
 							#print "Line goes to GrayList\n"; #DEBUG
 							print {$ParserCfg::Lists{GrayList}->{OutFileFD}} "$$: $l\n";
 						}
-						elsif( $ParserCfg::Lists{BlackList}->{OutFileFD} && ($ParserCfg::Lists{ExpBlackList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{BlackList}->{Thr}) ){
+						elsif( defined($ParserCfg::Lists{BlackList}->{OutFileFD}) && ($ParserCfg::Lists{ExpBlackList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{BlackList}->{Thr}) ){
 							#print "Line goes to BlackList\n"; #DEBUG
 							print {$ParserCfg::Lists{BlackList}->{OutFileFD}} "$l\n";
 						}
-						elsif( $ParserCfg::Lists{ExpBlackList}->{OutFileFD} && ($linescore < $ParserCfg::Lists{ExpBlackList}->{Thr}) ){
+						elsif( defined($ParserCfg::Lists{ExpBlackList}->{OutFileFD}) && ($linescore < $ParserCfg::Lists{ExpBlackList}->{Thr}) ){
 							#print "Line goes to ExpBlackList\n"; #DEBUG
 							print {$ParserCfg::Lists{ExpBlackList}->{OutFileFD}} "$l\n";
 						}
-						else {
-							print STDERR "$l\n"; #DEBUG
-						}
+						##else {
+						##	print STDERR "$l\n"; #DEBUG
+						##}
 					}
 					
 					# Close output files
 					map {
-						close $ParserCfg::Lists{$_}->{OutFileFD};
+						close $ParserCfg::Lists{$_}->{OutFileFD} if defined $ParserCfg::Lists{$_}->{OutFileFD};
 						unlink $ParserCfg::Lists{$_}->{OutFile} if (-z $ParserCfg::Lists{$_}->{OutFile}); #delete if size is zero
 					} (keys %ParserCfg::Lists);
 
