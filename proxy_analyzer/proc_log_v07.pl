@@ -17,13 +17,13 @@ do "Lists.conf"; # Threashold and Output files of colored lists
 #####################################
 # G L O B A L S 
 #####################################
-$BUF_SIZE = 2000; #lines in buffer
+$BUF_SIZE = 200000; #lines in buffer, log lines count  must be greatesr than BUF_SIZE * CHILDREN_NUM
 $MAX_LOAD_AVG = 9; #CPU load average after that we'd better go to sleep (used in --match only)
 $SLEEP = 10; #sleep when CPU overloaded (used in --match only)
 
 @buf = (); #array to store buffer 
 @buf2 = (); #array to store buffer 
-$CHILDREN_NUM = 9; #concurrent worker processes (used in --list only)
+$CHILDREN_NUM = 9; #concurrent worker processes (used in --list only), depends on available CPU kernels
 @CHILDREN = (); #(used in --list only)
 #####################################
 
