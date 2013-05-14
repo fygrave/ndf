@@ -496,6 +496,7 @@ sub transform_log_line {
 	
 	$LINE =~ s/^\s+//; $l =~ s/\s+$//;
 	if (defined $ParserCfg::Proclog{DELIMETER}){
+		chomp($LINE) ; #Added by vbk
 		my @inpfields = split /$ParserCfg::Proclog{DELIMETER}/,$LINE;
 		#print "inpfields: ".join("::",@inpfields)."\n"; #DEBUG
 		@ret = map {$_=~/_IP$/ ? long2ip($inpfields[$ParserCfg::Proclog{FIELDS}->{$_}->{N}]) : $inpfields[$ParserCfg::Proclog{FIELDS}->{$_}->{N}]} @{$ParserCfg::Proclog{Output}};
