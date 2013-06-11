@@ -201,11 +201,11 @@ elsif($list_search){
 						}
 						elsif( defined($ParserCfg::Lists{WhiteList}->{OutFileFD}) && ($ParserCfg::Lists{WhiteList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{ExpWhiteList}->{Thr}) ){
 							#print "Line goes to WhiteList\n"; #DEBUG
-							print {$ParserCfg::Lists{WhiteList}->{OutFileFD}} "$$: $l\n";
+							print {$ParserCfg::Lists{WhiteList}->{OutFileFD}} "$l\n";
 						}
 						elsif( defined($ParserCfg::Lists{GrayList}->{OutFileFD}) && ($ParserCfg::Lists{BlackList}->{Thr} < $linescore) && ($linescore < $ParserCfg::Lists{WhiteList}->{Thr}) ){
 							#print "Line goes to GrayList\n"; #DEBUG
-							print {$ParserCfg::Lists{GrayList}->{OutFileFD}} "$$: $l\n";
+							print {$ParserCfg::Lists{GrayList}->{OutFileFD}} "$l\n";
 						}
 						elsif( defined($ParserCfg::Lists{BlackList}->{OutFileFD}) && ($ParserCfg::Lists{ExpBlackList}->{Thr} <= $linescore) && ($linescore <= $ParserCfg::Lists{BlackList}->{Thr}) ){
 							#print "Line goes to BlackList\n"; #DEBUG
